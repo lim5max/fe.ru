@@ -1,0 +1,22 @@
+{
+  "name": "fe-ru-website",
+  "version": "1.0.0",
+  "description": "Static HTML pages for fe.ru hosting platform",
+  "scripts": {
+    "build-css": "tailwindcss -i ./input.css -o ./styles.css --watch",
+    "build-css-prod": "tailwindcss -i ./input.css -o ./styles.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
+    "tailwindcss": "^3.4.0"
+  },
+  "keywords": [
+    "html",
+    "css",
+    "tailwindcss",
+    "hosting",
+    "static-site"
+  ],
+  "author": "",
+  "license": "ISC"
+}

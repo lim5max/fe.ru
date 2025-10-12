@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход - FE Платформа</title>
+    <link href="./styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Left Column - Promotional Content / Левая колонка - промо контент -->
+      <div
+        class="hidden lg:flex lg:w-1/2 bg-base-surface-2 p-16 flex-col justify-between"
+      >
+        <!-- Logo / Логотип -->
+        <div class="flex items-center">
+          <img
+            src="public/images/fe-logo.png"
+            alt="FE ПЛАТФОРМА"
+            class="h-4 w-auto"
+          />
+        </div>
+
+        <!-- Hero Image / Главное изображение -->
+        <div
+          class="flex-1 flex items-center justify-center relative overflow-hidden"
+        >
+          <div class="w-[560px] h-[560px] relative">
+            <img
+              src="public/images/login-bg.png"
+              alt="Серверы"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+
+        <!-- Features List / Список преимуществ -->
+        <div class="space-y-4">
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 pt-0.5">
+              <img
+                src="public/icons/checkmark-circle-04.svg"
+                alt="✓"
+                class="w-6 h-6"
+              />
+            </div>
+            <p class="text-lg-medium text-text-dark-primary">
+              Бесплатный хостинг при регистрации домена
+            </p>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 pt-0.5">
+              <img
+                src="public/icons/checkmark-circle-04.svg"
+                alt="✓"
+                class="w-6 h-6"
+              />
+            </div>
+            <p class="text-lg-medium text-text-dark-primary">
+              100+ вариантов кастомизации VPS серверов
+            </p>
+          </div>
+          <div class="flex items-start space-x-4">
+            <div class="flex-shrink-0 pt-0.5">
+              <img
+                src="public/icons/checkmark-circle-04.svg"
+                alt="✓"
+                class="w-6 h-6"
+              />
+            </div>
+            <p class="text-lg-medium text-text-dark-primary">
+              Быстрая регистрация домена
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - Login Form / Правая колонка - форма входа -->
+      <div class="w-full lg:w-1/2 flex flex-col lg:border-l border-base-border">
+        <!-- Header with Registration Button / Хедер с кнопкой регистрации -->
+        <div class="flex justify-end p-11">
+          <a
+            href="registration.html"
+            class="btn-secondary px-4 py-2 text-base-semibold text-text-dark-primary bg-base-surface-2 border border-base-border rounded-8"
+          >
+            Зарегистрироваться
+          </a>
+        </div>
+
+        <!-- Login Form / Форма входа -->
+        <div class="flex-1 flex items-center justify-center px-8 lg:px-16">
+          <div class="w-full max-w-[412px] space-y-8">
+            <!-- Page Title / Заголовок страницы -->
+            <div class="text-left">
+              <h1 class="text-3xl-bold text-text-dark-primary">
+                Вход в аккаунт
+              </h1>
+            </div>
+
+            <!-- Form / Форма -->
+            <form id="loginForm" class="space-y-8">
+              <!-- Email Field / Поле email -->
+              <div class="form-field">
+                <label
+                  class="block text-lg-regular text-text-dark-secondary mb-3"
+                >
+                  Почта
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="example@mail.com"
+                  class="input w-full h-14 px-4 py-4 text-lg text-text-dark-secondary bg-base-surface-1 border border-base-border rounded-8 focus:border-state-brand-selected focus:outline-none"
+                  required
+                />
+              </div>
+
+              <!-- Password Field / Поле пароль -->
+              <div class="form-field">
+                <label
+                  class="block text-lg-regular text-text-dark-secondary mb-3"
+                >
+                  Пароль
+                </label>
+                <div class="relative">
+                  <input
+                    id="passwordInput"
+                    type="password"
+                    name="password"
+                    placeholder="Введите пароль"
+                    class="input w-full h-14 px-4 py-4 text-lg text-text-dark-secondary bg-base-surface-1 border border-base-border rounded-8 focus:border-state-brand-selected focus:outline-none"
+                    required
+                  />
+                  <button
+                    type="button"
+                    id="togglePassword"
+                    class="absolute top-1/2 -translate-y-1/2 right-4 flex items-center justify-center w-10 h-10 rounded-full text-text-dark-tertiary hover:text-text-dark-secondary"
+                    aria-label="Показать пароль"
+                  >
+                    <img
+                      id="togglePasswordIcon"
+                      src="public/icons/view.svg"
+                      alt="Показать"
+                      class="w-6 h-6"
+                    />
+                  </button>
+                </div>
+              </div>
+
+              <!-- Forgotten password only / Только ссылка "Забыли пароль?" -->
+              <div class="mt-2">
+                <a
+                  href="#"
+                  class="text-base-medium text-state-brand-active underline hover:no-underline"
+                >
+                  Забыли пароль?
+                </a>
+              </div>
+
+              <!-- Login Button / Кнопка входа -->
+              <button
+                type="submit"
+                class="btn-primary w-full h-14 px-6 text-xl-semibold text-text-light-primary bg-state-brand-active rounded-8 hover:bg-state-brand-hover active:bg-state-brand-active transition-colors"
+              >
+                Войти
+              </button>
+            </form>
+
+            <!-- Divider / Разделитель -->
+            <div class="flex items-center">
+              <div class="flex-1 h-px bg-base-border"></div>
+              <span class="px-2 text-base-medium text-text-dark-tertiary"
+                >Или</span
+              >
+              <div class="flex-1 h-px bg-base-border"></div>
+            </div>
+
+            <!-- Social Login / Вход через соцсети -->
+            <div class="space-y-4">
+              <button
+                class="w-full h-14 bg-base-surface-2 border border-base-border rounded-8 flex items-center justify-center space-x-4 hover:bg-base-fill-1 transition-colors"
+              >
+                <img src="public/icons/vk-icon.svg" alt="VK" class="icon-2xl" />
+                <span class="text-xl-semibold text-text-dark-primary"
+                  >Войти с ВК</span
+                >
+              </button>
+
+              <!-- Terms / Условия обработки данных -->
+              <div class="text-center">
+                <p class="text-base-medium text-text-dark-secondary">
+                  Нажимая кнопку, вы соглашаетесь с условиями
+                  <a
+                    href="#"
+                    class="underline hover:no-underline text-text-dark-secondary"
+                    >обработки данных</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("loginForm");
+        const inputs = document.querySelectorAll(".input");
+        const togglePassword = document.getElementById("togglePassword");
+        const passwordInput = document.getElementById("passwordInput");
+        const togglePasswordIcon =
+          document.getElementById("togglePasswordIcon");
+
+        // Input focus/blur effects
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.classList.add("border-state-brand-selected");
+            this.classList.remove("border-base-border");
+          });
+          input.addEventListener("blur", function () {
+            this.classList.remove("border-state-brand-selected");
+            this.classList.add("border-base-border");
+          });
+        });
+
+        // Password toggle
+        togglePassword.addEventListener("click", function () {
+          const wasPassword = passwordInput.getAttribute("type") === "password";
+          passwordInput.setAttribute("type", wasPassword ? "text" : "password");
+          const isNowPassword =
+            passwordInput.getAttribute("type") === "password";
+          // Иконка показывает доступное действие: глаз - показать, перечеркнутый - скрыть
+          togglePassword.setAttribute(
+            "aria-label",
+            isNowPassword ? "Показать пароль" : "Скрыть пароль"
+          );
+          togglePasswordIcon.src = isNowPassword
+            ? "public/icons/view.svg"
+            : "public/icons/view-off.svg";
+        });
+
+        // Form submission
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const formData = new FormData(this);
+          const data = Object.fromEntries(formData.entries());
+          console.log("Login data:", data);
+          alert("Попытка входа отправлена! (Данные в консоли)");
+        });
+      });
+    </script>
+  </body>
+</html>

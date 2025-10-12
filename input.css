@@ -1,0 +1,541 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+@layer base {
+  html {
+    font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  }
+
+  body {
+    @apply text-text-dark-primary bg-base-surface-1;
+  }
+}
+
+/* Component styles */
+@layer components {
+  /* Button styles */
+  .btn-primary {
+    @apply bg-state-brand-selected hover:bg-state-brand-hover active:bg-state-brand-active;
+    @apply text-text-light-primary font-semibold shadow-sm hover:shadow-md active:shadow-xs;
+    @apply px-4 py-2 rounded-8 transition-all duration-200;
+  }
+
+  .btn-danger {
+    @apply bg-state-danger-selected hover:bg-state-danger-hover active:bg-state-danger-active;
+    @apply text-text-light-primary font-semibold;
+    @apply px-4 py-2 rounded-6 transition-colors duration-200;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-base-surface-1 border border-base-border rounded-6;
+    @apply shadow-sm;
+  }
+
+  .card-elevated {
+    @apply bg-base-surface-1 border border-base-border rounded-6;
+    @apply shadow-md;
+  }
+
+  .card-floating {
+    @apply bg-base-surface-1 border border-base-border rounded-6;
+    @apply shadow-lg;
+  }
+
+  /* Glass effect styles */
+  .glass-light {
+    @apply bg-alpha-light-200 backdrop-blur-6 border border-alpha-dark-100;
+    @apply rounded-6;
+  }
+
+  .glass-dark {
+    @apply bg-alpha-dark-200 backdrop-blur-6 border border-alpha-dark-300;
+    @apply rounded-6;
+  }
+
+  /* Overlay styles */
+  .overlay-light {
+    @apply bg-alpha-dark-200 backdrop-blur-4;
+  }
+
+  .overlay-dark {
+    @apply bg-alpha-dark-300 backdrop-blur-4;
+  }
+
+  /* Input styles */
+  .input {
+    @apply bg-base-surface-1 border border-base-border rounded-8;
+    @apply px-3 py-2 text-text-dark-primary;
+    @apply focus:outline-none focus:border-state-brand-selected;
+  }
+
+  .input:disabled {
+    @apply bg-base-disabled cursor-not-allowed;
+  }
+}
+
+/* Override Tailwind Forms focus styles */
+@layer components {
+  /* Fix search input focus to use orange instead of blue */
+  input[type="text"]:focus,
+  input[type="search"]:focus {
+    --tw-ring-color: #e4570c !important; /* state-brand-active */
+    border-color: #fb923c !important; /* state-brand-selected */
+  }
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .icon-md {
+    width: 20px;
+    height: 20px;
+  }
+
+  .icon-lg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .icon-xl {
+    width: 28px;
+    height: 28px;
+  }
+
+  .icon-2xl {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Grid.js Figma Design Styles */
+  .gridjs-container-figma {
+    border: none;
+    border-radius: 0;
+    overflow: visible;
+    box-shadow: none;
+    background: transparent;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .gridjs-table-figma {
+    border: none;
+    border-collapse: separate;
+    border-spacing: 0 !important;
+    font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .gridjs-th-figma {
+    background-color: #fafaf9;
+    border-bottom: 1px solid #e7e5e4;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none;
+    padding: 12px 16px !important;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    color: rgba(26, 26, 26, 0.7);
+    text-align: left;
+    height: 52px !important;
+    max-height: 52px !important;
+    min-height: 52px !important;
+    vertical-align: middle;
+    position: relative;
+    box-shadow: none;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix inner content in header - but preserve checkbox layout */
+  .gridjs-th-figma > div:not([class*="checkbox"]) {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 24px !important;
+    height: auto !important;
+  }
+
+  .gridjs-th-figma:first-child,
+  .gridjs-th-figma:last-child {
+    text-align: center;
+    padding: 12px 16px;
+  }
+
+  .gridjs-td-figma:first-child,
+  .gridjs-td-figma:last-child {
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    padding: 12px 16px;
+    max-width: none;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: normal;
+  }
+
+  .gridjs-th-figma:first-child div,
+  .gridjs-th-content:first-child div,
+  .gridjs-th:first-child div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .gridjs-th-content,
+  .gridjs-th {
+    height: 52px;
+    vertical-align: middle;
+    display: table-cell;
+  }
+
+  .gridjs-td-figma:first-child div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 52px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .gridjs-td-figma {
+    padding: 12px 16px !important;
+    border-bottom: 1px solid #e7e5e4;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    height: 52px !important;
+    max-height: 52px !important;
+    min-height: 52px !important;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    color: rgba(26, 26, 26, 0.7);
+    background: white;
+    box-shadow: none;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix inner content height - exclude toggle and checkbox elements */
+  .gridjs-td-figma > div:not([class*="toggle"]):not([class*="checkbox"]) {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 22px !important;
+    height: auto !important;
+  }
+
+  .gridjs-tr {
+    height: 52px;
+    max-height: 52px;
+    min-height: 52px;
+  }
+
+  /* Remove all vertical borders between columns */
+  .gridjs-th-figma,
+  .gridjs-td-figma {
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  .gridjs-table-figma td,
+  .gridjs-table-figma th {
+    border-left: none !important;
+    border-right: none !important;
+  }
+
+  /* Remove top border from first row and bottom border from last row */
+  .gridjs-tbody .gridjs-tr:first-child .gridjs-td-figma {
+    border-top: none !important;
+  }
+
+  .gridjs-tbody .gridjs-tr:last-child .gridjs-td-figma {
+    border-bottom: none !important;
+  }
+
+  /* Remove top border from header if it exists */
+  .gridjs-thead .gridjs-tr:first-child .gridjs-th-figma {
+    border-top: none !important;
+  }
+
+  .gridjs-tbody .gridjs-tr:hover .gridjs-td-figma {
+    background-color: #fafaf9;
+  }
+
+  /* Hide default Grid.js pagination */
+  .gridjs-pagination {
+    display: none !important;
+  }
+
+  /* Hide default Grid.js search */
+  .gridjs-search {
+    display: none !important;
+  }
+
+  /* Hide all Grid.js navigation elements */
+  .gridjs-pages {
+    display: none !important;
+  }
+
+  .gridjs-summary {
+    display: none !important;
+  }
+
+  .gridjs-navigation {
+    display: none !important;
+  }
+
+  .gridjs-tr .gridjs-pagination {
+    display: none !important;
+  }
+
+  /* Fix table styling to match Figma */
+  .gridjs-container-figma {
+    border: 1px solid #e1e1e2 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .gridjs-table-figma {
+    border: none !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+  }
+
+  .gridjs-th-figma:first-child {
+    border-top-left-radius: 12px !important;
+  }
+
+  .gridjs-th-figma:last-child {
+    border-top-right-radius: 12px !important;
+  }
+
+  .gridjs-tbody .gridjs-tr:last-child .gridjs-td-figma:first-child {
+    border-bottom-left-radius: 12px !important;
+  }
+
+  .gridjs-tbody .gridjs-tr:last-child .gridjs-td-figma:last-child {
+    border-bottom-right-radius: 12px !important;
+  }
+
+  /* Remove any extra rows or spacing */
+  .gridjs-footer {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+  }
+
+  /* Hide Grid.js footer completely - multiple approaches */
+  .gridjs-footer,
+  .gridjs-container .gridjs-footer,
+  .gridjs-wrapper .gridjs-footer,
+  div.gridjs-footer {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    visibility: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide any footer-like elements at the bottom of container */
+  .gridjs-container > div:last-child:not(.gridjs-table-figma),
+  .gridjs-container > div:last-of-type:not(.gridjs-table-figma),
+  .gridjs-wrapper > div:last-child:not(.gridjs-table-figma) {
+    display: none !important;
+    height: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Hide any element that might contain footer content */
+  .gridjs-container
+    > *:not(.gridjs-table-figma):not(.gridjs-head):not(.gridjs-tbody) {
+    display: none !important;
+  }
+
+  /* Additional footer hiding - nuclear option */
+  .gridjs-container * {
+    /* Hide any element that looks like it might be a footer */
+  }
+
+  .gridjs-container > div:not(.gridjs-table-figma) {
+    display: none !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+  }
+
+  .gridjs-wrapper {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Fix table container to remove shadows and extra spacing */
+  .gridjs-head {
+    box-shadow: none !important;
+  }
+
+  .gridjs-tbody {
+    box-shadow: none !important;
+  }
+
+  /* Remove all shadows from table */
+  .gridjs-table-figma,
+  .gridjs-container-figma,
+  .gridjs-wrapper,
+  .gridjs-table-figma *,
+  .gridjs-container-figma * {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important;
+  }
+
+  /* Remove extra border at bottom */
+  .gridjs-tbody .gridjs-tr:last-child {
+    border-bottom: none !important;
+  }
+
+  .gridjs-tbody .gridjs-tr:last-child .gridjs-td-figma {
+    border-bottom: none !important;
+  }
+
+  /* Remove any container borders */
+  .gridjs-container {
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Hide any message or loading containers */
+  .gridjs-message {
+    display: none !important;
+  }
+
+  .gridjs-loading {
+    display: none !important;
+  }
+
+  /* Only hide specific navigation elements */
+  .gridjs-container .gridjs-pagination,
+  .gridjs-container .gridjs-summary,
+  .gridjs-container .gridjs-pages,
+  .gridjs-container .gridjs-navigation {
+    display: none !important;
+  }
+
+  /* Add margin below custom pagination for dropdown space */
+  .gridjs-pagination-figma {
+    margin-bottom: 60px !important;
+  }
+
+  /* Custom checkbox styling */
+  .row-checkbox,
+  .header-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .row-checkbox:checked,
+  .header-checkbox:checked {
+    background-color: #e4570c !important;
+    border-color: #e4570c !important;
+  }
+
+  .row-checkbox:checked::after,
+  .header-checkbox:checked::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .row-checkbox:hover,
+  .header-checkbox:hover {
+    border-color: #e4570c !important;
+  }
+
+  .row-checkbox:focus,
+  .header-checkbox:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(228, 87, 12, 0.2);
+  }
+
+  /* Indeterminate state for select-all checkbox */
+  .header-checkbox:indeterminate {
+    background-color: #e4570c !important;
+    border-color: #e4570c !important;
+  }
+
+  .header-checkbox:indeterminate::after {
+    content: "−";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  /* Custom toggle switch inner circle size and positioning */
+  .toggle-switch::after {
+    height: 20px !important;
+    width: 20px !important;
+    top: 2px !important;
+  }
+
+  /* Better spacing for checked state - maximum specificity */
+  .toggle-switch:has(+ input[type="checkbox"]:checked)::after,
+  input[type="checkbox"]:checked ~ .toggle-switch::after,
+  .toggle-switch.peer-checked::after {
+    transform: translateX(20px) !important;
+    margin-left: 0 !important;
+    -webkit-transform: translateX(20px) !important;
+    -moz-transform: translateX(20px) !important;
+    -ms-transform: translateX(20px) !important;
+    -o-transform: translateX(20px) !important;
+  }
+
+  /* Force override with animation */
+  .toggle-switch::after {
+    transition: transform 0.2s ease !important;
+  }
+}

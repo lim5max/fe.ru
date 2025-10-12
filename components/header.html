@@ -1,0 +1,263 @@
+<!-- Header Component / Заголовок страницы -->
+<div class="bg-base-surface-2 w-full border-b border-base-border">
+  <div class="px-6 py-4 w-full">
+    <div
+      id="main-header"
+      class="flex items-center justify-between lg:justify-end w-full"
+    >
+      <!-- Logo / Логотип -->
+      <img
+        id="logo"
+        src="../public/images/small_logo.png"
+        alt="FE Платформа"
+        class="h-11 lg:hidden"
+      />
+
+      <!-- Account Buttons / Кнопки аккаунта -->
+      <div id="account-buttons" class="flex items-center gap-2 lg:justify-end">
+        <!-- Balance Button / Кнопка баланса -->
+        <button
+          class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-11 flex items-center gap-4 hover:bg-base-fill-1 transition-colors"
+        >
+          <img src="../public/icons/coins.svg" alt="Баланс" class="w-6 h-6" />
+          <span class="hidden sm:inline text-lg-semibold text-text-dark-primary"
+            >1 123 ₽</span
+          >
+        </button>
+
+        <!-- Profile Button / Кнопка профиля -->
+        <button
+          class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-11 flex items-center gap-3 hover:bg-base-fill-1 transition-colors hidden lg:flex"
+        >
+          <img src="../public/icons/user.svg" alt="Профиль" class="w-6 h-6" />
+          <span class="hidden sm:inline text-lg-semibold text-text-dark-primary"
+            >farbx15@gmail.com</span
+          >
+        </button>
+
+        <!-- Mobile Menu Button / Кнопка мобильного меню -->
+        <button
+          id="mobile-menu-button"
+          class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200 lg:hidden"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 12H21M3 6H21M3 18H21"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu Items / Элементы мобильного меню -->
+<div
+  id="mobile-menu-items"
+  class="fixed inset-0 bg-base-surface-1 z-50 hidden flex flex-col h-full"
+>
+  <!-- Menu Header -->
+  <div
+    class="flex items-center justify-between p-4 border-b border-base-border"
+  >
+    <img
+      src="../public/images/small_logo.png"
+      alt="FE Платформа"
+      class="h-11"
+    />
+    <button
+      id="close-menu-button"
+      class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6L6 18M6 6l12 12"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu Content -->
+  <div class="flex-1 overflow-auto p-4">
+    <!-- Services Section -->
+    <div class="flex flex-col gap-1">
+      <h3 class="text-sm font-medium text-text-dark-secondary">Услуги</h3>
+      <a
+        href="#"
+        class="flex items-center gap-6 px-[8px] py-[10px] rounded-[12px] hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/globe.svg"
+          alt="Домены"
+          class="w-6 h-6 opacity-70"
+        />
+        <span class="text-base font-medium text-[rgba(26,26,26,0.7)]"
+          >Домены</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img src="../public/icons/hosting.svg" alt="Хостинг" class="w-6 h-6" />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Хостинг</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img src="../public/icons/server.svg" alt="VPS/VDS" class="w-6 h-6" />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >VPS/VDS</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/cloud-server.svg"
+          alt="Серверы"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Серверы</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/box.svg"
+          alt="Другие услуги"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Другие услуги</span
+        >
+      </a>
+    </div>
+
+    <!-- Additional Section -->
+    <div class="flex flex-col gap-1">
+      <h3 class="text-sm font-medium text-text-dark-secondary">
+        Дополнительно
+      </h3>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/user-business.svg"
+          alt="Партнерство"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Партнерство</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/customer-support.svg"
+          alt="Поддержка"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Поддержка</span
+        >
+      </a>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="flex flex-col gap-1">
+      <h3 class="text-sm font-medium text-text-dark-secondary">Профиль</h3>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/user-02.svg"
+          alt="Общая информация"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Общая информация</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/coins.svg"
+          alt="Управление счетом"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Управление счетом</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/folder-management.svg"
+          alt="Документы и акты"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Документы и акты</span
+        >
+      </a>
+      <a
+        href="#"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <img
+          src="../public/icons/settings-01.svg"
+          alt="Настройки"
+          class="w-6 h-6"
+        />
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Настройки</span
+        >
+      </a>
+    </div>
+  </div>
+
+  <!-- Logout Button -->
+  <div class="p-4">
+    <button
+      class="bg-base-surface-2 border border-base-border rounded-lg px-4 py-3 flex items-center justify-center hover:bg-base-fill-1 transition-colors"
+    >
+      <span class="text-base font-semibold text-text-dark-primary">Выйти</span>
+    </button>
+  </div>
+</div>
