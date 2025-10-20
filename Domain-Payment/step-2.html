@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Контактные данные - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Контактные данные
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-6 mb-10">
+            <!-- Create New Profile Button / Кнопка создания нового профиля -->
+            <a
+              href="step-3.html"
+              class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors flex items-center justify-center"
+            >
+              Создать новый профиль
+            </a>
+
+            <!-- Divider / Разделитель -->
+            <div class="flex items-center gap-2 h-6">
+              <div class="flex-1 border-t border-base-border"></div>
+              <span class="text-base-medium text-text-dark-tertiary px-2"
+                >Или</span
+              >
+              <div class="flex-1 border-t border-base-border"></div>
+            </div>
+
+            <!-- Existing Profile Section / Секция существующего профиля -->
+            <div class="flex flex-col gap-7">
+              <!-- Section Title / Заголовок секции -->
+              <h2 class="text-xl-medium text-text-dark-primary">
+                Использовать существующий профиль
+              </h2>
+
+              <!-- Search Input / Поле поиска -->
+              <div class="w-full">
+                <div class="relative">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                  >
+                    <img
+                      src="../public/icons/search.svg"
+                      alt="Поиск"
+                      class="h-6 w-6"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    id="profile-search"
+                    placeholder="Поиск по имени или почте"
+                    class="w-full h-17 pl-15 pr-4 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-selected transition-colors bg-white"
+                  />
+                </div>
+              </div>
+
+              <!-- Profile List / Список профилей -->
+              <div class="flex flex-col gap-5" id="profile-list">
+                <!-- Profiles will be rendered here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Profiles data / Данные профилей
+      const profiles = [
+        {
+          id: 1,
+          name: "Иванов иваныч",
+          email: "farbx15@gmail.com",
+          document: "Паспорт: 1212 332344",
+          type: "person",
+        },
+        {
+          id: 2,
+          name: 'OOO "Ромашка"',
+          email: "farbx15@gmail.com",
+          document: "ИНН: 45435435435",
+          type: "company",
+        },
+        {
+          id: 3,
+          name: "Петров Петр",
+          email: "petrov@example.com",
+          document: "Паспорт: 4321 876543",
+          type: "person",
+        },
+        {
+          id: 4,
+          name: "ИП Сидоров",
+          email: "sidorov@business.ru",
+          document: "ИНН: 78978978978",
+          type: "company",
+        },
+      ];
+
+      // Render profile card / Отрисовка карточки профиля
+      function renderProfileCard(profile) {
+        return `
+          <div class="bg-base-surface-2 border border-base-border rounded-6 cursor-pointer hover:bg-base-fill-1 transition-colors">
+            <div class="flex items-center justify-between p-8 gap-0.5">
+              <div class="flex-1 flex flex-col gap-0.5 py-0.5">
+                <p class="text-lg-medium text-text-dark-primary">${profile.name}</p>
+                <p class="text-sm-medium text-text-dark-secondary">${profile.email}, ${profile.document}</p>
+              </div>
+              <img src="../public/icons/arrow-right.svg" alt="Выбрать" class="w-8 h-8 flex-shrink-0" />
+            </div>
+          </div>
+        `;
+      }
+
+      // Render profiles list / Отрисовка списка профилей
+      function renderProfiles(profilesToRender) {
+        const profileList = document.getElementById("profile-list");
+
+        if (profilesToRender.length === 0) {
+          profileList.innerHTML = `
+            <div class="text-center py-8">
+              <p class="text-base-medium text-text-dark-secondary">Профили не найдены</p>
+            </div>
+          `;
+          return;
+        }
+
+        profileList.innerHTML = profilesToRender
+          .map(renderProfileCard)
+          .join("");
+      }
+
+      // Search profiles / Поиск профилей
+      function searchProfiles(query) {
+        const lowerQuery = query.toLowerCase().trim();
+
+        if (!lowerQuery) {
+          return profiles;
+        }
+
+        return profiles.filter((profile) => {
+          return (
+            profile.name.toLowerCase().includes(lowerQuery) ||
+            profile.email.toLowerCase().includes(lowerQuery)
+          );
+        });
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchInput = document.getElementById("profile-search");
+
+        // Initial render / Начальная отрисовка
+        renderProfiles(profiles);
+
+        // Search on input / Поиск при вводе
+        searchInput.addEventListener("input", function (e) {
+          const filteredProfiles = searchProfiles(e.target.value);
+          renderProfiles(filteredProfiles);
+        });
+
+        // Handle profile click / Обработка клика по профилю
+        document
+          .getElementById("profile-list")
+          .addEventListener("click", function (e) {
+            const card = e.target.closest(".bg-base-surface-2");
+            if (card) {
+              console.log("Profile selected");
+              // Here you would typically navigate to the next step or handle the selection
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

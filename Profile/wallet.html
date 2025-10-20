@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Управление счетом - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+    <!-- Profile Menu Web Component -->
+    <script src="../components/fe-profile-menu.js"></script>
+    <!-- Promo Modal Web Component -->
+    <script src="../components/fe-promo-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Two Column Layout / Двухколоночный макет -->
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+              <!-- Left Column - Profile Menu / Левая колонка - Меню профиля -->
+              <div class="w-full lg:w-[272px] shrink-0">
+                <fe-profile-menu active="wallet"></fe-profile-menu>
+              </div>
+
+              <!-- Right Column - Wallet Content / Правая колонка - Контент управления счетом -->
+              <div class="flex-1 flex flex-col gap-10 w-full max-w-[576px]">
+                <!-- Balance and Actions Card / Карточка баланса и действий -->
+                <div class="flex flex-col md:flex-row gap-4 w-full">
+                  <!-- Current Balance / Текущий баланс -->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-6 px-6 pt-4 pb-5 flex flex-col gap-0.5 flex-1"
+                  >
+                    <p class="text-base-medium text-text-dark-secondary">
+                      Текущий баланс
+                    </p>
+                    <p class="text-2xl-semibold text-text-dark-primary">
+                      1 123 ₽
+                    </p>
+                  </div>
+
+                  <!-- Action Buttons / Кнопки действий -->
+                  <div class="flex flex-col gap-2.5 flex-1">
+                    <button
+                      class="bg-state-brand-active hover:bg-state-brand-hover border border-base-disabled text-text-light-primary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+                    >
+                      Пополнить
+                    </button>
+                    <button
+                      id="open-promo-modal-btn"
+                      class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+                    >
+                      Ввести промокод
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Tabs Section / Секция вкладок -->
+                <div class="flex flex-col gap-11 w-full">
+                  <!-- Tabs Navigation / Навигация вкладок -->
+                  <div
+                    class="flex items-center gap-6 border-b border-base-border"
+                  >
+                    <button
+                      id="tab-invoices"
+                      class="tab-button active pb-2 border-b-2 border-state-brand-active text-base-medium text-text-dark-primary"
+                      data-tab="invoices"
+                    >
+                      Счета
+                    </button>
+                    <button
+                      id="tab-transactions"
+                      class="tab-button pb-2 border-b-2 border-transparent text-base-medium text-text-dark-secondary hover:text-text-dark-primary transition-colors"
+                      data-tab="transactions"
+                    >
+                      История транзакций
+                    </button>
+                  </div>
+
+                  <!-- Tab Panel 1: Invoices / Панель вкладки 1: Счета -->
+                  <div
+                    id="panel-invoices"
+                    class="tab-content flex flex-col gap-6"
+                  >
+                    <!-- Invoices List / Список счетов -->
+                    <div id="invoices-list" class="flex flex-col gap-4">
+                      <!-- Items will be rendered by JavaScript / Элементы будут отрендерены через JavaScript -->
+                    </div>
+
+                    <!-- Pagination / Пагинация -->
+                    <div
+                      id="invoices-pagination"
+                      class="flex gap-3 items-center justify-start h-9"
+                    >
+                      <div
+                        class="prev-btn-invoices bg-base-fill-1 content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] cursor-pointer hover:bg-base-fill-2"
+                      >
+                        <div
+                          class="overflow-clip relative shrink-0 size-[12px]"
+                        >
+                          <img
+                            src="../public/icons/arrow-left.svg"
+                            alt="Назад"
+                            class="block max-w-none size-full"
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        id="invoices-page-numbers"
+                        class="flex gap-1 items-center h-7"
+                      >
+                        <!-- Page numbers will be generated by JavaScript -->
+                      </div>
+
+                      <div
+                        class="next-btn-invoices bg-[#fcfcfc] content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] border border-base-border cursor-pointer hover:bg-base-fill-1"
+                      >
+                        <div
+                          class="overflow-clip relative shrink-0 size-[12px]"
+                        >
+                          <img
+                            src="../public/icons/arrow-right.svg"
+                            alt="Вперед"
+                            class="block max-w-none size-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Tab Panel 2: Transactions / Панель вкладки 2: История транзакций -->
+                  <div
+                    id="panel-transactions"
+                    class="tab-content hidden flex-col gap-6"
+                  >
+                    <!-- Transactions List / Список транзакций -->
+                    <div id="transactions-list" class="flex flex-col gap-4">
+                      <!-- Items will be rendered by JavaScript / Элементы будут отрендерены через JavaScript -->
+                    </div>
+
+                    <!-- Pagination / Пагинация -->
+                    <div
+                      id="transactions-pagination"
+                      class="flex gap-3 items-center justify-start h-9"
+                    >
+                      <div
+                        class="prev-btn-transactions bg-base-fill-1 content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] cursor-pointer hover:bg-base-fill-2"
+                      >
+                        <div
+                          class="overflow-clip relative shrink-0 size-[12px]"
+                        >
+                          <img
+                            src="../public/icons/arrow-left.svg"
+                            alt="Назад"
+                            class="block max-w-none size-full"
+                          />
+                        </div>
+                      </div>
+
+                      <div
+                        id="transactions-page-numbers"
+                        class="flex gap-1 items-center h-7"
+                      >
+                        <!-- Page numbers will be generated by JavaScript -->
+                      </div>
+
+                      <div
+                        class="next-btn-transactions bg-[#fcfcfc] content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] border border-base-border cursor-pointer hover:bg-base-fill-1"
+                      >
+                        <div
+                          class="overflow-clip relative shrink-0 size-[12px]"
+                        >
+                          <img
+                            src="../public/icons/arrow-right.svg"
+                            alt="Вперед"
+                            class="block max-w-none size-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promo Code Modal / Модалка промокода -->
+    <fe-promo-modal id="promoModal"></fe-promo-modal>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Data arrays / Массивы данных
+      const invoicesData = [
+        {
+          id: "681593",
+          date: "28.04.2025 10:30",
+          method: "Безналичный расчет",
+          amount: 499,
+        },
+        {
+          id: "661977",
+          date: "28.04.2025 10:30",
+          method: "Юmoney",
+          amount: 59,
+        },
+        {
+          id: "672345",
+          date: "28.04.2025 11:00",
+          method: "Картой",
+          amount: 1500,
+        },
+        {
+          id: "683210",
+          date: "28.04.2025 11:15",
+          method: "Наличный расчет",
+          amount: 800,
+        },
+        {
+          id: "694321",
+          date: "28.04.2025 11:30",
+          method: "PayPal",
+          amount: 1200,
+        },
+        {
+          id: "705432",
+          date: "28.04.2025 11:45",
+          method: "Сбербанк Онлайн",
+          amount: 350,
+        },
+        { id: "716543", date: "28.04.2025 12:00", method: "ВТБ", amount: 900 },
+        { id: "727654", date: "28.04.2025 12:15", method: "Qiwi", amount: 75 },
+        {
+          id: "738765",
+          date: "28.04.2025 12:30",
+          method: "Тинькофф",
+          amount: 1100,
+        },
+        {
+          id: "749876",
+          date: "28.04.2025 12:45",
+          method: "Альфа-Банк",
+          amount: 650,
+        },
+        {
+          id: "750987",
+          date: "28.04.2025 13:00",
+          method: "Яндекс.Деньги",
+          amount: 420,
+        },
+        {
+          id: "762098",
+          date: "28.04.2025 13:15",
+          method: "WebMoney",
+          amount: 890,
+        },
+        {
+          id: "773109",
+          date: "28.04.2025 13:30",
+          method: "Райффайзен",
+          amount: 1350,
+        },
+        {
+          id: "784210",
+          date: "28.04.2025 13:45",
+          method: "МТС Банк",
+          amount: 280,
+        },
+        {
+          id: "795321",
+          date: "28.04.2025 14:00",
+          method: "Почта Банк",
+          amount: 970,
+        },
+        {
+          id: "806432",
+          date: "28.04.2025 14:15",
+          method: "Совкомбанк",
+          amount: 540,
+        },
+        {
+          id: "817543",
+          date: "28.04.2025 14:30",
+          method: "Банк Открытие",
+          amount: 1620,
+        },
+      ];
+
+      const transactionsData = [
+        {
+          description:
+            "Продление домена fe-test-domain-v4-06.ru на 1 год (24.11.2024 - 24.11.2025) (via API 0.22)",
+          date: "28.04.2025 10:30",
+          amount: -499,
+          balance: 13232,
+        },
+        {
+          description:
+            "Регистрация домена test-fe-fiz-1.ru на 1 год (via API 0.26)",
+          date: "28.04.2025 10:30",
+          amount: -59,
+          balance: 13200,
+        },
+        {
+          description:
+            "Продление домена fedomain127.cfd на 1 год (24.11.2024 - 24.11.2025) (via API 0.22)",
+          date: "28.04.2025 11:00",
+          amount: -59,
+          balance: 13200,
+        },
+        {
+          description: "Оплата домена apanet51.ru на 1 год",
+          date: "28.04.2025 11:15",
+          amount: -59,
+          balance: 13200,
+        },
+        {
+          description: "Регистрация домена test-fe-domains-1.ru на 1 год",
+          date: "28.04.2025 11:30",
+          amount: -1200,
+          balance: 13200,
+        },
+        {
+          description:
+            "Оплата хостинга helloworld04.ru (hostingid=69148) на срок 1 мес (27.04.2025-27.05.2025)",
+          date: "28.04.2025 11:45",
+          amount: -1200,
+          balance: 13200,
+        },
+        {
+          description: "Регистрация домена test-fe-domains-2.ru на 1 год",
+          date: "28.04.2025 12:00",
+          amount: -900,
+          balance: 13200,
+        },
+        {
+          description: "Продление домена mysite.com на 1 год",
+          date: "28.04.2025 12:15",
+          amount: -750,
+          balance: 12450,
+        },
+        {
+          description: "Оплата SSL сертификата для domain.ru",
+          date: "28.04.2025 12:30",
+          amount: -1500,
+          balance: 10950,
+        },
+        {
+          description: "Регистрация домена newproject.io на 1 год",
+          date: "28.04.2025 12:45",
+          amount: -1350,
+          balance: 9600,
+        },
+        {
+          description: "Продление хостинга wordpress-site.com на 3 месяца",
+          date: "28.04.2025 13:00",
+          amount: -2400,
+          balance: 7200,
+        },
+        {
+          description: "Оплата VPS сервера на 1 месяц",
+          date: "28.04.2025 13:15",
+          amount: -3500,
+          balance: 3700,
+        },
+        {
+          description: "Регистрация домена shop-online.store на 1 год",
+          date: "28.04.2025 13:30",
+          amount: -1100,
+          balance: 2600,
+        },
+        {
+          description: "Продление домена portfolio.dev на 2 года",
+          date: "28.04.2025 13:45",
+          amount: -1800,
+          balance: 800,
+        },
+        {
+          description: "Пополнение баланса через Qiwi",
+          date: "28.04.2025 14:00",
+          amount: 5000,
+          balance: 5800,
+        },
+        {
+          description: "Оплата выделенного сервера на 1 месяц",
+          date: "28.04.2025 14:15",
+          amount: -8500,
+          balance: -2700,
+        },
+      ];
+
+      // Pagination state / Состояние пагинации
+      const paginationState = {
+        invoices: { currentPage: 1, itemsPerPage: 8 },
+        transactions: { currentPage: 1, itemsPerPage: 7 },
+      };
+
+      // Render functions / Функции рендеринга
+      function renderInvoices() {
+        const container = document.getElementById("invoices-list");
+        const state = paginationState.invoices;
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        const pageData = invoicesData.slice(startIndex, endIndex);
+
+        container.innerHTML = pageData
+          .map(
+            (invoice) => `
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex gap-7 items-start flex-1 min-w-0">
+              <div class="bg-base-surface-2 rounded-lg p-5 flex items-center justify-center shrink-0">
+                <img src="../public/icons/coins.svg" alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 flex-1 min-w-0">
+                <p class="text-sm-medium text-text-dark-primary">№${invoice.id}</p>
+                <p class="text-xs-regular text-text-dark-secondary">${invoice.date} | ${invoice.method}</p>
+              </div>
+            </div>
+            <p class="text-sm-medium text-text-dark-primary whitespace-nowrap">${invoice.amount} ₽</p>
+          </div>
+        `
+          )
+          .join("");
+      }
+
+      function renderTransactions() {
+        const container = document.getElementById("transactions-list");
+        const state = paginationState.transactions;
+        const startIndex = (state.currentPage - 1) * state.itemsPerPage;
+        const endIndex = startIndex + state.itemsPerPage;
+        const pageData = transactionsData.slice(startIndex, endIndex);
+
+        container.innerHTML = pageData
+          .map(
+            (transaction) => `
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex gap-7 items-start flex-1 min-w-0">
+              <div class="bg-base-surface-2 rounded-lg p-5 flex items-center justify-center shrink-0">
+                <img src="../public/icons/coins.svg" alt="" class="w-6 h-6" />
+              </div>
+              <div class="flex flex-col gap-0.5 flex-1 min-w-0">
+                <p class="text-sm-medium text-text-dark-primary break-words">${
+                  transaction.description
+                }</p>
+                <p class="text-xs-regular text-text-dark-secondary">${
+                  transaction.date
+                }</p>
+              </div>
+            </div>
+            <div class="flex flex-col gap-0.5 items-end sm:self-center shrink-0">
+              <p class="text-sm-medium text-text-dark-primary whitespace-nowrap">${
+                transaction.amount
+              } ₽</p>
+              <p class="text-xs-regular text-text-dark-secondary whitespace-nowrap">Остаток ${transaction.balance.toLocaleString(
+                "ru-RU"
+              )} ₽</p>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+      }
+
+      // Pagination functionality / Функционал пагинации
+      function initPagination(type) {
+        const dataSource =
+          type === "invoices" ? invoicesData : transactionsData;
+        const state = paginationState[type];
+        const totalPages = Math.ceil(dataSource.length / state.itemsPerPage);
+
+        // Render page numbers / Отрисовка номеров страниц
+        function renderPageNumbers() {
+          const container = document.getElementById(`${type}-page-numbers`);
+          container.innerHTML = "";
+
+          const maxVisible = 4;
+          let pages = [];
+
+          if (totalPages <= maxVisible + 2) {
+            for (let i = 1; i <= totalPages; i++) {
+              pages.push(i);
+            }
+          } else {
+            for (let i = 1; i <= Math.min(maxVisible, totalPages); i++) {
+              pages.push(i);
+            }
+            if (totalPages > maxVisible) {
+              pages.push("...");
+              pages.push(totalPages);
+            }
+          }
+
+          pages.forEach((page) => {
+            if (page === "...") {
+              const ellipsis = document.createElement("div");
+              ellipsis.className =
+                "overflow-clip relative rounded-full shrink-0 size-[28px]";
+              ellipsis.innerHTML =
+                '<div class="absolute flex flex-col font-[\'Inter_Variable:Medium\',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center"><p class="leading-[22px]">...</p></div>';
+              container.appendChild(ellipsis);
+            } else {
+              const button = document.createElement("div");
+              button.className =
+                page === state.currentPage
+                  ? "bg-state-brand-active overflow-clip relative rounded-full shadow-[0.5px_0.5px_3px_0px_rgba(26,26,26,0.08)] shrink-0 size-[28px] cursor-pointer"
+                  : "overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1";
+
+              const textClass =
+                page === state.currentPage
+                  ? "absolute flex flex-col font-['Inter_Variable:SemiBold',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-center text-white"
+                  : "absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center";
+
+              button.innerHTML = `<div class="${textClass}"><p class="leading-[22px]">${page}</p></div>`;
+              button.addEventListener("click", () => {
+                state.currentPage = page;
+                updatePagination();
+              });
+              container.appendChild(button);
+            }
+          });
+        }
+
+        // Update pagination controls / Обновить элементы управления пагинацией
+        function updatePagination() {
+          // Render items
+          if (type === "invoices") {
+            renderInvoices();
+          } else {
+            renderTransactions();
+          }
+
+          renderPageNumbers();
+
+          const prevBtn = document.querySelector(`.prev-btn-${type}`);
+          const nextBtn = document.querySelector(`.next-btn-${type}`);
+
+          if (prevBtn) {
+            prevBtn.style.opacity = state.currentPage === 1 ? "0.5" : "1";
+            prevBtn.style.cursor =
+              state.currentPage === 1 ? "not-allowed" : "pointer";
+          }
+          if (nextBtn) {
+            nextBtn.style.opacity =
+              state.currentPage === totalPages ? "0.5" : "1";
+            nextBtn.style.cursor =
+              state.currentPage === totalPages ? "not-allowed" : "pointer";
+          }
+        }
+
+        // Event listeners for prev/next buttons / Обработчики для кнопок назад/вперед
+        const prevBtn = document.querySelector(`.prev-btn-${type}`);
+        const nextBtn = document.querySelector(`.next-btn-${type}`);
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", () => {
+            if (state.currentPage > 1) {
+              state.currentPage--;
+              updatePagination();
+            }
+          });
+        }
+
+        if (nextBtn) {
+          nextBtn.addEventListener("click", () => {
+            if (state.currentPage < totalPages) {
+              state.currentPage++;
+              updatePagination();
+            }
+          });
+        }
+
+        // Initial update / Начальное обновление
+        updatePagination();
+      }
+
+      // Tabs functionality / Функционал вкладок
+      function initTabs() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const invoicesTab = document.getElementById("panel-invoices");
+        const transactionsTab = document.getElementById("panel-transactions");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tabName = button.dataset.tab;
+
+            // Update button states
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "border-state-brand-active",
+                "text-text-dark-primary"
+              );
+              btn.classList.add(
+                "border-transparent",
+                "text-text-dark-secondary"
+              );
+            });
+
+            button.classList.add(
+              "active",
+              "border-state-brand-active",
+              "text-text-dark-primary"
+            );
+            button.classList.remove(
+              "border-transparent",
+              "text-text-dark-secondary"
+            );
+
+            // Show/hide tabs
+            if (tabName === "invoices") {
+              invoicesTab.classList.remove("hidden");
+              invoicesTab.classList.add("flex");
+              transactionsTab.classList.add("hidden");
+              transactionsTab.classList.remove("flex");
+            } else if (tabName === "transactions") {
+              transactionsTab.classList.remove("hidden");
+              transactionsTab.classList.add("flex");
+              invoicesTab.classList.add("hidden");
+              invoicesTab.classList.remove("flex");
+            }
+          });
+        });
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+
+        // Initialize tabs / Инициализация вкладок
+        initTabs();
+
+        // Initialize pagination for both tabs / Инициализация пагинации для обеих вкладок
+        initPagination("invoices");
+        initPagination("transactions");
+
+        // Open promo modal / Открытие модалки промокода
+        const openPromoBtn = document.getElementById('open-promo-modal-btn');
+        const promoModal = document.getElementById('promoModal');
+
+        if (openPromoBtn && promoModal) {
+          openPromoBtn.addEventListener('click', () => {
+            promoModal.open();
+          });
+        }
+
+        // Listen for promo code activation
+        document.addEventListener('promo-activated', (e) => {
+          console.log('Promo code activated:', e.detail.code);
+          // Here you would typically send an API request to activate the promo code
+          // and update the balance
+        });
+
+        // Listen for logout event from profile menu
+        document.addEventListener("profile-logout", function () {
+          console.log("User logged out");
+          // Redirect to login page or perform logout
+          // window.location.href = '/login.html';
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Создание профиля - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Создание профиля
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-5 mb-10">
+            <!-- Tabs Toggle / Переключатель типа лица -->
+            <div
+              class="bg-base-fill-1 p-0.5 rounded-6 flex gap-0.5 w-full"
+              id="profile-type-tabs"
+            >
+              <button
+                class="flex-1 h-[52px] rounded-5 flex items-center justify-center text-lg-medium text-text-dark-tertiary transition-all"
+                data-tab="person"
+              >
+                Физ. лицо
+              </button>
+              <button
+                class="flex-1 h-[52px] rounded-5 flex items-center justify-center text-lg-semibold text-text-dark-primary bg-base-surface-1 border border-base-border transition-all"
+                data-tab="company"
+              >
+                Юр. лицо
+              </button>
+            </div>
+
+            <!-- Forms Container / Контейнер форм -->
+            <div id="forms-container">
+              <!-- Person Form / Форма физического лица -->
+              <form
+                id="person-form"
+                class="hidden flex-col gap-6"
+                onsubmit="return false;"
+              >
+                <!-- Country Select / Выбор страны -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-country"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Выбор страны
+                  </label>
+                  <div class="custom-dropdown relative w-full">
+                    <div
+                      id="person-country-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="person-country-selected">Россия</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div
+                      id="person-country-menu"
+                      class="custom-dropdown-menu hidden"
+                    >
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Россия"
+                        >
+                          Россия
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Беларусь"
+                        >
+                          Беларусь
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Казахстан"
+                        >
+                          Казахстан
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Full Name / ФИО -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-fullname"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    ФИО
+                  </label>
+                  <input
+                    type="text"
+                    id="person-fullname"
+                    placeholder="Иванов Иван Иванович"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Passport / Паспорт -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-passport"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Серия и номер паспорта
+                  </label>
+                  <input
+                    type="text"
+                    id="person-passport"
+                    placeholder="1234 567890"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Date of Issue / Дата выдачи -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-issue-date"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Дата выдачи паспорта
+                  </label>
+                  <input
+                    type="date"
+                    id="person-issue-date"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Issued By / Кем выдан -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-issued-by"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Кем выдан
+                  </label>
+                  <textarea
+                    id="person-issued-by"
+                    rows="3"
+                    placeholder="Отделением УФМС"
+                    class="w-full px-9 py-4 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Address / Адрес -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-address"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Адрес регистрации
+                  </label>
+                  <textarea
+                    id="person-address"
+                    rows="3"
+                    placeholder="г. Москва, ул. Ленина, д. 1, кв. 1"
+                    class="w-full px-9 py-4 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Email / Электронная почта -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-email"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Электронная почта
+                  </label>
+                  <input
+                    type="email"
+                    id="person-email"
+                    placeholder="example@mail.ru"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Phone / Телефон -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="person-phone"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Телефон
+                  </label>
+                  <input
+                    type="tel"
+                    id="person-phone"
+                    placeholder="+7 (999) 123-45-67"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Submit Button / Кнопка отправки -->
+                <button
+                  type="submit"
+                  class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+                >
+                  Создать и продолжить
+                </button>
+              </form>
+
+              <!-- Company Form / Форма юридического лица -->
+              <form
+                id="company-form"
+                class="flex flex-col gap-6"
+                onsubmit="return false;"
+              >
+                <!-- Country Select / Выбор страны -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-country"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Выбор страны
+                  </label>
+                  <div class="custom-dropdown relative w-full">
+                    <div
+                      id="company-country-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="company-country-selected">Россия</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div
+                      id="company-country-menu"
+                      class="custom-dropdown-menu hidden"
+                    >
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Россия"
+                        >
+                          Россия
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Беларусь"
+                        >
+                          Беларусь
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary px-5 py-2"
+                          data-value="Казахстан"
+                        >
+                          Казахстан
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Company Name / Название компании -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-name"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Название компании
+                  </label>
+                  <input
+                    type="text"
+                    id="company-name"
+                    placeholder='ООО "Энергомаш"'
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Company Name English / Наименование организации на англ -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-name-en"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Наименование организации на англ
+                  </label>
+                  <input
+                    type="text"
+                    id="company-name-en"
+                    placeholder='JSC "Energomash"'
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Legal Address / Юридический адрес -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-legal-address"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Юридический адрес
+                  </label>
+                  <textarea
+                    id="company-legal-address"
+                    rows="3"
+                    placeholder="г. Москва, Кремль, дом. 1, кв. 12"
+                    class="w-full px-9 py-4 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- Postal Address / Почтовый адрес -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-postal-address"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    Почтовый адрес
+                  </label>
+                  <textarea
+                    id="company-postal-address"
+                    rows="3"
+                    placeholder="г. Москва, Кремль, дом. 1, кв. 12"
+                    class="w-full px-9 py-4 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white resize-none"
+                  ></textarea>
+                </div>
+
+                <!-- OGRN / ОРГН -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-ogrn"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    ОРГН
+                  </label>
+                  <input
+                    type="text"
+                    id="company-ogrn"
+                    placeholder="1243124124124124"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- INN / ИНН -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-inn"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    ИНН
+                  </label>
+                  <input
+                    type="text"
+                    id="company-inn"
+                    placeholder="12412412412412412"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- KPP / КПП -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-kpp"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    КПП
+                  </label>
+                  <input
+                    type="text"
+                    id="company-kpp"
+                    placeholder="12412412412412412"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- CEO Name / ФИО ген. директора -->
+                <div class="flex flex-col gap-3 w-full">
+                  <label
+                    for="company-ceo"
+                    class="text-lg-regular text-text-dark-secondary"
+                  >
+                    ФИО ген. директора
+                  </label>
+                  <input
+                    type="text"
+                    id="company-ceo"
+                    placeholder="Макс Штиль"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-active transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Submit Button / Кнопка отправки -->
+                <button
+                  type="submit"
+                  class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+                >
+                  Создать и продолжить
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        const personForm = document.getElementById("person-form");
+        const companyForm = document.getElementById("company-form");
+        const tabs = document.querySelectorAll("#profile-type-tabs button");
+
+        // Tab switching / Переключение вкладок
+        tabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            const tabType = this.getAttribute("data-tab");
+
+            // Update tab styles / Обновление стилей вкладок
+            tabs.forEach((t) => {
+              if (t.getAttribute("data-tab") === tabType) {
+                t.classList.remove("text-text-dark-tertiary", "text-lg-medium");
+                t.classList.add(
+                  "text-text-dark-primary",
+                  "text-lg-semibold",
+                  "bg-base-surface-1",
+                  "border",
+                  "border-base-border"
+                );
+              } else {
+                t.classList.remove(
+                  "text-text-dark-primary",
+                  "text-lg-semibold",
+                  "bg-base-surface-1",
+                  "border",
+                  "border-base-border"
+                );
+                t.classList.add("text-text-dark-tertiary", "text-lg-medium");
+              }
+            });
+
+            // Show/hide forms / Показать/скрыть формы
+            if (tabType === "person") {
+              personForm.classList.remove("hidden");
+              personForm.classList.add("flex");
+              companyForm.classList.add("hidden");
+              companyForm.classList.remove("flex");
+            } else {
+              companyForm.classList.remove("hidden");
+              companyForm.classList.add("flex");
+              personForm.classList.add("hidden");
+              personForm.classList.remove("flex");
+            }
+          });
+        });
+
+        // Dropdown handlers / Обработчики выпадающих списков
+        function setupDropdown(triggerId, menuId, selectedId) {
+          const trigger = document.getElementById(triggerId);
+          const menu = document.getElementById(menuId);
+          const selected = document.getElementById(selectedId);
+
+          if (trigger && menu) {
+            trigger.addEventListener("click", (e) => {
+              e.stopPropagation();
+              menu.classList.toggle("hidden");
+            });
+
+            menu.querySelectorAll(".custom-dropdown-item").forEach((item) => {
+              item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selected.textContent = item.textContent.trim();
+                menu.classList.add("hidden");
+
+                menu.querySelectorAll(".custom-dropdown-item").forEach((i) => {
+                  i.classList.remove("selected");
+                });
+                item.classList.add("selected");
+              });
+            });
+
+            document.addEventListener("click", () => {
+              menu.classList.add("hidden");
+            });
+          }
+        }
+
+        // Setup all dropdowns / Настройка всех выпадающих списков
+        setupDropdown(
+          "person-country-trigger",
+          "person-country-menu",
+          "person-country-selected"
+        );
+        setupDropdown(
+          "company-country-trigger",
+          "company-country-menu",
+          "company-country-selected"
+        );
+
+        // Form submissions / Обработка отправки форм
+        personForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          console.log("Person form submitted");
+          // Here you would typically validate and send the data
+        });
+
+        companyForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          console.log("Company form submitted");
+          // Here you would typically validate and send the data
+        });
+      });
+    </script>
+  </body>
+</html>

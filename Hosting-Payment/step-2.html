@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Выбор тарифа - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] pt-18 pb-32 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[880px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Payment Period Section / Секция периода оплаты -->
+          <div class="flex flex-col gap-11 mb-11">
+            <!-- Period Title & Chips / Заголовок и чипсы периода -->
+            <div class="flex flex-col gap-8">
+              <h2 class="text-2xl-semibold text-text-dark-primary">
+                Период оплаты
+              </h2>
+              <div class="flex gap-3 flex-wrap">
+                <button
+                  class="period-chip bg-state-brand-active border border-alpha-dark-100 text-white px-8 h-15 rounded-[2000px] text-base-medium transition-colors"
+                  data-period="1"
+                  data-discount="0"
+                >
+                  1 месяц
+                </button>
+                <button
+                  class="period-chip bg-base-surface-2 border border-base-border text-text-dark-primary px-8 h-15 rounded-[2000px] text-base-medium hover:bg-base-fill-1 transition-colors"
+                  data-period="3"
+                  data-discount="10"
+                >
+                  3 месяца -10%
+                </button>
+                <button
+                  class="period-chip bg-base-surface-2 border border-base-border text-text-dark-primary px-8 h-15 rounded-[2000px] text-base-medium hover:bg-base-fill-1 transition-colors"
+                  data-period="6"
+                  data-discount="15"
+                >
+                  6 месяцев -15%
+                </button>
+                <button
+                  class="period-chip bg-base-surface-2 border border-base-border text-text-dark-primary px-8 h-15 rounded-[2000px] text-base-medium hover:bg-base-fill-1 transition-colors"
+                  data-period="12"
+                  data-discount="20"
+                >
+                  1 год -20%
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Two Column Layout / Двухколоночный макет -->
+          <div class="flex gap-6 items-start">
+            <!-- Left Column - Tariffs / Левая колонка - Тарифы -->
+            <div class="flex-1 flex flex-col gap-8">
+              <h2 class="text-2xl-semibold text-text-dark-primary">Тариф</h2>
+              <div id="tariffs-container" class="flex flex-col gap-3">
+                <!-- Tariff cards will be rendered here by JavaScript -->
+              </div>
+            </div>
+
+            <!-- Right Column - Servers / Правая колонка - Серверы -->
+            <div class="flex-1 flex flex-col gap-8">
+              <h2 class="text-2xl-semibold text-text-dark-primary">Сервер</h2>
+              <div id="servers-container" class="flex flex-col gap-3">
+                <!-- Server cards will be rendered here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fixed Bottom Bar / Фиксированная нижняя панель -->
+      <div
+        class="fixed bottom-0 left-0 right-0 bg-base-surface-2 border-t border-base-border px-6 lg:px-[153px] py-8 shadow-[0px_-4px_8px_rgba(0,0,0,0.04)]"
+      >
+        <div class="max-w-[880px] w-full mx-auto flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-base-medium text-text-dark-secondary"
+              >Стоимость:</span
+            >
+            <span
+              id="total-price"
+              class="text-xl-semibold text-text-dark-primary"
+              >511 ₽</span
+            >
+          </div>
+          <button
+            class="bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 px-8 h-15 text-lg-semibold transition-colors"
+          >
+            Продолжить
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Tariffs data / Данные тарифов
+      const tariffs = [
+        {
+          id: 'standard',
+          name: 'Стандартный',
+          price: 511,
+          specs: '20 GB NVME • 5 сайтов'
+        },
+        {
+          id: 'professional',
+          name: 'Профессиональный',
+          price: 724,
+          specs: '1 Core • 1 GB RAM • 20 GB NVME'
+        },
+        {
+          id: 'ultra',
+          name: 'Ультракрутой',
+          price: 834,
+          specs: '1 Core • 1 GB RAM • 20 GB NVME'
+        },
+        {
+          id: 'mega',
+          name: 'Мегакрутой',
+          price: 934,
+          specs: '1 Core • 1 GB RAM • 20 GB NVME'
+        }
+      ];
+
+      // Servers data / Данные серверов
+      const servers = [
+        {
+          id: 'hetzner',
+          name: '🇩🇪 Hetzner',
+          panel: 'ISPmanager 5',
+          php: 'на выбор',
+          mysql: '9',
+          ssl: 'Бесплатный'
+        },
+        {
+          id: 'moscow1',
+          name: '🇷🇺 Москва',
+          panel: 'cPanel',
+          php: 'на выбор',
+          mysql: '5.7',
+          ssl: 'Бесплатный'
+        },
+        {
+          id: 'moscow2',
+          name: '🇷🇺 Москва',
+          panel: 'DirectAdmin',
+          php: 'на выбор',
+          mysql: '5.7',
+          ssl: 'Бесплатный'
+        }
+      ];
+
+      // State / Состояние
+      let selectedPeriod = 1;
+      let selectedDiscount = 0;
+      let selectedTariffPrice = 511;
+      let selectedTariff = 'standard';
+      let selectedServer = 'hetzner';
+
+      // Calculate total price / Расчет общей стоимости
+      function calculateTotalPrice() {
+        const basePrice = selectedTariffPrice * selectedPeriod;
+        const discountAmount = (basePrice * selectedDiscount) / 100;
+        const totalPrice = basePrice - discountAmount;
+        return Math.round(totalPrice);
+      }
+
+      // Update price display / Обновление отображения цены
+      function updatePriceDisplay() {
+        const totalPrice = calculateTotalPrice();
+        document.getElementById('total-price').textContent = `${totalPrice.toLocaleString('ru-RU')} ₽`;
+      }
+
+      // Render tariff card / Отрисовка карточки тарифа
+      function renderTariffCard(tariff, isActive = false) {
+        const borderClass = isActive ? 'border-state-brand-active' : 'border-base-border hover:border-state-brand-selected';
+        return `
+          <div
+            class="tariff-card border-2 ${borderClass} bg-base-surface-1 rounded-6 p-10 cursor-pointer transition-colors"
+            data-tariff="${tariff.id}"
+            data-price="${tariff.price}"
+          >
+            <div class="flex justify-between items-center mb-2">
+              <h3 class="text-lg-medium text-text-dark-primary">
+                ${tariff.name}
+              </h3>
+              <span class="tariff-price text-lg-medium text-text-dark-primary">${tariff.price} ₽</span>
+            </div>
+            <p class="text-base-medium text-text-dark-secondary">
+              ${tariff.specs}
+            </p>
+          </div>
+        `;
+      }
+
+      // Render server card / Отрисовка карточки сервера
+      function renderServerCard(server, isActive = false) {
+        const borderClass = isActive ? 'border-state-brand-active' : 'border-base-border hover:border-state-brand-selected';
+        return `
+          <div
+            class="server-card border-2 ${borderClass} bg-base-surface-1 rounded-6 p-7 cursor-pointer transition-colors"
+            data-server="${server.id}"
+          >
+            <h3 class="text-base-medium text-text-dark-primary mb-3">
+              ${server.name}
+            </h3>
+            <div class="flex flex-col gap-0.5 text-sm-medium">
+              <p class="text-text-dark-secondary">
+                Панель управления:
+                <span class="text-text-dark-primary">${server.panel}</span>
+              </p>
+              <p class="text-text-dark-secondary">
+                Версия PHP:
+                <span class="text-text-dark-primary">${server.php}</span>
+              </p>
+              <p class="text-text-dark-secondary">
+                MySQL: <span class="text-text-dark-primary">${server.mysql}</span>
+              </p>
+              <p class="text-text-dark-secondary">
+                SSL:
+                <span class="text-text-dark-primary">${server.ssl}</span>
+              </p>
+            </div>
+          </div>
+        `;
+      }
+
+      // Render all tariffs / Отрисовка всех тарифов
+      function renderTariffs() {
+        const container = document.getElementById('tariffs-container');
+        container.innerHTML = tariffs.map((tariff, index) =>
+          renderTariffCard(tariff, index === 0)
+        ).join('');
+      }
+
+      // Render all servers / Отрисовка всех серверов
+      function renderServers() {
+        const container = document.getElementById('servers-container');
+        container.innerHTML = servers.map((server, index) =>
+          renderServerCard(server, index === 0)
+        ).join('');
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener('DOMContentLoaded', function() {
+        // Render tariffs and servers / Отрисовка тарифов и серверов
+        renderTariffs();
+        renderServers();
+        // Period chips handling / Обработка чипсов периода
+        const periodChips = document.querySelectorAll('.period-chip');
+        periodChips.forEach(chip => {
+          chip.addEventListener('click', function() {
+            // Remove active state from all chips
+            periodChips.forEach(c => {
+              c.classList.remove('bg-state-brand-active', 'text-white', 'border-alpha-dark-100');
+              c.classList.add('bg-base-surface-2', 'text-text-dark-primary', 'border-base-border', 'hover:bg-base-fill-1');
+            });
+
+            // Add active state to clicked chip
+            this.classList.remove('bg-base-surface-2', 'text-text-dark-primary', 'border-base-border', 'hover:bg-base-fill-1');
+            this.classList.add('bg-state-brand-active', 'text-white', 'border-alpha-dark-100');
+
+            // Update state
+            selectedPeriod = parseInt(this.dataset.period);
+            selectedDiscount = parseInt(this.dataset.discount);
+
+            // Update price
+            updatePriceDisplay();
+          });
+        });
+
+        // Tariff cards handling / Обработка карточек тарифов
+        const tariffCards = document.querySelectorAll('.tariff-card');
+        tariffCards.forEach(card => {
+          card.addEventListener('click', function() {
+            // Remove active state from all cards
+            tariffCards.forEach(c => {
+              c.classList.remove('border-state-brand-active');
+              c.classList.add('border-base-border');
+            });
+
+            // Add active state to clicked card
+            this.classList.remove('border-base-border');
+            this.classList.add('border-state-brand-active');
+
+            // Update state
+            selectedTariff = this.dataset.tariff;
+            selectedTariffPrice = parseInt(this.dataset.price);
+
+            // Update price
+            updatePriceDisplay();
+          });
+        });
+
+        // Server cards handling / Обработка карточек серверов
+        const serverCards = document.querySelectorAll('.server-card');
+        serverCards.forEach(card => {
+          card.addEventListener('click', function() {
+            // Remove active state from all cards
+            serverCards.forEach(c => {
+              c.classList.remove('border-state-brand-active');
+              c.classList.add('border-base-border');
+            });
+
+            // Add active state to clicked card
+            this.classList.remove('border-base-border');
+            this.classList.add('border-state-brand-active');
+
+            // Update state
+            selectedServer = this.dataset.server;
+          });
+        });
+
+        // Initial price update
+        updatePriceDisplay();
+      });
+    </script>
+  </body>
+</html>

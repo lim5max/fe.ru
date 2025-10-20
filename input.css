@@ -78,11 +78,25 @@
 
 /* Override Tailwind Forms focus styles */
 @layer components {
-  /* Fix search input focus to use orange instead of blue */
+  /* Fix all input types and textarea focus to use orange instead of blue */
   input[type="text"]:focus,
-  input[type="search"]:focus {
+  input[type="email"]:focus,
+  input[type="tel"]:focus,
+  input[type="date"]:focus,
+  input[type="search"]:focus,
+  textarea:focus {
     --tw-ring-color: #e4570c !important; /* state-brand-active */
-    border-color: #fb923c !important; /* state-brand-selected */
+    --tw-ring-offset-shadow: 0 0 #0000 !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    border-color: #e4570c !important; /* state-brand-active */
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  /* Domain input with prefix - apply focus to parent container */
+  #domain-name:focus {
+    border-color: transparent !important;
+    outline: none !important;
   }
 }
 
@@ -158,27 +172,24 @@
     height: auto !important;
   }
 
-  .gridjs-th-figma:first-child,
-  .gridjs-th-figma:last-child {
+  /* Centered alignment for checkbox and actions columns (domains table) */
+  .gridjs-th-figma:first-child:has(input[type="checkbox"]),
+  .gridjs-th-figma:last-child:empty,
+  .gridjs-td-figma:first-child:has(input[type="checkbox"]),
+  .gridjs-td-figma:last-child:has(button) {
     text-align: center;
-    padding: 12px 16px;
   }
 
   .gridjs-td-figma:first-child,
   .gridjs-td-figma:last-child {
-    text-align: center;
     vertical-align: middle;
     display: table-cell;
     padding: 12px 16px;
-    max-width: none;
-    overflow: visible;
-    text-overflow: clip;
-    white-space: normal;
   }
 
-  .gridjs-th-figma:first-child div,
-  .gridjs-th-content:first-child div,
-  .gridjs-th:first-child div {
+  /* Center layout for checkbox column content */
+  .gridjs-th-figma:first-child:has(input[type="checkbox"]) div,
+  .gridjs-td-figma:first-child:has(input[type="checkbox"]) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -194,16 +205,6 @@
     height: 52px;
     vertical-align: middle;
     display: table-cell;
-  }
-
-  .gridjs-td-figma:first-child div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 52px;
-    width: 100%;
-    margin: 0;
-    padding: 0;
   }
 
   .gridjs-td-figma {
@@ -227,6 +228,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     box-sizing: border-box !important;
+    text-align: left !important;
   }
 
   /* Fix inner content height - exclude toggle and checkbox elements */
@@ -272,6 +274,11 @@
 
   .gridjs-tbody .gridjs-tr:hover .gridjs-td-figma {
     background-color: #fafaf9;
+  }
+
+  /* Clickable table cells */
+  .gridjs-td-clickable {
+    cursor: pointer;
   }
 
   /* Hide default Grid.js pagination */
@@ -537,5 +544,115 @@
   /* Force override with animation */
   .toggle-switch::after {
     transition: transform 0.2s ease !important;
+  }
+
+  /* Custom Range Slider Styles - Orange/Brand Color */
+  input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  /* Slider Track - Webkit (Chrome, Safari, Edge) */
+  input[type="range"]::-webkit-slider-track {
+    background: #e7e5e4; /* base-border color */
+    height: 8px;
+    border-radius: 999px;
+  }
+
+  /* Slider Track - Firefox */
+  input[type="range"]::-moz-range-track {
+    background: #e7e5e4;
+    height: 8px;
+    border-radius: 999px;
+  }
+
+  /* Slider Thumb - Webkit */
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #e4570c; /* state-brand-active */
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+  }
+
+  input[type="range"]::-webkit-slider-thumb:hover {
+    background: #f67416; /* state-brand-hover */
+  }
+
+  /* Slider Thumb - Firefox */
+  input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #e4570c;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s ease;
+  }
+
+  input[type="range"]::-moz-range-thumb:hover {
+    background: #f67416;
+  }
+
+  /* Slider filled track effect - Webkit */
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #e4570c 0%, #e4570c var(--range-progress, 0%), #e7e5e4 var(--range-progress, 0%), #e7e5e4 100%);
+    height: 8px;
+    border-radius: 999px;
+  }
+
+  /* Slider filled track effect - Firefox */
+  input[type="range"]::-moz-range-progress {
+    background: #e4570c;
+    height: 8px;
+    border-radius: 999px;
+  }
+
+  /* Custom dropdown styles */
+  .custom-dropdown {
+    position: relative;
+  }
+
+  .custom-dropdown-trigger {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .custom-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 4px;
+    background: white;
+    border: 1px solid #e7e5e4;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px -2px rgba(16, 24, 40, 0.1), 0 2px 4px -2px rgba(16, 24, 40, 0.06);
+    z-index: 50;
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  .custom-dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .custom-dropdown-item:hover {
+    background-color: #f5f5f4;
+  }
+
+  .custom-dropdown-item.selected {
+    background-color: #fef3f2;
+    color: #e4570c;
   }
 }

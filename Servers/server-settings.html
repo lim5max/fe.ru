@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Настройки сервера - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component ---->
+    <script src="../components/fe-header.js"></script>
+    <!-- Center Modal Web Component ---->
+    <script src="../components/fe-center-modal.js"></script>
+    <!-- Side Modal Web Component ---->
+    <script src="../components/fe-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер ---->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель ---->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента ---->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок с кнопкой назад ---->
+        <fe-header
+          back-link="../Servers/index.html"
+          back-text="Список серверов"
+        ></fe-header>
+
+        <!-- Page Content / Содержимое страницы ---->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Server Header / Шапка сервера ---->
+            <div class="flex items-center gap-4 mb-10">
+              <!-- Server Icon / Иконка сервера ---->
+              <div
+                class="bg-base-surface-2 rounded-9 p-7 flex items-center justify-center flex-shrink-0"
+              >
+                <img
+                  src="../public/icons/server.svg"
+                  alt="Server"
+                  class="w-13 h-13"
+                />
+              </div>
+
+              <!-- Server Info / Информация о сервере ---->
+              <div class="flex flex-col">
+                <h2 class="text-base-medium text-text-dark-secondary">
+                  Настройки VPS
+                </h2>
+                <h1 class="text-xl-semibold text-text-dark-primary">Test</h1>
+              </div>
+            </div>
+
+            <!-- Tabs / Вкладки ---->
+            <div
+              class="flex items-center gap-6 border-b border-base-border mb-11"
+            >
+              <button
+                class="tab-button active pb-2 border-b-2 border-state-brand-active text-base-medium text-text-dark-primary"
+                data-tab="management"
+              >
+                Управление
+              </button>
+              <button
+                class="tab-button pb-2 border-b-2 border-transparent text-base-medium text-text-dark-secondary hover:text-text-dark-primary transition-colors"
+                data-tab="info"
+              >
+                Информация и статистика
+              </button>
+            </div>
+
+            <!-- Tab Content Container / Контейнер содержимого вкладок ---->
+            <div id="tab-content">
+              <!-- Management Tab / Вкладка Управление ---->
+              <div id="management-tab" class="tab-content flex flex-col gap-6">
+                <!-- Renewal Section / Секция продления ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/clock-05.svg"
+                        alt="Продление"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Продление
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Оплачен до 12.02.2025
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="renew-btn"
+                    class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap"
+                  >
+                    Продлить
+                  </button>
+                </div>
+
+                <!-- Auto-renewal Section / Секция автопродления ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/date-time.svg"
+                        alt="Автопродление"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Автопродление
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Следующие автопродление 12.01.2025
+                      </p>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Убедитесь, что у вас достаточно
+                        <span class="text-state-brand-active">средств</span> для
+                        автоматического списания
+                      </p>
+                    </div>
+                  </div>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer flex-shrink-0"
+                  >
+                    <input
+                      type="checkbox"
+                      id="autorenew-toggle"
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"
+                    ></div>
+                  </label>
+                </div>
+
+                <!-- Main IP Section / Секция главного IP ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/connect.svg"
+                        alt="Главный IP"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Главный IP
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        81.177.3.175
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="ptr-btn"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Прописать PTR"
+                      class="w-6 h-6"
+                    />
+                    Прописать PTR
+                  </button>
+                </div>
+
+                <!-- Change IP Section / Секция смены IP ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/location-05.svg"
+                        alt="Смена IP"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Смена IP
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        81.177.3.175
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="change-ip-btn"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Изменить"
+                      class="w-6 h-6"
+                    />
+                    Изменить
+                  </button>
+                </div>
+
+                <!-- Control Panel Section / Секция панели управления ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/folder-management.svg"
+                        alt="Панель управления"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Панель управления
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        VMmanager
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    Войти
+                  </button>
+                </div>
+
+                <!-- Configuration Section / Секция конфигурации ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/settings-01.svg"
+                        alt="Конфигурация"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Конфигурация
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        1 CORE, 512MB, 10GB SSD(MSK)
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="change-config-btn"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Изменить"
+                      class="w-6 h-6"
+                    />
+                    Изменить
+                  </button>
+                </div>
+
+                <!-- Notifications Section / Секция уведомлений ---->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/notification.svg"
+                        alt="Уведомления"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Уведомления
+                      </h3>
+                      <p class="text-sm-medium text-state-danger-active">
+                        Выключены
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="notifications-btn"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/settings-01.svg"
+                      alt="Настроить"
+                      class="w-6 h-6"
+                    />
+                    Настроить
+                  </button>
+                </div>
+              </div>
+
+              <!-- Info Tab / Вкладка Информация и статистика ---->
+              <div
+                id="info-tab"
+                class="tab-content hidden flex-col lg:flex-row gap-8"
+              >
+                <!-- Left Column / Левая колонка ---->
+                <div class="flex flex-col gap-4 flex-1">
+                  <!-- Cost Card / Карточка стоимости ---->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-3"
+                  >
+                    <p class="text-base-medium text-text-dark-secondary">
+                      Стоимость
+                    </p>
+                    <h3 class="text-3xl-semibold text-text-dark-primary">
+                      149 руб. в месяц
+                    </h3>
+                  </div>
+
+                  <!-- Server IP Card / Карточка IP сервера ---->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-3"
+                  >
+                    <p class="text-base-medium text-text-dark-secondary">
+                      IP сервера
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <h3
+                        class="text-3xl-semibold text-text-dark-primary"
+                        id="server-ip"
+                      >
+                        12.123.543.34
+                      </h3>
+                      <button
+                        id="copy-ip-btn"
+                        class="hover:bg-base-fill-1 rounded transition-colors p-1"
+                      >
+                        <img
+                          src="../public/icons/copy-01.svg"
+                          alt="Копировать"
+                          class="w-4 h-4"
+                        />
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Root Password Card / Карточка root пароля ---->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-3"
+                  >
+                    <p class="text-base-medium text-text-dark-secondary">
+                      Root пароль
+                    </p>
+                    <div class="flex items-center gap-2">
+                      <h3
+                        class="text-3xl-semibold text-text-dark-primary"
+                        id="root-password"
+                      >
+                        puTivdxki58A
+                      </h3>
+                      <button
+                        id="copy-password-btn"
+                        class="hover:bg-base-fill-1 rounded transition-colors p-1"
+                      >
+                        <img
+                          src="../public/icons/copy-01.svg"
+                          alt="Копировать"
+                          class="w-4 h-4"
+                        />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column / Правая колонка ---->
+                <div class="flex flex-col gap-4 flex-1">
+                  <!-- Server Configuration Card / Карточка конфигурации сервера ---->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-6"
+                  >
+                    <div class="flex flex-col gap-3">
+                      <p class="text-base-medium text-text-dark-secondary">
+                        Параметры
+                      </p>
+                      <h3 class="text-3xl-semibold text-text-dark-primary">
+                        Конфигурация сервера
+                      </h3>
+                    </div>
+
+                    <!-- Configuration Details / Детали конфигурации ---->
+                    <div class="flex flex-col gap-4">
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          CPU
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          1 CORE
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          RAM
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          512 MB
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Постоянная память
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          10 GB (SSD)
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Операционная система
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          CentOS 6
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Страна сервера
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          Russia
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Additional Services Card / Карточка дополнительных услуг ---->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-6"
+                  >
+                    <div class="flex flex-col gap-3">
+                      <p class="text-base-medium text-text-dark-secondary">
+                        Дополнительные
+                      </p>
+                      <h3 class="text-3xl-semibold text-text-dark-primary">
+                        Услуги
+                      </h3>
+                    </div>
+
+                    <!-- Services Details / Детали услуг ---->
+                    <div class="flex flex-col gap-3">
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Внешнеее хранилище
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          нет
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Поддержка PREMIUM
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          нет
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Виртуализация
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          OpenVZ
+                        </p>
+                      </div>
+
+                      <!-- Row / Строка ---->
+                      <div class="flex items-start justify-between gap-4">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Смена IP
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary text-right"
+                        >
+                          есть
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты ---->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+        initTabs();
+        initCopyButtons();
+        initAutoRenewToggle();
+        initRenewModal();
+        initSideModals();
+      });
+
+      // Tab Management / Управление вкладками
+      function initTabs() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const managementTab = document.getElementById("management-tab");
+        const infoTab = document.getElementById("info-tab");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tabName = button.dataset.tab;
+
+            // Update button states / Обновление состояния кнопок
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "border-state-brand-active",
+                "text-text-dark-primary"
+              );
+              btn.classList.add(
+                "border-transparent",
+                "text-text-dark-secondary"
+              );
+            });
+
+            button.classList.add(
+              "active",
+              "border-state-brand-active",
+              "text-text-dark-primary"
+            );
+            button.classList.remove(
+              "border-transparent",
+              "text-text-dark-secondary"
+            );
+
+            // Show/hide tabs / Показать/скрыть вкладки
+            if (tabName === "management") {
+              managementTab.classList.remove("hidden");
+              managementTab.classList.add("flex");
+              infoTab.classList.add("hidden");
+              infoTab.classList.remove("flex");
+            } else if (tabName === "info") {
+              infoTab.classList.remove("hidden");
+              infoTab.classList.add("flex");
+              managementTab.classList.add("hidden");
+              managementTab.classList.remove("flex");
+            }
+          });
+        });
+      }
+
+      // Copy Buttons / Кнопки копирования
+      function initCopyButtons() {
+        const copyIpBtn = document.getElementById("copy-ip-btn");
+        const copyPasswordBtn = document.getElementById("copy-password-btn");
+        const serverIp = document.getElementById("server-ip");
+        const rootPassword = document.getElementById("root-password");
+
+        if (copyIpBtn && serverIp) {
+          copyIpBtn.addEventListener("click", () => {
+            navigator.clipboard
+              .writeText(serverIp.textContent)
+              .then(() => {
+                console.log("IP copied to clipboard");
+              })
+              .catch((err) => {
+                console.error("Failed to copy IP:", err);
+              });
+          });
+        }
+
+        if (copyPasswordBtn && rootPassword) {
+          copyPasswordBtn.addEventListener("click", () => {
+            navigator.clipboard
+              .writeText(rootPassword.textContent)
+              .then(() => {
+                console.log("Password copied to clipboard");
+              })
+              .catch((err) => {
+                console.error("Failed to copy password:", err);
+              });
+          });
+        }
+      }
+
+      // Auto-renewal Toggle / Переключатель автопродления
+      function initAutoRenewToggle() {
+        const toggle = document.getElementById("autorenew-toggle");
+
+        if (toggle) {
+          toggle.addEventListener("change", (e) => {
+            const isEnabled = e.target.checked;
+            console.log("Auto-renewal:", isEnabled ? "Enabled" : "Disabled");
+            // Here you would typically send an API request to update the auto-renewal status
+          });
+        }
+      }
+
+      // Renew Modal / Модалка продления
+      function initRenewModal() {
+        const renewBtn = document.getElementById("renew-btn");
+        const modal = document.getElementById("renewModal");
+        const payBtn = document.getElementById("pay-btn");
+        const deductBtn = document.getElementById("deduct-btn");
+
+        if (renewBtn && modal) {
+          renewBtn.addEventListener("click", () => {
+            modal.open();
+          });
+        }
+
+        if (payBtn) {
+          payBtn.addEventListener("click", () => {
+            console.log("Оплатить clicked");
+            // Redirect to payment page or open payment form
+          });
+        }
+
+        if (deductBtn) {
+          deductBtn.addEventListener("click", () => {
+            console.log("Списать 149 ₽ clicked");
+            // API request to deduct from balance
+            modal.close();
+            alert("Сервер продлен на 1 месяц!");
+          });
+        }
+      }
+
+      // Side Modals / Боковые модалки
+      function initSideModals() {
+        // PTR Modal
+        const ptrBtn = document.getElementById("ptr-btn");
+        const ptrModal = document.getElementById("ptrModal");
+        if (ptrBtn && ptrModal) {
+          ptrBtn.addEventListener("click", () => {
+            ptrModal.open();
+          });
+        }
+
+        // Change IP Modal
+        const changeIpBtn = document.getElementById("change-ip-btn");
+        const changeIpModal = document.getElementById("changeIpModal");
+        if (changeIpBtn && changeIpModal) {
+          changeIpBtn.addEventListener("click", () => {
+            changeIpModal.open();
+          });
+        }
+
+        // Change Configuration Modal
+        const changeConfigBtn = document.getElementById("change-config-btn");
+        const changeConfigModal = document.getElementById("changeConfigModal");
+        if (changeConfigBtn && changeConfigModal) {
+          changeConfigBtn.addEventListener("click", () => {
+            changeConfigModal.open();
+          });
+        }
+
+        // Notifications Modal
+        const notificationsBtn = document.getElementById("notifications-btn");
+        const notificationsModal =
+          document.getElementById("notificationsModal");
+        if (notificationsBtn && notificationsModal) {
+          notificationsBtn.addEventListener("click", () => {
+            notificationsModal.open();
+          });
+        }
+
+        // Custom Dropdown for IP Selection
+        const ipDropdownTrigger = document.getElementById(
+          "ip-dropdown-trigger"
+        );
+        const ipDropdownMenu = document.getElementById("ip-dropdown-menu");
+        const ipSelectedText = document.getElementById("ip-selected-text");
+        let selectedIpValue = "81.177.3.176";
+
+        if (ipDropdownTrigger && ipDropdownMenu) {
+          ipDropdownTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ipDropdownMenu.classList.toggle("hidden");
+          });
+
+          // Handle IP selection
+          ipDropdownMenu
+            .querySelectorAll(".custom-dropdown-item")
+            .forEach((item) => {
+              item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectedIpValue = item.dataset.value;
+                ipSelectedText.textContent = item.textContent;
+                ipDropdownMenu.classList.add("hidden");
+
+                // Update selected state
+                ipDropdownMenu
+                  .querySelectorAll(".custom-dropdown-item")
+                  .forEach((i) => i.classList.remove("selected"));
+                item.classList.add("selected");
+              });
+            });
+        }
+
+        // Custom Dropdown for Notification Days
+        const notificationDaysDropdownTrigger = document.getElementById(
+          "notification-days-dropdown-trigger"
+        );
+        const notificationDaysDropdownMenu = document.getElementById(
+          "notification-days-dropdown-menu"
+        );
+        const notificationDaysSelectedText = document.getElementById(
+          "notification-days-selected-text"
+        );
+        const notificationsSaveBtn = document.getElementById(
+          "notifications-save-btn"
+        );
+        let selectedNotificationDaysValue = null;
+
+        if (notificationDaysDropdownTrigger && notificationDaysDropdownMenu) {
+          notificationDaysDropdownTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            notificationDaysDropdownMenu.classList.toggle("hidden");
+          });
+
+          // Handle notification days selection
+          notificationDaysDropdownMenu
+            .querySelectorAll(".custom-dropdown-item")
+            .forEach((item) => {
+              item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectedNotificationDaysValue = item.dataset.value;
+                notificationDaysSelectedText.textContent = item.textContent;
+                notificationDaysDropdownMenu.classList.add("hidden");
+
+                // Enable save button
+                if (notificationsSaveBtn) {
+                  notificationsSaveBtn.disabled = false;
+                  notificationsSaveBtn.classList.remove(
+                    "bg-base-disabled",
+                    "text-text-dark-tertiary",
+                    "cursor-not-allowed"
+                  );
+                  notificationsSaveBtn.classList.add(
+                    "bg-state-brand-active",
+                    "hover:bg-state-brand-hover",
+                    "text-white",
+                    "cursor-pointer"
+                  );
+                }
+
+                // Update selected state
+                notificationDaysDropdownMenu
+                  .querySelectorAll(".custom-dropdown-item")
+                  .forEach((i) => i.classList.remove("selected"));
+                item.classList.add("selected");
+              });
+            });
+        }
+
+        // Custom Dropdown for RAM Selection
+        const ramDropdownTrigger = document.getElementById(
+          "ram-dropdown-trigger"
+        );
+        const ramDropdownMenu = document.getElementById("ram-dropdown-menu");
+        const ramSelectedText = document.getElementById("ram-selected-text");
+        let selectedRamValue = 512;
+
+        if (ramDropdownTrigger && ramDropdownMenu) {
+          ramDropdownTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ramDropdownMenu.classList.toggle("hidden");
+          });
+
+          ramDropdownMenu
+            .querySelectorAll(".custom-dropdown-item")
+            .forEach((item) => {
+              item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectedRamValue = parseInt(item.dataset.value);
+                ramSelectedText.textContent = item.textContent;
+                ramDropdownMenu.classList.add("hidden");
+
+                // Update selected state
+                ramDropdownMenu
+                  .querySelectorAll(".custom-dropdown-item")
+                  .forEach((i) => i.classList.remove("selected"));
+                item.classList.add("selected");
+
+                // Update price
+                updateConfigPrice();
+              });
+            });
+        }
+
+        // Custom Dropdown for SSD Selection
+        const ssdDropdownTrigger = document.getElementById(
+          "ssd-dropdown-trigger"
+        );
+        const ssdDropdownMenu = document.getElementById("ssd-dropdown-menu");
+        const ssdSelectedText = document.getElementById("ssd-selected-text");
+        let selectedSsdValue = 10;
+
+        if (ssdDropdownTrigger && ssdDropdownMenu) {
+          ssdDropdownTrigger.addEventListener("click", (e) => {
+            e.stopPropagation();
+            ssdDropdownMenu.classList.toggle("hidden");
+          });
+
+          ssdDropdownMenu
+            .querySelectorAll(".custom-dropdown-item")
+            .forEach((item) => {
+              item.addEventListener("click", (e) => {
+                e.stopPropagation();
+                selectedSsdValue = parseInt(item.dataset.value);
+                ssdSelectedText.textContent = item.textContent;
+                ssdDropdownMenu.classList.add("hidden");
+
+                // Update selected state
+                ssdDropdownMenu
+                  .querySelectorAll(".custom-dropdown-item")
+                  .forEach((i) => i.classList.remove("selected"));
+                item.classList.add("selected");
+
+                // Update price
+                updateConfigPrice();
+              });
+            });
+        }
+
+        // Update configuration price
+        function updateConfigPrice() {
+          const cpuRange = document.getElementById("cpu-range");
+          const newPrice = document.getElementById("new-price");
+
+          if (cpuRange && newPrice) {
+            const cpu = parseInt(cpuRange.value);
+            const ram = selectedRamValue;
+            const ssd = selectedSsdValue;
+
+            // Simple price calculation
+            const basePrice = 100;
+            const cpuCost = cpu * 50;
+            const ramCost = (ram / 512) * 25;
+            const ssdCost = (ssd / 10) * 10;
+            const totalPrice = Math.round(
+              basePrice + cpuCost + ramCost + ssdCost
+            );
+
+            newPrice.textContent = `${totalPrice} ₽/мес`;
+          }
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener("click", () => {
+          if (ipDropdownMenu) ipDropdownMenu.classList.add("hidden");
+          if (notificationDaysDropdownMenu)
+            notificationDaysDropdownMenu.classList.add("hidden");
+          if (ramDropdownMenu) ramDropdownMenu.classList.add("hidden");
+          if (ssdDropdownMenu) ssdDropdownMenu.classList.add("hidden");
+        });
+
+        // PTR Save Button
+        const ptrSaveBtn = document.getElementById("ptr-save-btn");
+        if (ptrSaveBtn && ptrModal) {
+          ptrSaveBtn.addEventListener("click", () => {
+            const ptrInput = document.getElementById("ptr-input");
+            console.log("PTR сохранен:", ptrInput.value);
+            ptrModal.close();
+            alert("PTR запись успешно сохранена!");
+          });
+        }
+
+        // Change IP Save Button
+        const changeIpSaveBtn = document.getElementById("change-ip-save-btn");
+        if (changeIpSaveBtn && changeIpModal) {
+          changeIpSaveBtn.addEventListener("click", () => {
+            console.log("IP изменен на:", selectedIpValue);
+            changeIpModal.close();
+            alert("IP адрес успешно изменен!");
+          });
+        }
+
+        // Change Configuration Save Button
+        const changeConfigSaveBtn = document.getElementById(
+          "change-config-save-btn"
+        );
+        if (changeConfigSaveBtn && changeConfigModal) {
+          changeConfigSaveBtn.addEventListener("click", () => {
+            const cpuRange = document.getElementById("cpu-range");
+            console.log("Конфигурация изменена:", {
+              cpu: cpuRange.value,
+              ram: selectedRamValue,
+              ssd: selectedSsdValue,
+            });
+            changeConfigModal.close();
+            alert("Конфигурация успешно изменена!");
+          });
+        }
+
+        // Notifications Save Button
+        if (notificationsSaveBtn && notificationsModal) {
+          notificationsSaveBtn.addEventListener("click", () => {
+            if (selectedNotificationDaysValue) {
+              console.log(
+                "Уведомления настроены на",
+                selectedNotificationDaysValue,
+                "дней"
+              );
+              notificationsModal.close();
+              alert("Настройки уведомлений сохранены!");
+            }
+          });
+        }
+      }
+    </script>
+
+    <!-- Renew Modal / Модалка продления ---->
+    <fe-center-modal id="renewModal" modal-title="Продление сервера">
+      <div slot="content">
+        <p class="text-base-medium text-text-dark-secondary">
+          Вы можете оплатить сервер доступными на платформе средствами или
+          списать средства с баланса
+        </p>
+      </div>
+
+      <div slot="footer" class="flex flex-col gap-5 w-full">
+        <button
+          id="pay-btn"
+          class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+        >
+          Оплатить
+        </button>
+        <button
+          id="deduct-btn"
+          class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+        >
+          Списать 149 ₽
+        </button>
+      </div>
+    </fe-center-modal>
+
+    <!-- PTR Modal / Модалка настройки PTR ---->
+    <fe-modal id="ptrModal" modal-title="Прописать PTR">
+      <div slot="content" class="px-6">
+        <div class="flex flex-col gap-6">
+          <!-- Description / Описание -->
+          <p class="text-base-regular text-text-dark-secondary">
+            PTR-запись используется для обратного преобразования IP-адреса в
+            доменное имя
+          </p>
+
+          <!-- Input Field / Поле ввода -->
+          <div class="flex flex-col gap-2">
+            <label
+              class="text-sm-medium text-text-dark-primary"
+              for="ptr-input"
+            >
+              PTR запись
+            </label>
+            <input
+              id="ptr-input"
+              type="text"
+              placeholder="example.com"
+              class="w-full h-15 px-4 bg-base-surface-1 border border-base-border rounded-6 text-base-regular text-text-dark-primary placeholder:text-text-dark-tertiary focus:outline-none focus:border-state-brand-active transition-colors"
+            />
+          </div>
+
+          <!-- Current IP / Текущий IP -->
+          <div class="flex flex-col gap-1">
+            <p class="text-sm-medium text-text-dark-secondary">Текущий IP</p>
+            <p class="text-base-regular text-text-dark-primary">81.177.3.175</p>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex flex-col gap-3 w-full">
+        <button
+          id="ptr-save-btn"
+          class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+        >
+          Сохранить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Change IP Modal / Модалка смены IP ---->
+    <fe-modal id="changeIpModal" modal-title="Сменить IP адрес">
+      <div slot="content" class="px-6">
+        <div class="flex flex-col gap-6">
+          <!-- Description / Описание -->
+          <p class="text-base-regular text-text-dark-secondary">
+            Выберите новый IP адрес из доступных вариантов
+          </p>
+
+          <!-- Current IP / Текущий IP -->
+          <div
+            class="bg-base-surface-1 border border-base-border rounded-6 p-4 flex flex-col gap-1"
+          >
+            <p class="text-sm-medium text-text-dark-secondary">Текущий IP</p>
+            <p class="text-base-semibold text-text-dark-primary">
+              81.177.3.175
+            </p>
+          </div>
+
+          <!-- Select New IP / Выбор нового IP -->
+          <div class="flex flex-col gap-2">
+            <label class="text-sm-medium text-text-dark-primary">
+              Новый IP адрес
+            </label>
+            <div class="custom-dropdown relative">
+              <div
+                id="ip-dropdown-trigger"
+                class="custom-dropdown-trigger w-full h-15 px-4 bg-base-surface-1 border border-base-border rounded-6 text-base-regular text-text-dark-primary hover:bg-base-fill-1 transition-colors flex items-center justify-between"
+              >
+                <span id="ip-selected-text">81.177.3.176</span>
+                <img
+                  src="../public/icons/arrow-down.svg"
+                  alt="Выбрать"
+                  class="w-7 h-7"
+                />
+              </div>
+              <div id="ip-dropdown-menu" class="custom-dropdown-menu hidden">
+                <div class="py-1">
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="81.177.3.176"
+                  >
+                    81.177.3.176
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="81.177.3.177"
+                  >
+                    81.177.3.177
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="81.177.3.178"
+                  >
+                    81.177.3.178
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="81.177.3.179"
+                  >
+                    81.177.3.179
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Warning / Предупреждение -->
+          <div
+            class="bg-state-warning-surface border border-state-warning-border rounded-6 p-4"
+          >
+            <p class="text-sm-regular text-text-dark-secondary">
+              После смены IP адреса может потребоваться время на обновление DNS
+              записей
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex flex-col gap-3 w-full">
+        <button
+          id="change-ip-save-btn"
+          class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+        >
+          Изменить IP
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Change Configuration Modal / Модалка изменения конфигурации ---->
+    <fe-modal
+      id="changeConfigModal"
+      modal-title="Изменить конфигурацию"
+      max-width="464px"
+    >
+      <div slot="content" class="px-6">
+        <div class="flex flex-col gap-6">
+          <!-- Description / Описание -->
+          <p class="text-base-regular text-text-dark-secondary">
+            Настройте параметры сервера под ваши потребности
+          </p>
+
+          <!-- CPU Configuration / Конфигурация CPU -->
+          <div class="flex flex-col gap-3">
+            <div class="flex items-center justify-between">
+              <label class="text-sm-medium text-text-dark-primary">CPU</label>
+              <span
+                class="text-base-semibold text-text-dark-primary"
+                id="cpu-value"
+                >1 CORE</span
+              >
+            </div>
+            <input
+              id="cpu-range"
+              type="range"
+              min="1"
+              max="8"
+              value="1"
+              class="w-full h-2 bg-base-border rounded-full appearance-none cursor-pointer accent-state-brand-active"
+            />
+            <div
+              class="flex justify-between text-xs-regular text-text-dark-tertiary"
+            >
+              <span>1 CORE</span>
+              <span>8 CORES</span>
+            </div>
+          </div>
+
+          <!-- RAM Configuration / Конфигурация RAM -->
+          <div class="flex flex-col gap-3">
+            <label class="text-sm-medium text-text-dark-primary">RAM</label>
+            <div class="custom-dropdown relative">
+              <div
+                id="ram-dropdown-trigger"
+                class="custom-dropdown-trigger w-full h-15 px-4 bg-base-surface-1 border border-base-border rounded-6 text-base-regular text-text-dark-primary hover:bg-base-fill-1 transition-colors flex items-center justify-between"
+              >
+                <span id="ram-selected-text">512 MB</span>
+                <img
+                  src="../public/icons/arrow-down.svg"
+                  alt="Выбрать"
+                  class="w-7 h-7"
+                />
+              </div>
+              <div id="ram-dropdown-menu" class="custom-dropdown-menu hidden">
+                <div class="py-1">
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="512"
+                  >
+                    512 MB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="1024"
+                  >
+                    1 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="2048"
+                  >
+                    2 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="4096"
+                  >
+                    4 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="8192"
+                  >
+                    8 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="16384"
+                  >
+                    16 GB
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SSD Configuration / Конфигурация SSD -->
+          <div class="flex flex-col gap-3">
+            <label class="text-sm-medium text-text-dark-primary"
+              >Постоянная память</label
+            >
+            <div class="custom-dropdown relative">
+              <div
+                id="ssd-dropdown-trigger"
+                class="custom-dropdown-trigger w-full h-15 px-4 bg-base-surface-1 border border-base-border rounded-6 text-base-regular text-text-dark-primary hover:bg-base-fill-1 transition-colors flex items-center justify-between"
+              >
+                <span id="ssd-selected-text">10 GB</span>
+                <img
+                  src="../public/icons/arrow-down.svg"
+                  alt="Выбрать"
+                  class="w-7 h-7"
+                />
+              </div>
+              <div id="ssd-dropdown-menu" class="custom-dropdown-menu hidden">
+                <div class="py-1">
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="10"
+                  >
+                    10 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="20"
+                  >
+                    20 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="50"
+                  >
+                    50 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="100"
+                  >
+                    100 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="200"
+                  >
+                    200 GB
+                  </div>
+                  <div
+                    class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                    data-value="500"
+                  >
+                    500 GB
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Calculation / Расчет стоимости -->
+          <div
+            class="bg-base-surface-1 border border-base-border rounded-6 p-4 flex items-center justify-between"
+          >
+            <p class="text-base-medium text-text-dark-secondary">
+              Новая стоимость
+            </p>
+            <p class="text-xl-semibold text-text-dark-primary" id="new-price">
+              149 ₽/мес
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex flex-col gap-3 w-full">
+        <button
+          id="change-config-save-btn"
+          class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+        >
+          Применить изменения
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Notifications Modal / Модалка настройки уведомлений ---->
+    <fe-modal id="notificationsModal" modal-title="Настройки уведомлений">
+      <div slot="content" class="px-6">
+        <div class="flex flex-col gap-4">
+          <!-- Email Info / Информация о почте -->
+          <p class="text-base-regular text-text-dark-secondary">
+            Уведомления приходят на почту
+            <span class="text-text-dark-primary">farbx15@gmail.com</span>
+          </p>
+
+          <!-- Notification Timing / Время уведомлений -->
+          <div class="flex flex-col gap-4">
+            <p class="text-base-regular text-text-dark-secondary">
+              Получать уведомления не позднее
+            </p>
+
+            <div class="flex flex-col gap-1.5">
+              <!-- Days Dropdown / Выбор дней -->
+              <div class="custom-dropdown relative">
+                <div
+                  id="notification-days-dropdown-trigger"
+                  class="custom-dropdown-trigger w-full h-15 px-4 bg-base-surface-1 border border-base-border rounded-6 text-base-regular text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between"
+                >
+                  <span id="notification-days-selected-text"
+                    >Выбрать за сколько дней</span
+                  >
+                  <img
+                    src="../public/icons/arrow-down.svg"
+                    alt="Выбрать"
+                    class="w-7 h-7"
+                  />
+                </div>
+                <div
+                  id="notification-days-dropdown-menu"
+                  class="custom-dropdown-menu hidden"
+                >
+                  <div class="py-1">
+                    <div
+                      class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                      data-value="1"
+                    >
+                      За 1 день
+                    </div>
+                    <div
+                      class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                      data-value="3"
+                    >
+                      За 3 дня
+                    </div>
+                    <div
+                      class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                      data-value="7"
+                    >
+                      За 7 дней
+                    </div>
+                    <div
+                      class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                      data-value="14"
+                    >
+                      За 14 дней
+                    </div>
+                    <div
+                      class="custom-dropdown-item text-sm-medium text-text-dark-secondary pl-5 px-3 py-2"
+                      data-value="30"
+                    >
+                      За 30 дней
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Helper Text / Подсказка -->
+              <p class="text-base-regular text-text-dark-secondary">
+                *до окончания аренды
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex flex-col gap-3 w-full">
+        <button
+          id="notifications-save-btn"
+          class="bg-base-disabled text-text-dark-tertiary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full cursor-not-allowed"
+          disabled
+        >
+          Сохранить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Range Slider Update Script / Скрипт обновления слайдеров -->
+    <script>
+      // Update CPU range slider value in real-time
+      document.addEventListener("DOMContentLoaded", function () {
+        const cpuRange = document.getElementById("cpu-range");
+        const cpuValue = document.getElementById("cpu-value");
+
+        if (cpuRange && cpuValue) {
+          cpuRange.addEventListener("input", (e) => {
+            const value = e.target.value;
+            cpuValue.textContent = `${value} ${
+              value === "1" ? "CORE" : "CORES"
+            }`;
+
+            // Update price through the updateConfigPrice function
+            if (typeof updateConfigPrice === "function") {
+              updateConfigPrice();
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

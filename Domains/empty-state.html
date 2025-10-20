@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Домены - FE Платформа</title>
+  <link href="../styles.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Header Web Component -->
+  <script src="../components/fe-header.js"></script>
+</head>
+<body class="bg-base-surface-1 font-sans">
+
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
+
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-15 w-full lg:pl-[300px]">
+          <div class="basis-0 content-stretch flex flex-col gap-6 grow items-center justify-start max-h-[850px] min-h-px min-w-px relative shrink-0 w-full">
+
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div class="content-stretch flex flex-col gap-3 items-center justify-start relative shrink-0 w-full">
+              <div class="content-stretch flex flex-col md:flex-row md:items-center md:justify-between relative shrink-0 w-full gap-4 md:gap-0">
+                <div class="flex items-center gap-4">
+                  <h1 class="text-4xl-semibold text-text-dark-primary">Домены</h1>
+                </div>
+                <button class="bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active transition-colors rounded-6 px-4 h-15 flex items-center gap-2 justify-center w-full md:w-auto md:self-auto">
+                  <img src="../public/icons/shopping-cart.svg" alt="Заказать" class="w-6 h-6 brightness-0 invert" />
+                  <span class="text-lg-semibold text-text-light-primary">Заказать новый</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search and Empty State Container / Контейнер поиска и пустого состояния -->
+            <div class="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full">
+              <!-- Search Bar / Строка поиска -->
+              <div class="w-full max-w-md">
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <img src="../public/icons/search.svg" alt="Поиск" class="h-6 w-6" />
+                  </div>
+                  <input
+                    type="text"
+                    id="domain-search"
+                    placeholder="Поиск доменов"
+                    class="input w-full pl-12"
+                  />
+                </div>
+              </div>
+
+              <!-- Empty State Block / Блок пустого состояния -->
+              <div class="bg-base-surface-2 border border-base-border border-dashed box-border content-stretch flex gap-2.5 items-center justify-center px-16 md:px-32 lg:px-64 py-8 relative rounded-6 w-full">
+                <div class="flex flex-col font-semibold justify-center leading-none relative shrink-0 text-base text-text-dark-secondary text-nowrap">
+                  <p class="leading-6 whitespace-pre">
+                    Список доменов пуст. <span class="text-state-brand-active">Закажите</span> новый домен
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript / Скрипты -->
+  <script>
+    // Load Components / Загрузка компонентов
+    async function loadComponent(containerId, componentPath) {
+      try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+      }
+    }
+
+    // Initialize Components / Инициализация компонентов
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('sidebar-container', '../components/sidebar.html');
+    });
+  </script>
+</body>
+</html>

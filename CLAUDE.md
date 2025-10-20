@@ -106,3 +106,4 @@ Tables are a key interface element requiring special attention:
   ```
 - не забывай запускать сборку tailwind
 - всегда вноси изменения сначала в input css. У нас используется проект на tailwind css, после сборки, выходным файлом является style css
+- не забудь адаптировать страницы (контент внутри них) под мобильные устройства

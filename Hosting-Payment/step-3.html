@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация хостинга - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Регистрация хостинга
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-10 mb-10">
+            <!-- Domain Input Section / Секция ввода домена -->
+            <div class="flex flex-col gap-7">
+              <!-- Domain Input Label / Описание поля ввода -->
+              <p class="text-lg-regular text-text-dark-secondary">
+                Введите имя домена для регистрации хостинга
+              </p>
+
+              <!-- Domain Input / Поле ввода домена -->
+              <div
+                class="border border-base-border rounded-6 overflow-hidden h-17 flex items-center focus-within:border-state-brand-active transition-colors bg-white"
+              >
+                <!-- Prefix / Префикс -->
+                <div class="bg-base-fill-1 h-full px-8 flex items-center">
+                  <span class="text-lg-medium text-text-dark-tertiary"
+                    >https://</span
+                  >
+                </div>
+
+                <!-- Input / Поле ввода -->
+                <input
+                  type="text"
+                  id="domain-name"
+                  class="flex-1 h-full px-8 text-lg-medium text-text-dark-secondary focus:outline-none border-none bg-white"
+                  placeholder="testdomain.ru"
+                />
+              </div>
+            </div>
+
+            <!-- Order Details Card / Карточка деталей заказа -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-10 flex flex-col gap-3"
+            >
+              <!-- Card Header / Заголовок карточки -->
+              <div class="flex flex-col gap-9">
+                <h2 class="text-lg-medium text-text-dark-primary">
+                  Детали заказа VPS
+                </h2>
+              </div>
+
+              <!-- Divider / Разделитель -->
+              <div class="border-t border-base-border h-6"></div>
+
+              <!-- Order Details List / Список деталей заказа -->
+              <div class="flex flex-col gap-5">
+                <!-- Hosting / Хостинг -->
+                <div
+                  class="flex items-center justify-between text-base-medium"
+                >
+                  <span class="text-text-dark-secondary">Хостинг</span>
+                  <span class="text-text-dark-primary" id="hosting-name"
+                    >Стандартный 1</span
+                  >
+                </div>
+
+                <!-- Sites Count / Кол-во сайтов -->
+                <div
+                  class="flex items-center justify-between text-base-medium"
+                >
+                  <span class="text-text-dark-secondary">Кол-во сайтов</span>
+                  <span class="text-text-dark-primary" id="sites-count">∞</span>
+                </div>
+
+                <!-- SSD -->
+                <div
+                  class="flex items-center justify-between text-base-medium"
+                >
+                  <span class="text-text-dark-secondary">SSD</span>
+                  <span class="text-text-dark-primary" id="ssd-size"
+                    >20 GB</span
+                  >
+                </div>
+              </div>
+
+              <!-- Divider / Разделитель -->
+              <div class="border-t border-base-border h-6"></div>
+
+              <!-- Total Price / Итого к оплате -->
+              <div class="flex items-center justify-between">
+                <span class="text-base-medium text-text-dark-secondary"
+                  >Итого к оплате</span
+                >
+                <span
+                  id="total-price"
+                  class="text-xl-semibold text-text-dark-primary"
+                  >412 ₽</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button / Кнопка отправки -->
+          <button
+            id="order-btn"
+            class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+          >
+            Заказать
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Order data (would typically come from previous steps or URL params)
+      const orderData = {
+        hostingName: "Стандартный 1",
+        sitesCount: "∞",
+        ssdSize: "20 GB",
+        totalPrice: 412,
+      };
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        const orderBtn = document.getElementById("order-btn");
+        const domainInput = document.getElementById("domain-name");
+
+        // Populate order details / Заполнение деталей заказа
+        document.getElementById("hosting-name").textContent =
+          orderData.hostingName;
+        document.getElementById("sites-count").textContent =
+          orderData.sitesCount;
+        document.getElementById("ssd-size").textContent = orderData.ssdSize;
+        document.getElementById("total-price").textContent = `${orderData.totalPrice.toLocaleString("ru-RU")} ₽`;
+
+        // Handle order button click / Обработка клика по кнопке заказа
+        orderBtn.addEventListener("click", function () {
+          const domainName = domainInput.value.trim();
+
+          if (!domainName) {
+            alert("Пожалуйста, введите имя домена");
+            return;
+          }
+
+          console.log("Создание заказа:", {
+            domain: domainName,
+            ...orderData,
+          });
+
+          // Here you would typically submit the order to the server
+          alert(`Заказ оформлен для домена: ${domainName}`);
+        });
+
+        // Handle Enter key in domain input / Обработка нажатия Enter в поле домена
+        domainInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            orderBtn.click();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

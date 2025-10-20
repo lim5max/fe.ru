@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Выбор типа хостинга - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Выбор типа хостинга
+          </h1>
+
+          <!-- Hosting Types Section / Секция выбора типа хостинга -->
+          <div class="flex flex-col gap-5 mb-10">
+            <!-- Light Hosting Card / Карточка лёгкого хостинга -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 cursor-pointer hover:bg-base-fill-1 transition-colors flex items-center justify-between gap-2"
+              onclick="selectHostingType('light')"
+            >
+              <div class="flex-1 flex flex-col gap-0.5">
+                <h2 class="text-xl-medium text-text-dark-primary">Легкий</h2>
+                <p class="text-sm-regular text-text-dark-secondary">
+                  Недорогой хостинг для статичных страниц или простого сайта на
+                  CMS. Хорошее решение, если у вас 1 сайт
+                </p>
+              </div>
+              <img
+                src="../public/icons/arrow-right.svg"
+                alt="Выбрать"
+                class="w-8 h-8 flex-shrink-0"
+              />
+            </div>
+
+            <!-- Standard Hosting Card / Карточка стандартного хостинга -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 cursor-pointer hover:bg-base-fill-1 transition-colors flex items-center justify-between gap-2"
+              onclick="selectHostingType('standard')"
+            >
+              <div class="flex-1 flex flex-col gap-0.5">
+                <h2 class="text-xl-medium text-text-dark-primary">
+                  Стандартный
+                </h2>
+                <p class="text-sm-regular text-text-dark-secondary">
+                  Подойдёт для размещения персональных страниц, блогов и
+                  бизнес-сайтов компаний
+                </p>
+              </div>
+              <img
+                src="../public/icons/arrow-right.svg"
+                alt="Выбрать"
+                class="w-8 h-8 flex-shrink-0"
+              />
+            </div>
+
+            <!-- Professional Hosting Card / Карточка профессионального хостинга -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 cursor-pointer hover:bg-base-fill-1 transition-colors flex items-center justify-between gap-2"
+              onclick="selectHostingType('professional')"
+            >
+              <div class="flex-1 flex flex-col gap-0.5">
+                <h2 class="text-xl-medium text-text-dark-primary">
+                  Профессиональный
+                </h2>
+                <p class="text-sm-regular text-text-dark-secondary">
+                  Предназначен для проектов с высокими требованиями к ресурсам и
+                  управлению, профессиональный уровень сервиса
+                </p>
+              </div>
+              <img
+                src="../public/icons/arrow-right.svg"
+                alt="Выбрать"
+                class="w-8 h-8 flex-shrink-0"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Select hosting type / Выбор типа хостинга
+      function selectHostingType(type) {
+        console.log("Selected hosting type:", type);
+        // Here you would typically navigate to the next step
+        // For example: window.location.href = `step-2.html?type=${type}`;
+        alert(`Выбран тип хостинга: ${type}`);
+      }
+    </script>
+  </body>
+</html>

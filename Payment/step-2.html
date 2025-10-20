@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Выбор метода оплаты - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[138px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Выбор метода оплаты
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-9 mb-10">
+            <!-- Amount Summary Card / Карточка суммы -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 px-10 py-8 flex items-center justify-between"
+            >
+              <span class="text-base-medium text-text-dark-secondary"
+                >К пополнению</span
+              >
+              <span
+                id="payment-amount"
+                class="text-xl-semibold text-text-dark-primary"
+                >412 ₽</span
+              >
+            </div>
+
+            <!-- Payment Methods Section / Секция методов оплаты -->
+            <div class="flex flex-col gap-7">
+              <!-- Section Label / Заголовок секции -->
+              <p class="text-lg-regular text-text-dark-secondary">
+                Выберите метод оплаты
+              </p>
+
+              <!-- Payment Methods List / Список методов оплаты -->
+              <div id="payment-methods-list" class="flex flex-col gap-5">
+                <!-- Payment method cards will be rendered here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Payment methods data / Данные методов оплаты
+      const paymentMethods = [
+        {
+          id: "yoomoney",
+          name: "ЮMoney",
+          amount: "412 ₽",
+          description: "Оплата без комиссии",
+          icon: "../public/images/youcassa.png",
+        },
+        {
+          id: "sbp",
+          name: "СБП",
+          amount: "412 ₽",
+          description: "Оплата без комиссии",
+          icon: "../public/images/sbp.png",
+        },
+        {
+          id: "webmoney",
+          name: "WebMoney",
+          amount: "$3.79",
+          description: "WebMoney (WMZ-кошелек)",
+          icon: "../public/images/webmoney.png",
+        },
+        {
+          id: "cards",
+          name: "Банковские карты",
+          amount: "412 ₽",
+          description: "Российские банковские карты",
+          icon: "../public/images/mir.png",
+        },
+        {
+          id: "paypal",
+          name: "PayPal",
+          amount: "$3.79",
+          description: "Российские банковские карты",
+          icon: "../public/images/paypal.png",
+        },
+        {
+          id: "invoice",
+          name: "Безналичный расчет",
+          amount: "412 ₽",
+          description: "Для юридических лиц",
+          icon: "../public/images/beznal.png",
+        },
+      ];
+
+      // Selected payment method / Выбранный метод оплаты
+      let selectedMethod = null;
+
+      // Render payment method card / Отрисовка карточки метода оплаты
+      function renderPaymentMethod(method) {
+        return `
+          <div
+            class="payment-method-card bg-base-surface-2 border border-base-border rounded-6 pl-9 pr-8 py-7 flex items-center justify-between cursor-pointer hover:bg-base-fill-1 transition-colors"
+            data-method="${method.id}"
+          >
+            <div class="flex flex-col gap-0.5 w-[252px]">
+              <p class="text-base-medium text-text-dark-primary">
+                ${method.name} • ${method.amount}
+              </p>
+              <p class="text-sm-medium text-text-dark-secondary">
+                ${method.description}
+              </p>
+            </div>
+            <div class="w-[42px] h-[42px] rounded-6 overflow-hidden flex items-center justify-center bg-white">
+              <img src="${method.icon}" alt="${method.name}" class="w-full h-full object-cover" onerror="this.style.display='none'" />
+            </div>
+          </div>
+        `;
+      }
+
+      // Render all payment methods / Отрисовка всех методов оплаты
+      function renderPaymentMethods() {
+        const container = document.getElementById("payment-methods-list");
+        container.innerHTML = paymentMethods
+          .map((method) => renderPaymentMethod(method))
+          .join("");
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        // Render payment methods / Отрисовка методов оплаты
+        renderPaymentMethods();
+
+        // Get amount from URL params or localStorage / Получение суммы из URL или localStorage
+        const urlParams = new URLSearchParams(window.location.search);
+        const amount =
+          urlParams.get("amount") ||
+          localStorage.getItem("paymentAmount") ||
+          412;
+        document.getElementById("payment-amount").textContent = `${parseInt(
+          amount
+        ).toLocaleString("ru-RU")} ₽`;
+
+        // Handle payment method selection / Обработка выбора метода оплаты
+        document
+          .getElementById("payment-methods-list")
+          .addEventListener("click", function (e) {
+            const card = e.target.closest(".payment-method-card");
+            if (card) {
+              const methodId = card.dataset.method;
+              selectedMethod = paymentMethods.find((m) => m.id === methodId);
+
+              console.log("Выбран метод оплаты:", selectedMethod);
+
+              // Here you would typically redirect to payment processing
+              alert(
+                `Переход к оплате через ${selectedMethod.name} на сумму ${selectedMethod.amount}`
+              );
+            }
+          });
+      });
+    </script>
+  </body>
+</html>

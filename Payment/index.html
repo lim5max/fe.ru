@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Пополнение баланса - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[138px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">2</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Пополнение баланса
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-9 mb-10">
+            <!-- Amount Input Section / Секция ввода суммы -->
+            <div class="flex flex-col gap-7">
+              <!-- Input Label / Описание поля ввода -->
+              <p class="text-lg-regular text-text-dark-secondary">
+                Введите сумму пополнения
+              </p>
+
+              <!-- Amount Input / Поле ввода суммы -->
+              <div
+                class="border border-base-border rounded-6 overflow-hidden h-17 flex items-center focus-within:border-state-brand-selected transition-colors bg-white"
+              >
+                <!-- Prefix / Префикс -->
+                <div class="bg-base-fill-1 h-full px-8 flex items-center">
+                  <span class="text-lg-medium text-text-dark-tertiary">₽</span>
+                </div>
+
+                <!-- Input / Поле ввода -->
+                <input
+                  type="number"
+                  id="amount-input"
+                  class="flex-1 h-full px-8 text-lg-medium text-text-dark-secondary focus:outline-none border-none bg-white [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                  placeholder="Сумма"
+                  min="0"
+                  step="1"
+                />
+              </div>
+            </div>
+
+            <!-- Summary Card / Карточка итого -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 flex items-center justify-between"
+            >
+              <span class="text-base-medium text-text-dark-secondary"
+                >К пополнению</span
+              >
+              <span
+                id="total-amount"
+                class="text-xl-semibold text-text-dark-primary"
+                >0 ₽</span
+              >
+            </div>
+
+            <!-- Continue Button / Кнопка продолжения -->
+            <button
+              id="continue-btn"
+              class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+            >
+              Продолжить
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        const amountInput = document.getElementById("amount-input");
+        const totalAmount = document.getElementById("total-amount");
+        const continueBtn = document.getElementById("continue-btn");
+
+        // Update total amount / Обновление итоговой суммы
+        function updateTotal() {
+          const amount = parseFloat(amountInput.value) || 0;
+          totalAmount.textContent = `${Math.round(amount).toLocaleString("ru-RU")} ₽`;
+        }
+
+        // Update on input / Обновление при вводе
+        amountInput.addEventListener("input", updateTotal);
+
+        // Handle continue button click / Обработка клика по кнопке продолжения
+        continueBtn.addEventListener("click", function () {
+          const amount = parseFloat(amountInput.value) || 0;
+
+          if (amount <= 0) {
+            alert("Пожалуйста, введите сумму пополнения");
+            return;
+          }
+
+          console.log("Пополнение баланса на сумму:", amount);
+
+          // Here you would typically navigate to payment method selection
+          alert(`Переход к выбору способа оплаты на сумму ${amount} ₽`);
+        });
+
+        // Handle Enter key / Обработка нажатия Enter
+        amountInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            continueBtn.click();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

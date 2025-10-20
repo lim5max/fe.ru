@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Другие услуги - FE Платформа</title>
+  <link href="../styles.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Grid.js CSS / Стили Grid.js -->
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet">
+  <!-- Grid.js JavaScript -->
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <!-- Header Web Component -->
+  <script src="../components/fe-header.js"></script>
+</head>
+<body class="bg-base-surface-1 font-sans">
+
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
+
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-15 w-full lg:pl-[300px]">
+          <div class="basis-0 content-stretch flex flex-col gap-6 grow items-center justify-start max-h-[850px] min-h-px min-w-px relative shrink-0 w-full">
+
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div class="content-stretch flex flex-col gap-3 items-center justify-start relative shrink-0 w-full">
+              <div class="content-stretch flex flex-col md:flex-row md:items-center md:justify-between relative shrink-0 w-full gap-4 md:gap-0">
+                <div class="flex items-center gap-4">
+                  <h1 class="text-4xl-semibold text-text-dark-primary">Другие услуги</h1>
+                </div>
+                <button class="bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active transition-colors rounded-6 px-4 h-15 flex items-center gap-2 justify-center w-full md:w-auto md:self-auto">
+                  <img src="../public/icons/shopping-cart.svg" alt="Заказать" class="w-6 h-6 brightness-0 invert" />
+                  <span class="text-lg-semibold text-text-light-primary">Заказать новую</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Services Table Container / Контейнер таблицы услуг -->
+            <div class="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full">
+
+              <!-- Services Table / Таблица услуг -->
+              <!-- Desktop Table / Десктопная таблица -->
+              <div id="services-table" class="w-full hidden md:block"></div>
+
+              <!-- Mobile Table / Мобильная таблица -->
+              <div id="services-table-mobile" class="block md:hidden w-full border border-base-border rounded-7 overflow-hidden">
+                <!-- Mobile table content will be inserted here by JavaScript -->
+              </div>
+
+              <!-- Figma Pagination / Пагинация по дизайну Figma -->
+              <!-- Desktop Version -->
+              <div class="hidden md:flex bg-white content-stretch items-center justify-between relative shrink-0 w-full" style="margin-bottom: 82px;">
+                <!-- Total Count / Общее количество -->
+                <div class="content-stretch flex gap-2.5 items-center justify-start relative shrink-0">
+                  <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                    <p class="leading-[22px] whitespace-pre">Всего 30 услуг</p>
+                  </div>
+                </div>
+
+                <!-- Pagination Controls / Управление пагинацией -->
+                <div class="absolute content-stretch flex gap-3 h-[36px] items-center justify-center left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]">
+                  <!-- Previous Button / Кнопка "Назад" -->
+                  <div class="prev-button bg-base-fill-1 content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] cursor-pointer hover:bg-base-fill-2">
+                    <div class="overflow-clip relative shrink-0 size-[12px]">
+                      <img src="../public/icons/arrow-left.svg" alt="Назад" class="block max-w-none size-full" />
+                    </div>
+                  </div>
+
+                  <!-- Page Numbers / Номера страниц -->
+                  <div class="content-stretch flex gap-1 h-7 items-center justify-center relative shrink-0">
+                    <!-- Page 1 (Active) / Страница 1 (Активная) -->
+                    <div class="page-button bg-state-brand-active overflow-clip relative rounded-full shadow-[0.5px_0.5px_3px_0px_rgba(26,26,26,0.08)] shrink-0 size-[28px]" data-page="1">
+                      <div class="absolute flex flex-col font-['Inter_Variable:SemiBold',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-center text-white">
+                        <p class="leading-[22px]">1</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 2 / Страница 2 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="2">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">2</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 3 / Страница 3 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="3">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">3</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 4 / Страница 4 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="4">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">4</p>
+                      </div>
+                    </div>
+
+                    <!-- Ellipsis / Многоточие -->
+                    <div class="overflow-clip relative rounded-full shrink-0 size-[28px]">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">...</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 10 / Страница 10 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="10">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">10</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Next Button / Кнопка "Вперед" -->
+                  <div class="next-button bg-[#fcfcfc] content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] border border-base-border cursor-pointer hover:bg-base-fill-1">
+                    <div class="overflow-clip relative shrink-0 size-[12px]">
+                      <img src="../public/icons/arrow-right.svg" alt="Вперед" class="block max-w-none size-full" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Rows Per Page / Строк на странице -->
+                <div class="content-stretch flex gap-2.5 items-center justify-end relative shrink-0">
+                  <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                    <p class="leading-[22px] whitespace-pre">Показывать</p>
+                  </div>
+
+                  <!-- Dropdown for rows count / Выпадающий список количества строк -->
+                  <div class="dropdown-container relative">
+                    <div class="rows-dropdown-trigger bg-white box-border content-stretch flex gap-[6px] h-[36px] items-center justify-start min-h-[36px] pl-[12px] pr-[10px] py-0 relative rounded-full shrink-0 border border-base-border cursor-pointer hover:bg-base-fill-1">
+                      <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                        <span id="rows-count-text" class="leading-[22px] whitespace-pre">8 строк</span>
+                      </div>
+                      <div class="overflow-clip relative shrink-0 size-[12px]">
+                        <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="block max-w-none size-full" />
+                      </div>
+                    </div>
+
+                    <!-- Dropdown Menu -->
+                    <div id="rows-dropdown-menu" class="dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[120px] hidden">
+                      <div class="py-1">
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="8">8 строк</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="16">16 строк</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="24">24 строки</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="32">32 строки</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile Version / Мобильная версия -->
+              <div class="flex md:hidden flex-col gap-4 bg-white relative shrink-0 w-full pb-8">
+                <!-- Total Count / Общее количество -->
+                <div class="flex items-center justify-center">
+                  <p class="text-sm-medium text-text-dark-secondary">Всего 30 услуг</p>
+                </div>
+
+                <!-- Pagination Controls / Управление пагинацией -->
+                <div class="flex items-center justify-center gap-3">
+                  <!-- Previous Button / Кнопка "Назад" -->
+                  <div class="prev-button-mobile bg-base-fill-1 flex items-center justify-center rounded-full size-[36px] cursor-pointer hover:bg-base-fill-2">
+                    <img src="../public/icons/arrow-left.svg" alt="Назад" class="size-[12px]" />
+                  </div>
+
+                  <!-- Page Numbers / Номера страниц -->
+                  <div class="flex gap-1 items-center justify-center">
+                    <!-- Page 1 (Active) / Страница 1 (Активная) -->
+                    <div class="page-button-mobile bg-state-brand-active rounded-full size-[28px] flex items-center justify-center shadow-[0.5px_0.5px_3px_0px_rgba(26,26,26,0.08)]" data-page="1">
+                      <p class="text-sm font-semibold text-white leading-[22px]">1</p>
+                    </div>
+
+                    <!-- Page 2 / Страница 2 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="2">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">2</p>
+                    </div>
+
+                    <!-- Page 3 / Страница 3 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="3">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">3</p>
+                    </div>
+
+                    <!-- Page 4 / Страница 4 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="4">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">4</p>
+                    </div>
+
+                    <!-- Ellipsis / Многоточие -->
+                    <div class="rounded-full size-[28px] flex items-center justify-center">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">...</p>
+                    </div>
+
+                    <!-- Page 10 / Страница 10 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="10">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">10</p>
+                    </div>
+                  </div>
+
+                  <!-- Next Button / Кнопка "Вперед" -->
+                  <div class="next-button-mobile bg-[#fcfcfc] border border-base-border flex items-center justify-center rounded-full size-[36px] cursor-pointer hover:bg-base-fill-1">
+                    <img src="../public/icons/arrow-right.svg" alt="Вперед" class="size-[12px]" />
+                  </div>
+                </div>
+
+                <!-- Rows Per Page / Строк на странице -->
+                <div class="flex items-center justify-center gap-2.5">
+                  <p class="text-sm-medium text-text-dark-secondary">Показывать</p>
+                  <div class="dropdown-container relative">
+                    <div class="rows-dropdown-trigger-mobile bg-white border border-base-border flex gap-[6px] h-[36px] items-center pl-[12px] pr-[10px] rounded-full cursor-pointer hover:bg-base-fill-1">
+                      <span id="rows-count-text-mobile" class="text-sm-medium text-text-dark-secondary">8 строк</span>
+                      <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="size-[12px]" />
+                    </div>
+                    <!-- Dropdown Menu -->
+                    <div id="rows-dropdown-menu-mobile" class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[120px] hidden">
+                      <div class="py-1">
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="8">8 строк</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="16">16 строк</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="24">24 строки</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="32">32 строки</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript / Скрипты -->
+  <script>
+    // Load Components / Загрузка компонентов
+    async function loadComponent(containerId, componentPath) {
+      try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+      }
+    }
+
+    // Initialize Components / Инициализация компонентов
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('sidebar-container', '../components/sidebar.html');
+
+      // Initialize Grid.js Table / Инициализация таблицы Grid.js
+      initServicesTable();
+
+      // Initialize Mobile Table / Инициализация мобильной таблицы
+      initMobileServicesTable();
+    });
+
+    // Global variables for pagination
+    let currentPage = 1;
+    let rowsPerPage = 8;
+    let totalRecords = 0;
+
+    // Update pagination display function
+    function updatePaginationDisplay(totalRecords, rowsPerPage) {
+      const totalPages = Math.ceil(totalRecords / rowsPerPage);
+      const totalCountElement = document.querySelector('.gridjs-pagination p');
+      if (totalCountElement) {
+        totalCountElement.textContent = `Всего ${totalRecords} услуг`;
+      }
+
+      // Update page buttons
+      const pageButtons = document.querySelectorAll('.page-button');
+      pageButtons.forEach((btn, index) => {
+        const pageNum = index + 1;
+        if (pageNum <= totalPages) {
+          btn.style.display = 'block';
+          btn.dataset.page = pageNum;
+          btn.querySelector('p').textContent = pageNum;
+
+          // Update active state
+          const textElement = btn.querySelector('div');
+          if (pageNum === currentPage) {
+            btn.classList.remove('text-[rgba(26,26,26,0.36)]');
+            btn.classList.add('bg-state-brand-active', 'text-white');
+            if (textElement) {
+              textElement.classList.remove('text-[rgba(26,26,26,0.36)]');
+              textElement.classList.add('text-white');
+            }
+          } else {
+            btn.classList.remove('bg-state-brand-active', 'text-white');
+            btn.classList.add('text-[rgba(26,26,26,0.36)]');
+            if (textElement) {
+              textElement.classList.remove('text-white');
+              textElement.classList.add('text-[rgba(26,26,26,0.36)]');
+            }
+          }
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+
+      // Hide ellipsis and last page if not needed
+      const ellipsis = document.querySelector('.gridjs-pagination .overflow-clip');
+      const lastPage = document.querySelector('.page-button[data-page="10"]');
+      if (totalPages <= 4) {
+        if (ellipsis) ellipsis.style.display = 'none';
+        if (lastPage) lastPage.style.display = 'none';
+      }
+    }
+
+
+    // Initialize Services Table / Инициализация таблицы услуг
+    function initServicesTable() {
+      // Sample data / Примеры данных
+      const servicesData = [
+        {
+          type: 'Панель управления',
+          name: 'ISPmanager 6 Lite',
+          expiry: '12.02.2025',
+          autorenew: null
+        },
+        {
+          type: 'SSL',
+          name: 'Lets Encrypt Plus',
+          expiry: '08.03.2025',
+          autorenew: true
+        },
+        {
+          type: 'КВМ',
+          name: 'Подключение КВМ',
+          expiry: '21.02.2025',
+          autorenew: null
+        },
+        {
+          type: 'Панель управления',
+          name: 'cPanel Basic',
+          expiry: '15.04.2025',
+          autorenew: false
+        },
+        {
+          type: 'SSL',
+          name: 'Comodo SSL',
+          expiry: '22.05.2025',
+          autorenew: true
+        },
+        {
+          type: 'Backup',
+          name: 'Cloud Backup 100GB',
+          expiry: '30.06.2025',
+          autorenew: null
+        },
+        {
+          type: 'Мониторинг',
+          name: 'Server Monitor Pro',
+          expiry: '10.07.2025',
+          autorenew: true
+        },
+        {
+          type: 'Firewall',
+          name: 'Advanced Firewall',
+          expiry: '18.08.2025',
+          autorenew: false
+        },
+        {
+          type: 'CDN',
+          name: 'CDN Basic Plan',
+          expiry: '25.09.2025',
+          autorenew: null
+        },
+        {
+          type: 'Email',
+          name: 'Business Email 50GB',
+          expiry: '12.10.2025',
+          autorenew: true
+        },
+        {
+          type: 'Database',
+          name: 'MySQL Database',
+          expiry: '20.11.2025',
+          autorenew: null
+        },
+        {
+          type: 'Панель управления',
+          name: 'Plesk Web Admin',
+          expiry: '05.12.2025',
+          autorenew: true
+        },
+        {
+          type: 'SSL',
+          name: 'Wildcard SSL',
+          expiry: '15.01.2026',
+          autorenew: false
+        },
+        {
+          type: 'Backup',
+          name: 'Incremental Backup',
+          expiry: '28.02.2026',
+          autorenew: true
+        },
+        {
+          type: 'Security',
+          name: 'DDoS Protection',
+          expiry: '10.03.2026',
+          autorenew: false
+        },
+        {
+          type: 'Analytics',
+          name: 'Web Analytics Pro',
+          expiry: '22.04.2026',
+          autorenew: true
+        },
+        {
+          type: 'Storage',
+          name: 'Object Storage 500GB',
+          expiry: '30.05.2026',
+          autorenew: false
+        },
+        {
+          type: 'Load Balancer',
+          name: 'HTTP Load Balancer',
+          expiry: '15.06.2026',
+          autorenew: true
+        },
+        {
+          type: 'VPN',
+          name: 'Private VPN Access',
+          expiry: '20.07.2026',
+          autorenew: false
+        },
+        {
+          type: 'DNS',
+          name: 'Premium DNS',
+          expiry: '05.08.2026',
+          autorenew: true
+        },
+        {
+          type: 'Мониторинг',
+          name: 'Uptime Monitor',
+          expiry: '12.09.2026',
+          autorenew: false
+        },
+        {
+          type: 'API',
+          name: 'API Gateway Service',
+          expiry: '25.10.2026',
+          autorenew: true
+        },
+        {
+          type: 'Cache',
+          name: 'Redis Cache 1GB',
+          expiry: '30.11.2026',
+          autorenew: false
+        },
+        {
+          type: 'Контейнеры',
+          name: 'Docker Registry',
+          expiry: '15.12.2026',
+          autorenew: true
+        },
+        {
+          type: 'Messaging',
+          name: 'Message Queue Service',
+          expiry: '20.01.2027',
+          autorenew: false
+        },
+        {
+          type: 'AI/ML',
+          name: 'GPU Instance',
+          expiry: '28.02.2027',
+          autorenew: true
+        },
+        {
+          type: 'Streaming',
+          name: 'Video Streaming CDN',
+          expiry: '10.03.2027',
+          autorenew: false
+        },
+        {
+          type: 'IoT',
+          name: 'IoT Hub Basic',
+          expiry: '22.04.2027',
+          autorenew: true
+        },
+        {
+          type: 'Blockchain',
+          name: 'Blockchain Node',
+          expiry: '30.05.2027',
+          autorenew: false
+        },
+        {
+          type: 'CI/CD',
+          name: 'Build Pipeline Pro',
+          expiry: '15.06.2027',
+          autorenew: true
+        }
+      ];
+
+      // Manual pagination - we'll handle data slicing ourselves
+      let currentData = servicesData;
+      const initialPageData = currentData.slice(0, rowsPerPage).map(row => [
+        row.type,
+        row.name,
+        row.expiry,
+        row.autorenew
+      ]);
+
+      const grid = new gridjs.Grid({
+        pagination: false, // Disable built-in pagination
+        columns: [
+          {
+            name: 'Тип услуги',
+            id: 'type',
+            formatter: (cell) => gridjs.html(`<div style="width: 381px; min-width: 381px; max-width: 381px;">${cell}</div>`),
+            width: '381px',
+            sort: false
+          },
+          {
+            name: 'Название услуги',
+            id: 'name',
+            formatter: (cell) => gridjs.html(`<div style="width: 381px; min-width: 381px; max-width: 381px;">${cell}</div>`),
+            width: '381px',
+            sort: false
+          },
+          {
+            name: 'Действует до',
+            id: 'expiry',
+            formatter: (cell) => gridjs.html(`<div style="width: 180px; min-width: 180px; max-width: 180px;">${cell}</div>`),
+            width: '180px',
+            sort: {
+              compare: (a, b) => {
+                // Custom sort function for dates
+                const dateA = new Date(a.split('.').reverse().join('-'));
+                const dateB = new Date(b.split('.').reverse().join('-'));
+                return dateA - dateB;
+              }
+            }
+          },
+          {
+            name: 'Автопродление',
+            id: 'autorenew',
+            formatter: (cell, row) => {
+              // If null or undefined, show empty cell (no toggle)
+              if (cell === null || cell === undefined) {
+                return gridjs.html(`<div style="width: 178px; min-width: 178px; max-width: 178px;"></div>`);
+              }
+
+              // Otherwise show toggle switch (can be checked or unchecked)
+              const toggleId = `toggle-${row.cells[1].data}`;
+              const isChecked = cell === true;
+              return gridjs.html(`
+                <div class="flex items-center justify-center" style="width: 178px; min-width: 178px; max-width: 178px;">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="${toggleId}" class="sr-only peer" ${isChecked ? 'checked' : ''}>
+                    <div class="toggle-switch w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+                  </label>
+                </div>
+              `);
+            },
+            width: '178px',
+            sort: {
+              compare: (a, b) => {
+                // Sort: true first, then false, then null
+                if (a === true && b !== true) return -1;
+                if (a !== true && b === true) return 1;
+                if (a === false && b === null) return -1;
+                if (a === null && b === false) return 1;
+                return 0;
+              }
+            }
+          },
+          {
+            name: '',
+            id: 'actions',
+            formatter: () => gridjs.html(`
+              <div style="width: 48px; min-width: 48px; max-width: 48px;" class="flex items-center justify-center">
+                <button class="p-1 hover:bg-base-fill-1 rounded">
+                  <img src="../public/icons/more-vertical.svg" alt="Действия" class="w-6 h-6" />
+                </button>
+              </div>
+            `),
+            width: '48px',
+            sort: false
+          }
+        ],
+        data: initialPageData,
+        search: false,
+        sort: false,
+        resizable: false,
+        footer: false,
+        style: {
+          footer: {
+            display: 'none',
+            height: '0',
+            overflow: 'hidden'
+          }
+        },
+        className: {
+          table: 'gridjs-table-figma',
+          th: 'gridjs-th-figma',
+          td: 'gridjs-td-figma',
+          container: 'gridjs-container-figma',
+          pagination: 'gridjs-pagination-figma',
+          footer: 'hidden'
+        }
+      }).render(document.getElementById('services-table'));
+
+      // Set total records and update pagination
+      totalRecords = servicesData.length;
+      updatePaginationDisplay(totalRecords, rowsPerPage);
+
+      // Handle toggle switches for auto-renewal
+      document.addEventListener('change', (e) => {
+        if (e.target.matches('[id^="toggle-"]')) {
+          const toggleId = e.target.id;
+          const serviceName = toggleId.replace('toggle-', '');
+          const isChecked = e.target.checked;
+
+          console.log(`Toggle for ${serviceName}: ${isChecked ? 'ON' : 'OFF'}`);
+          // Here you would typically send an API request to update the auto-renewal status
+        }
+      });
+
+      // Handle pagination clicks
+      document.addEventListener('click', (e) => {
+        // Handle direct page navigation
+        if (e.target.closest('.page-button')) {
+          const pageButton = e.target.closest('.page-button');
+          currentPage = parseInt(pageButton.dataset.page);
+          const start = (currentPage - 1) * rowsPerPage;
+          const end = start + rowsPerPage;
+          const pageData = currentData.slice(start, end).map(row => [
+            row.type, row.name, row.expiry, row.autorenew
+          ]);
+          grid.updateConfig({ data: pageData }).forceRender();
+
+          updatePaginationDisplay(totalRecords, rowsPerPage);
+          console.log(`Navigate to page ${currentPage}`);
+        }
+
+        if (e.target.closest('.prev-button')) {
+          if (currentPage > 1) {
+            currentPage--;
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = currentData.slice(start, end).map(row => [
+              row.type, row.name, row.expiry, row.autorenew
+            ]);
+            grid.updateConfig({ data: pageData }).forceRender();
+
+            updatePaginationDisplay(totalRecords, rowsPerPage);
+          }
+          console.log('Navigate to previous page');
+        }
+
+        if (e.target.closest('.next-button')) {
+          const totalPages = Math.ceil(totalRecords / rowsPerPage);
+          if (currentPage < totalPages) {
+            currentPage++;
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = currentData.slice(start, end).map(row => [
+              row.type, row.name, row.expiry, row.autorenew
+            ]);
+            grid.updateConfig({ data: pageData }).forceRender();
+
+            updatePaginationDisplay(totalRecords, rowsPerPage);
+          }
+          console.log('Navigate to next page');
+        }
+
+        // Handle row count dropdown trigger
+        if (e.target.closest('.rows-dropdown-trigger')) {
+          const menu = document.getElementById('rows-dropdown-menu');
+          menu.classList.toggle('hidden');
+        }
+
+        // Handle dropdown item selection
+        if (e.target.classList.contains('dropdown-item')) {
+          const value = e.target.dataset.value;
+          const text = e.target.textContent;
+          document.getElementById('rows-count-text').textContent = text;
+
+          // Hide dropdown
+          document.getElementById('rows-dropdown-menu').classList.add('hidden');
+
+          // Update global variables
+          const newLimit = parseInt(value);
+          rowsPerPage = newLimit;
+          currentPage = 1; // Reset to first page
+
+          // Update table with new page size
+          const pageData = currentData.slice(0, rowsPerPage).map(row => [
+            row.type, row.name, row.expiry, row.autorenew
+          ]);
+          grid.updateConfig({ data: pageData }).forceRender();
+
+          // Update pagination display
+          updatePaginationDisplay(totalRecords, rowsPerPage);
+
+          console.log(`Changed rows per page to ${newLimit}`);
+        }
+
+        // Close dropdown when clicking outside
+        if (!e.target.closest('.dropdown-container')) {
+          document.getElementById('rows-dropdown-menu').classList.add('hidden');
+        }
+      });
+
+    }
+
+    // Initialize Mobile Services Table / Инициализация мобильной таблицы услуг
+    function initMobileServicesTable() {
+      // Sample data - same as desktop / Те же данные что и для десктопа
+      const servicesData = [
+        {
+          type: 'Панель управления',
+          name: 'ISPmanager 6 Lite',
+          expiry: '12.02.2025',
+          autorenew: null
+        },
+        {
+          type: 'SSL',
+          name: 'Lets Encrypt Plus',
+          expiry: '08.03.2025',
+          autorenew: true
+        },
+        {
+          type: 'КВМ',
+          name: 'Подключение КВМ',
+          expiry: '21.02.2025',
+          autorenew: null
+        },
+        {
+          type: 'Панель управления',
+          name: 'cPanel Basic',
+          expiry: '15.04.2025',
+          autorenew: false
+        },
+        {
+          type: 'SSL',
+          name: 'Comodo SSL',
+          expiry: '22.05.2025',
+          autorenew: true
+        },
+        {
+          type: 'Backup',
+          name: 'Cloud Backup 100GB',
+          expiry: '30.06.2025',
+          autorenew: null
+        },
+        {
+          type: 'Мониторинг',
+          name: 'Server Monitor Pro',
+          expiry: '10.07.2025',
+          autorenew: true
+        },
+        {
+          type: 'Firewall',
+          name: 'Advanced Firewall',
+          expiry: '18.08.2025',
+          autorenew: false
+        },
+        {
+          type: 'CDN',
+          name: 'CDN Basic Plan',
+          expiry: '25.09.2025',
+          autorenew: null
+        },
+        {
+          type: 'Email',
+          name: 'Business Email 50GB',
+          expiry: '12.10.2025',
+          autorenew: true
+        },
+        {
+          type: 'Database',
+          name: 'MySQL Database',
+          expiry: '20.11.2025',
+          autorenew: null
+        },
+        {
+          type: 'Панель управления',
+          name: 'Plesk Web Admin',
+          expiry: '05.12.2025',
+          autorenew: true
+        },
+        {
+          type: 'SSL',
+          name: 'Wildcard SSL',
+          expiry: '15.01.2026',
+          autorenew: false
+        },
+        {
+          type: 'Backup',
+          name: 'Incremental Backup',
+          expiry: '28.02.2026',
+          autorenew: true
+        },
+        {
+          type: 'Security',
+          name: 'DDoS Protection',
+          expiry: '10.03.2026',
+          autorenew: false
+        },
+        {
+          type: 'Analytics',
+          name: 'Web Analytics Pro',
+          expiry: '22.04.2026',
+          autorenew: true
+        },
+        {
+          type: 'Storage',
+          name: 'Object Storage 500GB',
+          expiry: '30.05.2026',
+          autorenew: false
+        },
+        {
+          type: 'Load Balancer',
+          name: 'HTTP Load Balancer',
+          expiry: '15.06.2026',
+          autorenew: true
+        },
+        {
+          type: 'VPN',
+          name: 'Private VPN Access',
+          expiry: '20.07.2026',
+          autorenew: false
+        },
+        {
+          type: 'DNS',
+          name: 'Premium DNS',
+          expiry: '05.08.2026',
+          autorenew: true
+        },
+        {
+          type: 'Мониторинг',
+          name: 'Uptime Monitor',
+          expiry: '12.09.2026',
+          autorenew: false
+        },
+        {
+          type: 'API',
+          name: 'API Gateway Service',
+          expiry: '25.10.2026',
+          autorenew: true
+        },
+        {
+          type: 'Cache',
+          name: 'Redis Cache 1GB',
+          expiry: '30.11.2026',
+          autorenew: false
+        },
+        {
+          type: 'Контейнеры',
+          name: 'Docker Registry',
+          expiry: '15.12.2026',
+          autorenew: true
+        },
+        {
+          type: 'Messaging',
+          name: 'Message Queue Service',
+          expiry: '20.01.2027',
+          autorenew: false
+        },
+        {
+          type: 'AI/ML',
+          name: 'GPU Instance',
+          expiry: '28.02.2027',
+          autorenew: true
+        },
+        {
+          type: 'Streaming',
+          name: 'Video Streaming CDN',
+          expiry: '10.03.2027',
+          autorenew: false
+        },
+        {
+          type: 'IoT',
+          name: 'IoT Hub Basic',
+          expiry: '22.04.2027',
+          autorenew: true
+        },
+        {
+          type: 'Blockchain',
+          name: 'Blockchain Node',
+          expiry: '30.05.2027',
+          autorenew: false
+        },
+        {
+          type: 'CI/CD',
+          name: 'Build Pipeline Pro',
+          expiry: '15.06.2027',
+          autorenew: true
+        }
+      ];
+
+      let currentMobileData = servicesData;
+
+      // Function to render mobile table rows
+      function renderMobileTable(data, startIndex, limit) {
+        const container = document.getElementById('services-table-mobile');
+        const endIndex = Math.min(startIndex + limit, data.length);
+        const pageData = data.slice(startIndex, endIndex);
+
+        let html = '';
+
+        // Add data rows
+        pageData.forEach((row, index) => {
+          const rowId = `mobile-row-${startIndex + index}`;
+
+          // Handle autorenew display
+          let autorenewDisplay;
+          if (row.autorenew === null || row.autorenew === undefined) {
+            autorenewDisplay = `<span class="text-sm-medium text-text-dark-secondary">—</span>`;
+          } else {
+            const toggleId = `toggle-mobile-${row.name.replace(/\s+/g, '-')}`;
+            const isChecked = row.autorenew === true;
+            autorenewDisplay = `
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="${toggleId}" class="sr-only peer" ${isChecked ? 'checked' : ''}>
+                <div class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+              </label>
+            `;
+          }
+
+          html += `
+            <div id="${rowId}" class="bg-white border-b border-base-border last:border-b-0 flex items-start px-4 py-4 hover:bg-base-surface-2 transition-colors">
+              <!-- Info Column / Информационная колонка -->
+              <div class="flex flex-col gap-3 flex-1 min-w-0">
+                <!-- Service Name / Название услуги -->
+                <div class="flex items-center justify-between">
+                  <h3 class="text-base font-semibold text-text-dark-primary overflow-ellipsis overflow-hidden">${row.name}</h3>
+                  <button class="p-1 hover:bg-base-fill-1 rounded flex-shrink-0">
+                    <img src="../public/icons/more-vertical.svg" alt="Действия" class="w-4 h-4" />
+                  </button>
+                </div>
+
+                <!-- Service Type / Тип услуги -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Тип:</span>
+                  <span class="text-sm-medium text-text-dark-primary">${row.type}</span>
+                </div>
+
+                <!-- Expiry Date / Дата истечения -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Действует до:</span>
+                  <span class="text-sm-medium text-text-dark-primary">${row.expiry}</span>
+                </div>
+
+                <!-- Autorenew / Автопродление -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Автопродление:</span>
+                  <div class="min-w-0 flex-1">
+                    ${autorenewDisplay}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Initial render
+      renderMobileTable(currentMobileData, 0, rowsPerPage);
+
+      // Handle mobile toggle switches for auto-renewal
+      document.addEventListener('change', (e) => {
+        if (e.target.matches('[id^="toggle-mobile-"]')) {
+          const toggleId = e.target.id;
+          const serviceName = toggleId.replace('toggle-mobile-', '').replace(/-/g, ' ');
+          const isChecked = e.target.checked;
+
+          console.log(`Mobile toggle for ${serviceName}: ${isChecked ? 'ON' : 'OFF'}`);
+          // Here you would typically send an API request to update the auto-renewal status
+        }
+      });
+
+      // Handle mobile pagination clicks
+      document.addEventListener('click', (e) => {
+        // Handle mobile page buttons
+        if (e.target.closest('.page-button-mobile')) {
+          const pageButton = e.target.closest('.page-button-mobile');
+          const page = parseInt(pageButton.dataset.page);
+          const start = (page - 1) * rowsPerPage;
+          renderMobileTable(currentMobileData, start, rowsPerPage);
+        }
+
+        // Handle mobile prev button
+        if (e.target.closest('.prev-button-mobile')) {
+          if (currentPage > 1) {
+            const start = (currentPage - 2) * rowsPerPage;
+            renderMobileTable(currentMobileData, start, rowsPerPage);
+          }
+        }
+
+        // Handle mobile next button
+        if (e.target.closest('.next-button-mobile')) {
+          const totalPages = Math.ceil(currentMobileData.length / rowsPerPage);
+          if (currentPage < totalPages) {
+            const start = currentPage * rowsPerPage;
+            renderMobileTable(currentMobileData, start, rowsPerPage);
+          }
+        }
+
+        // Handle mobile dropdown
+        if (e.target.closest('.rows-dropdown-trigger-mobile')) {
+          const menu = document.getElementById('rows-dropdown-menu-mobile');
+          menu.classList.toggle('hidden');
+        }
+
+        // Handle mobile dropdown item selection
+        if (e.target.classList.contains('dropdown-item-mobile')) {
+          const value = e.target.dataset.value;
+          const text = e.target.textContent;
+          document.getElementById('rows-count-text-mobile').textContent = text;
+          document.getElementById('rows-dropdown-menu-mobile').classList.add('hidden');
+
+          const newLimit = parseInt(value);
+          rowsPerPage = newLimit;
+          currentPage = 1;
+
+          renderMobileTable(currentMobileData, 0, rowsPerPage);
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

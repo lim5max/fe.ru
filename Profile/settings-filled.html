@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Настройки (Заполненные) - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+    <!-- Profile Menu Web Component -->
+    <script src="../components/fe-profile-menu.js"></script>
+    <!-- Modal Web Component -->
+    <script src="../components/fe-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col lg:flex-row">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 border border-base-border flex flex-col gap-2.5 grow pt-8 md:pt-12 lg:pt-17 px-4 md:px-8 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Two Column Layout / Двухколоночный макет -->
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-13 items-start">
+              <!-- Left Column - Profile Menu / Левая колонка - Меню профиля -->
+              <div class="w-full lg:w-[272px] shrink-0">
+                <fe-profile-menu active="settings"></fe-profile-menu>
+              </div>
+
+              <!-- Right Column - Settings Content / Правая колонка - Контент настроек -->
+              <div class="flex-1 w-full flex flex-col gap-9">
+                <!-- Profile Data Section / Секция данных профиля -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5">
+                      <p class="text-base-semibold text-text-dark-primary">
+                        Данные профиля
+                      </p>
+                    </div>
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      Штиль Максим Геннадьевич
+                    </p>
+                  </div>
+                  <button
+                    id="btn-add-profile-data"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-7 h-13 min-h-13 text-sm-semibold transition-colors flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt=""
+                      class="w-7 h-7 opacity-70"
+                    />
+                    <span>Редактировать</span>
+                  </button>
+                </div>
+
+                <!-- Account Verification Section / Секция верификации аккаунта -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <p class="text-base-semibold text-text-dark-primary">
+                      Верификация аккаунта
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <img
+                      src="../public/icons/checkmark-badge-02.svg"
+                      alt="Verified"
+                      class="w-[18px] h-[18px]"
+                    />
+                    <p class="text-sm-medium text-text-dark-primary">
+                      Аккаунт верифицирован
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Email Section / Секция электронной почты -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <p class="text-base-semibold text-text-dark-primary">
+                      Электронная почта
+                    </p>
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      farbx15@gmail.com
+                    </p>
+                  </div>
+                  <button
+                    id="btn-change-email"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-7 h-13 min-h-13 text-sm-semibold transition-colors flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt=""
+                      class="w-7 h-7 opacity-70"
+                    />
+                    <span>Изменить</span>
+                  </button>
+                </div>
+
+                <!-- Mobile Phone Section / Секция мобильного телефона -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <p class="text-base-semibold text-text-dark-primary">
+                      Мобильный телефон
+                    </p>
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      +7 (999) 121-99-87
+                    </p>
+                  </div>
+                  <button
+                    id="btn-add-phone"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-7 h-13 min-h-13 text-sm-semibold transition-colors flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt=""
+                      class="w-7 h-7 opacity-70"
+                    />
+                    <span>Изменить</span>
+                  </button>
+                </div>
+
+                <!-- Password Section / Секция пароля -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col justify-center">
+                    <div class="flex items-center gap-1.5">
+                      <p class="text-base-semibold text-text-dark-primary">
+                        Пароль
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    id="btn-change-password"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-7 h-13 min-h-13 text-sm-semibold transition-colors flex items-center justify-center gap-2 whitespace-nowrap w-full sm:w-auto"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt=""
+                      class="w-7 h-7 opacity-70"
+                    />
+                    <span>Изменить</span>
+                  </button>
+                </div>
+
+                <!-- VK Authorization Section / Секция авторизации ВК -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <p class="text-base-semibold text-text-dark-primary">
+                      Авторизация ВК
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <img
+                      src="../public/icons/checkmark-circle-04.svg"
+                      alt="Added"
+                      class="w-[18px] h-[18px]"
+                    />
+                    <p class="text-sm-medium text-text-dark-primary">
+                      Добавлена
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Telegram Bot Section / Секция телеграм бота -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 min-h-[46px]"
+                >
+                  <div class="flex flex-col">
+                    <p class="text-base-semibold text-text-dark-primary">
+                      Телеграм бот
+                    </p>
+                  </div>
+                  <div class="flex items-center gap-1.5">
+                    <img
+                      src="../public/icons/checkmark-circle-04.svg"
+                      alt="Added"
+                      class="w-[18px] h-[18px]"
+                    />
+                    <p class="text-sm-medium text-text-dark-primary">
+                      Добавлен
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modals / Модалки -->
+
+    <!-- Modal: Change Password / Модалка смены пароля -->
+    <fe-modal id="modal-change-password" modal-title="Смена пароля">
+      <div slot="content" class="px-6">
+        <!-- Current Password / Текущий пароль -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Текущий пароль
+          </label>
+          <div class="relative">
+            <input
+              type="password"
+              id="current-password"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="*****"
+            />
+            <button
+              type="button"
+              class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+              onclick="togglePassword('current-password')"
+            >
+              <img src="../public/icons/view-off.svg" alt="Toggle visibility" class="w-full h-full" />
+            </button>
+          </div>
+          <a href="#" class="text-sm-medium text-state-brand-active hover:text-state-brand-hover transition-colors mt-2 inline-block">
+            Забыли пароль?
+          </a>
+        </div>
+
+        <!-- New Password / Новый пароль -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Новый пароль
+          </label>
+          <div class="relative">
+            <input
+              type="password"
+              id="new-password"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="*****"
+            />
+            <button
+              type="button"
+              class="absolute right-4 top-1/2 -translate-y-1/2 w-6 h-6 flex items-center justify-center opacity-70 hover:opacity-100 transition-opacity"
+              onclick="togglePassword('new-password')"
+            >
+              <img src="../public/icons/view-off.svg" alt="Toggle visibility" class="w-full h-full" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" class="flex gap-3">
+        <button
+          type="button"
+          class="flex-1 bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 min-h-15 text-base-semibold transition-colors"
+          onclick="document.getElementById('modal-change-password').close()"
+        >
+          Отмена
+        </button>
+        <button
+          type="button"
+          class="flex-1 bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-15 min-h-15 text-base-semibold transition-colors shadow-sm"
+        >
+          Сохранить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Modal: Add Phone / Модалка добавления номера телефона -->
+    <fe-modal id="modal-add-phone" modal-title="Добавление номера телефона">
+      <div slot="content" class="px-6">
+        <!-- Step 1: Enter Phone Number / Шаг 1: Ввод номера -->
+        <div id="phone-step-1" class="flex flex-col">
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Новый номер
+            </label>
+            <input
+              type="tel"
+              id="phone-number"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="+7 (999) 122-23-23"
+            />
+          </div>
+        </div>
+
+        <!-- Step 2: Enter SMS Code with Timer / Шаг 2: Ввод SMS кода с таймером -->
+        <div id="phone-step-2" class="flex flex-col hidden">
+          <!-- Info Text / Информационный текст -->
+          <div class="mb-8">
+            <p class="text-lg-medium text-text-dark-secondary mb-3">
+              Отправили на <span class="text-text-dark-primary" id="phone-display-timer">+7 (999) 122-23-23</span> код
+            </p>
+            <div class="flex flex-col gap-3">
+              <p class="text-lg-medium text-text-dark-primary">
+                Не получили код?
+              </p>
+              <p class="text-lg-medium text-text-dark-secondary">
+                Можно отправить заново через <span class="text-text-dark-primary" id="resend-timer">15 сек</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- SMS Code Input / Поле ввода SMS кода -->
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Код подтверждения
+            </label>
+            <input
+              type="text"
+              id="sms-code"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="1111"
+              maxlength="4"
+            />
+          </div>
+        </div>
+
+        <!-- Step 3: Enter SMS Code with Resend Button / Шаг 3: Ввод SMS кода с кнопкой повтора -->
+        <div id="phone-step-3" class="flex flex-col hidden">
+          <!-- Info Text / Информационный текст -->
+          <div class="mb-8">
+            <p class="text-lg-medium text-text-dark-secondary mb-3">
+              Отправили на <span class="text-text-dark-primary" id="phone-display-resend">+7 (999) 122-23-23</span> код
+            </p>
+            <div class="flex flex-col gap-3">
+              <p class="text-lg-medium text-text-dark-primary">
+                Не получили код?
+              </p>
+              <button
+                type="button"
+                id="resend-code-btn"
+                class="text-lg-medium text-state-brand-active hover:text-state-brand-hover transition-colors text-left"
+              >
+                Отправить заново
+              </button>
+            </div>
+          </div>
+
+          <!-- SMS Code Input / Поле ввода SMS кода -->
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Код подтверждения
+            </label>
+            <input
+              type="text"
+              id="sms-code-resend"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="1111"
+              maxlength="4"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" id="phone-footer">
+        <!-- Footer for Step 1 -->
+        <button
+          type="button"
+          id="phone-submit-btn"
+          class="w-full bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-17 text-xl-semibold transition-colors shadow-sm"
+        >
+          Сохранить
+        </button>
+
+        <!-- Footer for Step 2 & 3 -->
+        <button
+          type="button"
+          id="phone-verify-btn"
+          class="w-full bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-17 text-xl-semibold transition-colors shadow-sm hidden"
+        >
+          Подтвердить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Modal: Add/Edit Profile Data / Модалка добавления/редактирования данных профиля -->
+    <fe-modal id="modal-profile-data" modal-title="Редактирование профиля" max-width="464px">
+      <div slot="content" class="px-6">
+        <!-- Full Name / ФИО -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            ФИО
+          </label>
+          <input
+            type="text"
+            id="full-name"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="Штиль Максим Геннадьевич"
+          />
+        </div>
+
+        <!-- Country Code / Код страны -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Код страны
+          </label>
+          <input
+            type="text"
+            id="country-code"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="RU"
+          />
+        </div>
+
+        <!-- Passport Series and Number / Паспорт серия и номер -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Паспорт серия и номер
+          </label>
+          <input
+            type="text"
+            id="passport"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="1111 131231"
+          />
+        </div>
+
+        <!-- Birth Date / Дата рождения -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Дата рождения
+          </label>
+          <input
+            type="text"
+            id="birth-date"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="01.01.01"
+          />
+        </div>
+
+        <!-- City / Город -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Город
+          </label>
+          <input
+            type="text"
+            id="city"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="Москва"
+          />
+        </div>
+
+        <!-- Address / Адрес -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Адрес
+          </label>
+          <textarea
+            id="address"
+            rows="3"
+            class="w-full px-9 py-4 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors resize-none"
+            placeholder="г. Москва, Кремль, дом. 1, кв. 12"
+          ></textarea>
+        </div>
+
+        <!-- Postal Code / Почтовый индекс -->
+        <div class="mb-7">
+          <label class="block text-lg-regular text-text-dark-secondary mb-7">
+            Почтовый индекс
+          </label>
+          <input
+            type="text"
+            id="postal-code"
+            class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+            placeholder="123456"
+          />
+        </div>
+      </div>
+
+      <div slot="footer" class="flex gap-3">
+        <button
+          type="button"
+          class="flex-1 bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 min-h-15 text-base-semibold transition-colors"
+          onclick="document.getElementById('modal-profile-data').close()"
+        >
+          Отмена
+        </button>
+        <button
+          type="button"
+          class="flex-1 bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-15 min-h-15 text-base-semibold transition-colors shadow-sm"
+        >
+          Сохранить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Modal: Account Verification / Модалка верификации аккаунта -->
+    <fe-modal id="modal-verify-account" modal-title="Верификация аккаунта">
+      <div slot="content" class="px-6">
+        <!-- Info Text / Информационный текст -->
+        <div class="mb-7">
+          <p class="text-lg-regular text-text-dark-secondary mb-8">
+            Необходимо отправить <span class="text-text-dark-primary font-semibold">1 рубль</span> по реквизитам
+          </p>
+
+          <!-- Company Info / Информация о компании -->
+          <div class="space-y-5">
+            <div>
+              <p class="text-sm-regular text-text-dark-secondary">Назнавание организации</p>
+              <p class="text-lg-medium text-text-dark-primary">ООО "Интернет Технологии"</p>
+            </div>
+
+            <div>
+              <p class="text-sm-regular text-text-dark-secondary">ИНН</p>
+              <p class="text-lg-medium text-text-dark-primary">5053041232</p>
+            </div>
+
+            <div>
+              <p class="text-sm-regular text-text-dark-secondary">КПП</p>
+              <p class="text-lg-medium text-text-dark-primary">5053041232</p>
+            </div>
+
+            <div>
+              <p class="text-sm-regular text-text-dark-secondary">Р/С</p>
+              <p class="text-lg-medium text-text-dark-primary">40834234234344324324</p>
+            </div>
+
+            <div>
+              <p class="text-sm-regular text-text-dark-secondary">БИК</p>
+              <p class="text-lg-medium text-text-dark-primary">123123213123441</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer">
+        <button
+          type="button"
+          class="w-full bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-17 text-xl-semibold transition-colors shadow-sm"
+        >
+          Проверить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- Modal: Change Email / Модалка изменения электронной почты -->
+    <fe-modal id="modal-change-email" modal-title="Изменение электронной почты">
+      <div slot="content" class="px-6">
+        <!-- Step 1: Enter New Email / Шаг 1: Ввод новой почты -->
+        <div id="email-step-1" class="flex flex-col">
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Новая электронная почта
+            </label>
+            <input
+              type="email"
+              id="new-email"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="example@gmail.com"
+            />
+          </div>
+        </div>
+
+        <!-- Step 2: Enter Verification Code with Timer / Шаг 2: Ввод кода с таймером -->
+        <div id="email-step-2" class="flex flex-col hidden">
+          <!-- Info Text / Информационный текст -->
+          <div class="mb-8">
+            <p class="text-lg-medium text-text-dark-secondary mb-3">
+              Отправили на <span class="text-text-dark-primary" id="email-display-timer">example@gmail.com</span> код
+            </p>
+            <div class="flex flex-col gap-3">
+              <p class="text-lg-medium text-text-dark-primary">
+                Не получили код?
+              </p>
+              <p class="text-lg-medium text-text-dark-secondary">
+                Можно отправить заново через <span class="text-text-dark-primary" id="email-resend-timer">15 сек</span>
+              </p>
+            </div>
+          </div>
+
+          <!-- Verification Code Input / Поле ввода кода -->
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Код подтверждения
+            </label>
+            <input
+              type="text"
+              id="email-code"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="1111"
+              maxlength="4"
+            />
+          </div>
+        </div>
+
+        <!-- Step 3: Enter Verification Code with Resend Button / Шаг 3: Ввод кода с кнопкой повтора -->
+        <div id="email-step-3" class="flex flex-col hidden">
+          <!-- Info Text / Информационный текст -->
+          <div class="mb-8">
+            <p class="text-lg-medium text-text-dark-secondary mb-3">
+              Отправили на <span class="text-text-dark-primary" id="email-display-resend">example@gmail.com</span> код
+            </p>
+            <div class="flex flex-col gap-3">
+              <p class="text-lg-medium text-text-dark-primary">
+                Не получили код?
+              </p>
+              <button
+                type="button"
+                id="email-resend-code-btn"
+                class="text-lg-medium text-state-brand-active hover:text-state-brand-hover transition-colors text-left"
+              >
+                Отправить заново
+              </button>
+            </div>
+          </div>
+
+          <!-- Verification Code Input / Поле ввода кода -->
+          <div class="mb-7">
+            <label class="block text-lg-regular text-text-dark-secondary mb-7">
+              Код подтверждения
+            </label>
+            <input
+              type="text"
+              id="email-code-resend"
+              class="w-full px-9 h-17 border border-base-border rounded-6 text-lg-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+              placeholder="1111"
+              maxlength="4"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div slot="footer" id="email-footer">
+        <!-- Footer for Step 1 -->
+        <button
+          type="button"
+          id="email-submit-btn"
+          class="w-full bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-17 text-xl-semibold transition-colors shadow-sm"
+        >
+          Сохранить
+        </button>
+
+        <!-- Footer for Step 2 & 3 -->
+        <button
+          type="button"
+          id="email-verify-btn"
+          class="w-full bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active text-white rounded-6 px-4 h-17 text-xl-semibold transition-colors shadow-sm hidden"
+        >
+          Подтвердить
+        </button>
+      </div>
+    </fe-modal>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Toggle Password Visibility / Переключение видимости пароля
+      function togglePassword(inputId) {
+        const input = document.getElementById(inputId);
+        const button = input.nextElementSibling;
+        const icon = button.querySelector('img');
+
+        if (input.type === 'password') {
+          input.type = 'text';
+          icon.src = '../public/icons/view.svg';
+        } else {
+          input.type = 'password';
+          icon.src = '../public/icons/view-off.svg';
+        }
+      }
+
+      // Phone Modal State Management / Управление состояниями модалки телефона
+      let phoneModalState = 1;
+      let resendTimerInterval = null;
+      let resendSecondsLeft = 15;
+
+      // Email Modal State Management / Управление состояниями модалки email
+      let emailModalState = 1;
+      let emailResendTimerInterval = null;
+      let emailResendSecondsLeft = 15;
+
+      function showPhoneStep(step) {
+        // Hide all steps
+        document.getElementById('phone-step-1').classList.add('hidden');
+        document.getElementById('phone-step-2').classList.add('hidden');
+        document.getElementById('phone-step-3').classList.add('hidden');
+
+        // Hide all buttons
+        document.getElementById('phone-submit-btn').classList.add('hidden');
+        document.getElementById('phone-verify-btn').classList.add('hidden');
+
+        // Show selected step
+        if (step === 1) {
+          document.getElementById('phone-step-1').classList.remove('hidden');
+          document.getElementById('phone-submit-btn').classList.remove('hidden');
+        } else if (step === 2) {
+          document.getElementById('phone-step-2').classList.remove('hidden');
+          document.getElementById('phone-verify-btn').classList.remove('hidden');
+          startResendTimer();
+        } else if (step === 3) {
+          document.getElementById('phone-step-3').classList.remove('hidden');
+          document.getElementById('phone-verify-btn').classList.remove('hidden');
+          stopResendTimer();
+        }
+
+        phoneModalState = step;
+      }
+
+      function startResendTimer() {
+        resendSecondsLeft = 15;
+        updateTimerDisplay();
+
+        resendTimerInterval = setInterval(() => {
+          resendSecondsLeft--;
+          updateTimerDisplay();
+
+          if (resendSecondsLeft <= 0) {
+            showPhoneStep(3);
+          }
+        }, 1000);
+      }
+
+      function stopResendTimer() {
+        if (resendTimerInterval) {
+          clearInterval(resendTimerInterval);
+          resendTimerInterval = null;
+        }
+      }
+
+      function updateTimerDisplay() {
+        const timerElement = document.getElementById('resend-timer');
+        if (timerElement) {
+          timerElement.textContent = `${resendSecondsLeft} сек`;
+        }
+      }
+
+      function resetPhoneModal() {
+        showPhoneStep(1);
+        document.getElementById('phone-number').value = '';
+        document.getElementById('sms-code').value = '';
+        document.getElementById('sms-code-resend').value = '';
+      }
+
+      // Email Modal Functions / Функции модалки email
+      function showEmailStep(step) {
+        // Hide all steps
+        document.getElementById('email-step-1').classList.add('hidden');
+        document.getElementById('email-step-2').classList.add('hidden');
+        document.getElementById('email-step-3').classList.add('hidden');
+
+        // Hide all buttons
+        document.getElementById('email-submit-btn').classList.add('hidden');
+        document.getElementById('email-verify-btn').classList.add('hidden');
+
+        // Show selected step
+        if (step === 1) {
+          document.getElementById('email-step-1').classList.remove('hidden');
+          document.getElementById('email-submit-btn').classList.remove('hidden');
+        } else if (step === 2) {
+          document.getElementById('email-step-2').classList.remove('hidden');
+          document.getElementById('email-verify-btn').classList.remove('hidden');
+          startEmailResendTimer();
+        } else if (step === 3) {
+          document.getElementById('email-step-3').classList.remove('hidden');
+          document.getElementById('email-verify-btn').classList.remove('hidden');
+          stopEmailResendTimer();
+        }
+
+        emailModalState = step;
+      }
+
+      function startEmailResendTimer() {
+        emailResendSecondsLeft = 15;
+        updateEmailTimerDisplay();
+
+        emailResendTimerInterval = setInterval(() => {
+          emailResendSecondsLeft--;
+          updateEmailTimerDisplay();
+
+          if (emailResendSecondsLeft <= 0) {
+            showEmailStep(3);
+          }
+        }, 1000);
+      }
+
+      function stopEmailResendTimer() {
+        if (emailResendTimerInterval) {
+          clearInterval(emailResendTimerInterval);
+          emailResendTimerInterval = null;
+        }
+      }
+
+      function updateEmailTimerDisplay() {
+        const timerElement = document.getElementById('email-resend-timer');
+        if (timerElement) {
+          timerElement.textContent = `${emailResendSecondsLeft} сек`;
+        }
+      }
+
+      function resetEmailModal() {
+        showEmailStep(1);
+        document.getElementById('new-email').value = '';
+        document.getElementById('email-code').value = '';
+        document.getElementById('email-code-resend').value = '';
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+
+        // Listen for logout event from profile menu
+        document.addEventListener("profile-logout", function () {
+          console.log("User logged out");
+          // Redirect to login page or perform logout
+          // window.location.href = '/login.html';
+        });
+
+        // Modal Event Listeners / Обработчики событий модалок
+
+        // Button: Add Profile Data / Кнопка добавления данных профиля
+        const btnAddProfileData = document.getElementById('btn-add-profile-data');
+        if (btnAddProfileData) {
+          btnAddProfileData.addEventListener('click', () => {
+            document.getElementById('modal-profile-data').open();
+          });
+        }
+
+        // Button: Verify Account / Кнопка верификации аккаунта
+        const btnVerifyAccount = document.getElementById('btn-verify-account');
+        if (btnVerifyAccount) {
+          btnVerifyAccount.addEventListener('click', () => {
+            document.getElementById('modal-verify-account').open();
+          });
+        }
+
+        // Button: Add Phone / Кнопка добавления телефона
+        const btnAddPhone = document.getElementById('btn-add-phone');
+        if (btnAddPhone) {
+          btnAddPhone.addEventListener('click', () => {
+            resetPhoneModal();
+            document.getElementById('modal-add-phone').open();
+          });
+        }
+
+        // Phone Modal: Submit Phone Number / Отправка номера телефона
+        const phoneSubmitBtn = document.getElementById('phone-submit-btn');
+        if (phoneSubmitBtn) {
+          phoneSubmitBtn.addEventListener('click', () => {
+            const phoneNumber = document.getElementById('phone-number').value;
+            if (phoneNumber) {
+              // Update phone display in step 2 and 3
+              document.getElementById('phone-display-timer').textContent = phoneNumber;
+              document.getElementById('phone-display-resend').textContent = phoneNumber;
+              // Show step 2 (SMS verification with timer)
+              showPhoneStep(2);
+            }
+          });
+        }
+
+        // Phone Modal: Verify SMS Code / Подтверждение SMS кода
+        const phoneVerifyBtn = document.getElementById('phone-verify-btn');
+        if (phoneVerifyBtn) {
+          phoneVerifyBtn.addEventListener('click', () => {
+            const smsCode = phoneModalState === 2
+              ? document.getElementById('sms-code').value
+              : document.getElementById('sms-code-resend').value;
+
+            if (smsCode) {
+              console.log('SMS code verified:', smsCode);
+              // Here you would verify the code
+              // If successful, close modal
+              document.getElementById('modal-add-phone').close();
+              resetPhoneModal();
+            }
+          });
+        }
+
+        // Phone Modal: Resend Code Button / Кнопка повторной отправки
+        const resendCodeBtn = document.getElementById('resend-code-btn');
+        if (resendCodeBtn) {
+          resendCodeBtn.addEventListener('click', () => {
+            // Restart from step 2 (with timer)
+            showPhoneStep(2);
+          });
+        }
+
+        // Listen for modal close to reset timer / Сброс таймера при закрытии модалки
+        const phoneModal = document.getElementById('modal-add-phone');
+        if (phoneModal) {
+          phoneModal.addEventListener('modal-closed', () => {
+            stopResendTimer();
+            resetPhoneModal();
+          });
+        }
+
+        // Button: Change Password / Кнопка смены пароля
+        const btnChangePassword = document.getElementById('btn-change-password');
+        if (btnChangePassword) {
+          btnChangePassword.addEventListener('click', () => {
+            document.getElementById('modal-change-password').open();
+          });
+        }
+
+        // Button: Change Email / Кнопка изменения email
+        const btnChangeEmail = document.getElementById('btn-change-email');
+        if (btnChangeEmail) {
+          btnChangeEmail.addEventListener('click', () => {
+            resetEmailModal();
+            document.getElementById('modal-change-email').open();
+          });
+        }
+
+        // Email Modal: Submit New Email / Отправка нового email
+        const emailSubmitBtn = document.getElementById('email-submit-btn');
+        if (emailSubmitBtn) {
+          emailSubmitBtn.addEventListener('click', () => {
+            const newEmail = document.getElementById('new-email').value;
+            if (newEmail) {
+              // Update email display in step 2 and 3
+              document.getElementById('email-display-timer').textContent = newEmail;
+              document.getElementById('email-display-resend').textContent = newEmail;
+              // Show step 2 (Email verification with timer)
+              showEmailStep(2);
+            }
+          });
+        }
+
+        // Email Modal: Verify Code / Подтверждение кода
+        const emailVerifyBtn = document.getElementById('email-verify-btn');
+        if (emailVerifyBtn) {
+          emailVerifyBtn.addEventListener('click', () => {
+            const emailCode = emailModalState === 2
+              ? document.getElementById('email-code').value
+              : document.getElementById('email-code-resend').value;
+
+            if (emailCode) {
+              console.log('Email code verified:', emailCode);
+              // Here you would verify the code
+              // If successful, close modal
+              document.getElementById('modal-change-email').close();
+              resetEmailModal();
+            }
+          });
+        }
+
+        // Email Modal: Resend Code Button / Кнопка повторной отправки
+        const emailResendCodeBtn = document.getElementById('email-resend-code-btn');
+        if (emailResendCodeBtn) {
+          emailResendCodeBtn.addEventListener('click', () => {
+            // Restart from step 2 (with timer)
+            showEmailStep(2);
+          });
+        }
+
+        // Listen for email modal close to reset timer / Сброс таймера при закрытии модалки
+        const emailModal = document.getElementById('modal-change-email');
+        if (emailModal) {
+          emailModal.addEventListener('modal-closed', () => {
+            stopEmailResendTimer();
+            resetEmailModal();
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

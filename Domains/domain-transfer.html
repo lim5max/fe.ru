@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Передача домена - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок с кнопкой назад -->
+        <fe-header
+          back-link="./domain-settings.html"
+          back-text="Настройки домена"
+        ></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Domain Header / Шапка домена -->
+            <div class="flex items-center gap-4 mb-10">
+              <!-- Transfer Icon / Иконка передачи -->
+              <div
+                class="bg-base-surface-2 rounded-9 p-7 flex items-center justify-center flex-shrink-0"
+              >
+                <img
+                  src="../public/icons/link-forward.svg"
+                  alt="Передача домена"
+                  class="w-13 h-13"
+                />
+              </div>
+
+              <!-- Domain Info / Информация о домене -->
+              <div class="flex flex-col">
+                <h2 class="text-base-medium text-text-dark-secondary">
+                  testdomain.com
+                </h2>
+                <h1 class="text-xl-semibold text-text-dark-primary">
+                  Передача домена
+                </h1>
+              </div>
+            </div>
+
+            <!-- Transfer Section / Секция передачи -->
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+              <!-- Left Side: Warning Text / Левая сторона: предупреждающий текст -->
+              <div class="flex-1 max-w-[560px]">
+                <div class="border border-base-border rounded-9 p-4">
+                  <p class="text-base-medium text-text-dark-secondary">
+                    После передачи домена вы не сможете управлять им. Данные
+                    администратора не изменятся. Вся ответственность остается за
+                    текущим
+                    <span class="text-state-brand-active">администратором</span
+                    >.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Right Side: Form / Правая сторона: форма -->
+              <div class="flex flex-col gap-6 flex-1 max-w-[400px]">
+                <!-- Contract Number Input / Поле номера договора -->
+                <div class="flex flex-col gap-3">
+                  <label class="text-lg-regular text-text-dark-secondary">
+                    Номер договора
+                  </label>
+                  <input
+                    type="text"
+                    id="contract-number-input"
+                    class="bg-base-surface-2 border border-base-border rounded-6 px-4 h-15 text-lg-medium text-text-dark-secondary placeholder:text-text-dark-tertiary focus:border-state-brand-active focus:outline-none transition-colors"
+                    placeholder="Введите номер договора"
+                  />
+                </div>
+
+                <!-- Transfer Button / Кнопка передачи -->
+                <button
+                  id="transfer-btn"
+                  class="bg-base-surface-2 text-text-dark-tertiary rounded-6 px-6 h-15 text-base-semibold transition-colors cursor-not-allowed w-full"
+                  disabled
+                >
+                  Передать
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+        initContractNumberInput();
+        initTransferButton();
+      });
+
+      // Contract Number Input Logic / Логика инпута номера договора
+      function initContractNumberInput() {
+        const contractInput = document.getElementById("contract-number-input");
+        const transferBtn = document.getElementById("transfer-btn");
+
+        contractInput.addEventListener("input", (e) => {
+          const value = e.target.value.trim();
+
+          if (value.length > 0) {
+            // Активируем кнопку
+            transferBtn.classList.remove(
+              "bg-base-surface-2",
+              "text-text-dark-tertiary",
+              "cursor-not-allowed"
+            );
+            transferBtn.classList.add(
+              "bg-state-brand-active",
+              "hover:bg-state-brand-hover",
+              "text-white",
+              "cursor-pointer"
+            );
+            transferBtn.disabled = false;
+          } else {
+            // Деактивируем кнопку
+            transferBtn.classList.add(
+              "bg-base-surface-2",
+              "text-text-dark-tertiary",
+              "cursor-not-allowed"
+            );
+            transferBtn.classList.remove(
+              "bg-state-brand-active",
+              "hover:bg-state-brand-hover",
+              "text-white",
+              "cursor-pointer"
+            );
+            transferBtn.disabled = true;
+          }
+        });
+      }
+
+      // Transfer Button Handler / Обработчик кнопки передачи
+      function initTransferButton() {
+        const transferBtn = document.getElementById("transfer-btn");
+        const contractInput = document.getElementById("contract-number-input");
+
+        transferBtn.addEventListener("click", () => {
+          if (!transferBtn.disabled) {
+            const contractNumber = contractInput.value.trim();
+
+            // Показываем подтверждение
+            if (
+              confirm(
+                `Вы уверены, что хотите передать домен testdomain.com по договору №${contractNumber}? Это действие нельзя отменить.`
+              )
+            ) {
+              console.log("Transferring domain with contract:", contractNumber);
+              // Здесь будет API запрос для передачи домена
+              alert("Домен успешно передан!");
+            }
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

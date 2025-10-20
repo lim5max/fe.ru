@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Выбор тарифа VPS - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[880px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Выбор тарифа
+          </h1>
+
+          <!-- Tariffs Grid / Сетка тарифов -->
+          <div id="tariffs-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Tariff cards will be rendered here by JavaScript -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // VPS Tariffs data / Данные тарифов VPS
+      const vpsTariffs = [
+        {
+          id: "vds-h1",
+          name: "Сервер VDS H1",
+          price: 511,
+          cores: "1 Core",
+          ram: "1 GB RAM",
+          storage: "20 GB NVME",
+          virtualization: "OPENVZ",
+        },
+        {
+          id: "vds-h2",
+          name: "Сервер VDS H2",
+          price: 724,
+          cores: "2 Core",
+          ram: "2 GB RAM",
+          storage: "40 GB NVME",
+          virtualization: "OPENVZ",
+        },
+        {
+          id: "vds-h3",
+          name: "Сервер VDS H3",
+          price: 934,
+          cores: "4 Core",
+          ram: "4 GB RAM",
+          storage: "80 GB NVME",
+          virtualization: "KVM",
+        },
+        {
+          id: "vds-h4",
+          name: "Сервер VDS H4",
+          price: 1234,
+          cores: "8 Core",
+          ram: "8 GB RAM",
+          storage: "160 GB NVME",
+          virtualization: "KVM",
+        },
+        {
+          id: "vds-h5",
+          name: "Сервер VDS H5",
+          price: 1534,
+          cores: "16 Core",
+          ram: "16 GB RAM",
+          storage: "320 GB NVME",
+          virtualization: "KVM",
+        },
+        {
+          id: "vds-h6",
+          name: "Сервер VDS H6",
+          price: 2034,
+          cores: "32 Core",
+          ram: "32 GB RAM",
+          storage: "640 GB NVME",
+          virtualization: "KVM",
+        },
+      ];
+
+      // Render tariff card / Отрисовка карточки тарифа
+      function renderTariffCard(tariff) {
+        return `
+          <div class="border border-base-border rounded-6 px-10 py-8 relative">
+            <div class="flex items-center justify-between mb-2.5">
+              <h3 class="text-lg-medium text-text-dark-primary">${tariff.name}</h3>
+              <span class="text-lg-medium text-text-dark-primary">${tariff.price} ₽</span>
+            </div>
+            <div class="flex flex-col gap-3">
+              <p class="text-base-medium text-text-dark-secondary">${tariff.cores}</p>
+              <p class="text-base-medium text-text-dark-secondary">${tariff.ram} • ${tariff.storage}</p>
+              <p class="text-base-medium text-text-dark-secondary">${tariff.virtualization}</p>
+            </div>
+            <button
+              class="absolute right-4 top-[90px] w-16 h-16 bg-state-brand-active hover:bg-state-brand-hover rounded-6 flex items-center justify-center transition-colors"
+              onclick="addToCart('${tariff.id}')"
+            >
+              <img src="../public/icons/shopping-cart.svg" alt="Добавить в корзину" class="w-6 h-6 brightness-0 invert" />
+            </button>
+          </div>
+        `;
+      }
+
+      // Render all tariffs / Отрисовка всех тарифов
+      function renderTariffs() {
+        const container = document.getElementById("tariffs-grid");
+        container.innerHTML = vpsTariffs
+          .map((tariff) => renderTariffCard(tariff))
+          .join("");
+      }
+
+      // Add to cart / Добавить в корзину
+      function addToCart(tariffId) {
+        const tariff = vpsTariffs.find((t) => t.id === tariffId);
+        console.log("Добавлен в корзину:", tariff);
+        alert(`Тариф "${tariff.name}" добавлен в корзину`);
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        renderTariffs();
+      });
+    </script>
+  </body>
+</html>

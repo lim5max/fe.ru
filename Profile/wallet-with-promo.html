@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Управление счетом - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+    <!-- Profile Menu Web Component -->
+    <script src="../components/fe-profile-menu.js"></script>
+    <!-- Promo Modal Web Component -->
+    <script src="../components/fe-promo-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Two Column Layout / Двухколоночный макет -->
+            <div class="flex flex-col lg:flex-row gap-12 items-start">
+              <!-- Left Column - Profile Menu / Левая колонка - Меню профиля -->
+              <div class="w-full lg:w-[272px] shrink-0">
+                <fe-profile-menu active="wallet"></fe-profile-menu>
+              </div>
+
+              <!-- Right Column - Wallet Content / Правая колонка - Контент управления счетом -->
+              <div class="flex-1 flex flex-col gap-10 w-full max-w-[576px]">
+                <!-- Balance and Actions / Баланс и действия -->
+                <div class="flex flex-col gap-4 w-full">
+                  <!-- Balance and Action Buttons Row / Строка с балансом и кнопками -->
+                  <div class="flex flex-col md:flex-row gap-4 w-full">
+                    <!-- Current Balance / Текущий баланс -->
+                    <div
+                      class="bg-base-surface-2 border border-base-border rounded-6 px-6 pt-4 pb-5 flex flex-col gap-0.5 flex-1"
+                    >
+                      <p class="text-base-medium text-text-dark-secondary">
+                        Текущий баланс
+                      </p>
+                      <p class="text-2xl-semibold text-text-dark-primary">
+                        1 123 ₽
+                      </p>
+                    </div>
+
+                    <!-- Action Buttons / Кнопки действий -->
+                    <div class="flex flex-col gap-2.5 flex-1">
+                      <button
+                        class="bg-state-brand-active hover:bg-state-brand-hover border border-base-disabled text-text-light-primary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+                      >
+                        Пополнить
+                      </button>
+                      <button
+                        id="open-promo-modal-btn"
+                        class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors w-full"
+                      >
+                        Ввести промокод
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Activated Promo Code Info / Информация об активированном промокоде -->
+                  <div
+                    class="bg-base-surface-2 border border-base-border rounded-6 px-6 py-4 flex flex-col gap-0.5"
+                  >
+                    <p class="text-base-medium text-text-dark-secondary">
+                      Активированный промокод
+                    </p>
+                    <p class="text-xl-semibold text-text-dark-primary">
+                      Скидка -20% на покупку первого домена
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Tabs Section / Секция вкладок -->
+                <div class="flex flex-col gap-6 w-full">
+                  <!-- Tabs Navigation / Навигация вкладок -->
+                  <div
+                    class="flex items-center gap-6 border-b border-base-border"
+                  >
+                    <button
+                      id="tab-invoices"
+                      class="tab-button active pb-2 border-b-2 border-state-brand-active text-base-medium text-text-dark-primary"
+                      data-tab="invoices"
+                    >
+                      Счета
+                    </button>
+                    <button
+                      id="tab-transactions"
+                      class="tab-button pb-2 border-b-2 border-transparent text-base-medium text-text-dark-secondary hover:text-text-dark-primary transition-colors"
+                      data-tab="transactions"
+                    >
+                      История транзакций
+                    </button>
+                  </div>
+
+                  <!-- Tab Panel 1: Invoices Empty State / Панель вкладки 1: Пустое состояние счетов -->
+                  <div
+                    id="panel-invoices"
+                    class="tab-content flex flex-col gap-6"
+                  >
+                    <div
+                      class="bg-base-surface-2 border border-dashed border-base-border rounded-6 flex items-center justify-center py-8 px-4"
+                    >
+                      <p class="text-base-semibold text-text-dark-secondary">
+                        Список счетов пуст
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- Tab Panel 2: Transactions Empty State / Панель вкладки 2: Пустое состояние транзакций -->
+                  <div
+                    id="panel-transactions"
+                    class="tab-content hidden flex-col gap-6"
+                  >
+                    <div
+                      class="bg-base-surface-2 border border-dashed border-base-border rounded-6 flex items-center justify-center py-8 px-4"
+                    >
+                      <p class="text-base-semibold text-text-dark-secondary">
+                        Список транзакций пуст
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Promo Code Modal / Модалка промокода -->
+    <fe-promo-modal id="promoModal"></fe-promo-modal>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Tabs functionality / Функционал вкладок
+      function initTabs() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const invoicesTab = document.getElementById("panel-invoices");
+        const transactionsTab = document.getElementById("panel-transactions");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tabName = button.dataset.tab;
+
+            // Update button states
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "border-state-brand-active",
+                "text-text-dark-primary"
+              );
+              btn.classList.add(
+                "border-transparent",
+                "text-text-dark-secondary"
+              );
+            });
+
+            button.classList.add(
+              "active",
+              "border-state-brand-active",
+              "text-text-dark-primary"
+            );
+            button.classList.remove(
+              "border-transparent",
+              "text-text-dark-secondary"
+            );
+
+            // Show/hide tabs
+            if (tabName === "invoices") {
+              invoicesTab.classList.remove("hidden");
+              invoicesTab.classList.add("flex");
+              transactionsTab.classList.add("hidden");
+              transactionsTab.classList.remove("flex");
+            } else if (tabName === "transactions") {
+              transactionsTab.classList.remove("hidden");
+              transactionsTab.classList.add("flex");
+              invoicesTab.classList.add("hidden");
+              invoicesTab.classList.remove("flex");
+            }
+          });
+        });
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+
+        // Initialize tabs / Инициализация вкладок
+        initTabs();
+
+        // Open promo modal / Открытие модалки промокода
+        const openPromoBtn = document.getElementById("open-promo-modal-btn");
+        const promoModal = document.getElementById("promoModal");
+
+        if (openPromoBtn && promoModal) {
+          openPromoBtn.addEventListener("click", () => {
+            promoModal.open();
+          });
+        }
+
+        // Listen for promo code activation
+        document.addEventListener("promo-activated", (e) => {
+          console.log("Promo code activated:", e.detail.code);
+          // Here you would typically send an API request to activate the promo code
+          // and update the balance
+        });
+
+        // Listen for logout event from profile menu
+        document.addEventListener("profile-logout", function () {
+          console.log("User logged out");
+          // Redirect to login page or perform logout
+          // window.location.href = '/login.html';
+        });
+      });
+    </script>
+  </body>
+</html>

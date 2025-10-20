@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Настройки конфигурации VPS - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[880px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-state-brand-active rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div
+              class="flex-1 h-3 bg-state-brand-active rounded-[2000px]"
+            ></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Настройки конфигурации
+          </h1>
+
+          <!-- Two Column Layout / Двухколоночный макет -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Left Column - Configuration / Левая колонка - Конфигурация -->
+            <div class="flex flex-col gap-11">
+              <!-- Payment Period / Период оплаты -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">
+                  Период оплаты
+                </h2>
+                <p class="text-sm-regular text-text-dark-secondary">
+                  Чем больше месяцев, тем больше скидка
+                </p>
+                <div class="custom-dropdown relative">
+                  <div
+                    id="period-trigger"
+                    class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                  >
+                    <span id="period-selected-text">1 месяц (скидка 0%)</span>
+                    <img
+                      src="../public/icons/arrow-down.svg"
+                      alt="Выбрать"
+                      class="w-7 h-7"
+                    />
+                  </div>
+                  <div id="period-menu" class="custom-dropdown-menu hidden">
+                    <div class="py-1">
+                      <div
+                        class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                        data-value="1"
+                      >
+                        1 месяц (скидка 0%)
+                      </div>
+                      <div
+                        class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                        data-value="3"
+                      >
+                        3 месяца (скидка 5%)
+                      </div>
+                      <div
+                        class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                        data-value="6"
+                      >
+                        6 месяцев (скидка 10%)
+                      </div>
+                      <div
+                        class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                        data-value="12"
+                      >
+                        1 год (скидка 15%)
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Basic Settings / Основное -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">Основное</h2>
+
+                <!-- Name Input / Название -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Название</label
+                  >
+                  <input
+                    type="text"
+                    id="server-name"
+                    value="Hisberg"
+                    class="w-full h-17 px-9 text-lg-medium text-text-dark-secondary border border-base-border rounded-6 focus:outline-none focus:border-state-brand-selected transition-colors bg-white"
+                  />
+                </div>
+
+                <!-- Region Dropdown / Регион -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Регион</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="region-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="region-selected-text">Москва</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="region-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="moscow"
+                        >
+                          Москва
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="spb"
+                        >
+                          Санкт-Петербург
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Virtualization Dropdown / Виртуализация -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Виртуализация</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="virt-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="virt-selected-text">OpenVZ</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="virt-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="openvz"
+                        >
+                          OpenVZ
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="kvm"
+                        >
+                          KVM
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- System / Система -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">Система</h2>
+                <div class="custom-dropdown relative">
+                  <div
+                    id="os-trigger"
+                    class="custom-dropdown-trigger w-full h-18 pr-9 pl-7 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                  >
+                    <div class="flex items-center gap-3">
+                      <span class="text-2xl">🐧</span>
+                      <div class="flex flex-col">
+                        <span class="text-base-medium text-text-dark-primary"
+                          >Ubuntu 24 LTC 64-bit</span
+                        >
+                        <span class="text-sm-medium text-text-dark-secondary"
+                          >512 MB RAM, 5 GB SSD</span
+                        >
+                      </div>
+                    </div>
+                    <img
+                      src="../public/icons/arrow-down.svg"
+                      alt="Выбрать"
+                      class="w-7 h-7"
+                    />
+                  </div>
+                  <div id="os-menu" class="custom-dropdown-menu hidden">
+                    <div class="py-1">
+                      <div
+                        class="custom-dropdown-item selected pl-9 px-3 py-2"
+                        data-value="ubuntu"
+                        data-title="Ubuntu 24 LTC 64-bit"
+                        data-subtitle="512 MB RAM, 5 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >Ubuntu 24 LTC 64-bit</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >512 MB RAM, 5 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="custom-dropdown-item pl-9 px-3 py-2"
+                        data-value="ubuntu22"
+                        data-title="Ubuntu 22 LTS 64-bit"
+                        data-subtitle="1 GB RAM, 10 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >Ubuntu 22 LTS 64-bit</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >1 GB RAM, 10 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="custom-dropdown-item pl-9 px-3 py-2"
+                        data-value="debian"
+                        data-title="Debian 12"
+                        data-subtitle="512 MB RAM, 8 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >Debian 12</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >512 MB RAM, 8 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="custom-dropdown-item pl-9 px-3 py-2"
+                        data-value="debian11"
+                        data-title="Debian 11"
+                        data-subtitle="1 GB RAM, 10 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >Debian 11</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >1 GB RAM, 10 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="custom-dropdown-item pl-9 px-3 py-2"
+                        data-value="centos"
+                        data-title="CentOS 9 Stream"
+                        data-subtitle="2 GB RAM, 15 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >CentOS 9 Stream</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >2 GB RAM, 15 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                      <div
+                        class="custom-dropdown-item pl-9 px-3 py-2"
+                        data-value="rocky"
+                        data-title="Rocky Linux 9"
+                        data-subtitle="2 GB RAM, 20 GB SSD"
+                      >
+                        <div class="flex flex-col pointer-events-none">
+                          <span class="text-base-medium text-text-dark-primary"
+                            >Rocky Linux 9</span
+                          >
+                          <span class="text-sm-medium text-text-dark-secondary"
+                            >2 GB RAM, 20 GB SSD</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Management / Управление -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">
+                  Управление
+                </h2>
+
+                <!-- Control Panel / Панель управления -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Панель управления</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="panel-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="panel-selected-text">Не выбрано</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="panel-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="none"
+                        >
+                          Не выбрано
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="ispmanager"
+                        >
+                          ISPmanager
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Administration / Администрирование -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Администрирование</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="admin-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="admin-selected-text">Не выбрано</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="admin-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="none"
+                        >
+                          Не выбрано
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="admin"
+                        >
+                          Администрирование
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Support Checkbox / Поддержка -->
+                <label class="flex items-start gap-7 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    id="support-checkbox"
+                    class="w-[22px] h-[22px] text-state-brand-active bg-white border-2 border-base-border rounded-3 focus:ring-state-brand-active focus:ring-2 shadow-xs mt-0.5"
+                  />
+                  <div class="flex flex-col gap-0.5">
+                    <span class="text-base-medium text-text-dark-primary"
+                      >Поддержка 500 ₽ в месяц</span
+                    >
+                    <span class="text-sm-regular text-text-dark-secondary"
+                      >Поможем следить за получением сервера</span
+                    >
+                  </div>
+                </label>
+              </div>
+
+              <!-- External Storage / Внешнее хранилище -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">
+                  Внешнее хранилище
+                </h2>
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-col gap-1">
+                    <label class="text-sm-regular text-text-dark-secondary"
+                      >Объем памяти, ТВ</label
+                    >
+                    <span class="text-sm-regular text-text-dark-secondary"
+                      >Диск SSD</span
+                    >
+                  </div>
+                  <div
+                    class="flex items-center gap-3 border border-base-border rounded-6 px-4 py-3 bg-white focus-within:border-state-brand-selected transition-colors"
+                  >
+                    <button
+                      id="storage-decrease"
+                      class="w-16 h-12 flex items-center justify-center text-text-dark-primary hover:bg-base-fill-1 rounded transition-colors text-2xl"
+                    >
+                      −
+                    </button>
+                    <input
+                      type="number"
+                      id="storage-value"
+                      value="1"
+                      min="0"
+                      class="w-16 text-center text-lg-medium text-text-dark-primary focus:outline-none focus:ring-0 focus:border-none bg-transparent border-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                    />
+                    <button
+                      id="storage-increase"
+                      class="w-16 h-12 flex items-center justify-center text-text-dark-primary hover:bg-base-fill-1 rounded transition-colors text-2xl"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- IP Address / IP-адреса -->
+              <div class="flex flex-col gap-7">
+                <h2 class="text-xl-medium text-text-dark-primary">IP-адреса</h2>
+
+                <!-- IPv4 / Дополнительные IPv4 -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Дополнительные IPv4</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="ipv4-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="ipv4-selected-text">Не выбрано</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="ipv4-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="none"
+                        >
+                          Не выбрано
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="1"
+                        >
+                          1 адрес
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- IPv6 / Дополнительные IPv6 -->
+                <div class="flex flex-col gap-7">
+                  <label class="text-sm-regular text-text-dark-secondary"
+                    >Дополнительные IPv6</label
+                  >
+                  <div class="custom-dropdown relative">
+                    <div
+                      id="ipv6-trigger"
+                      class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                    >
+                      <span id="ipv6-selected-text">Не выбрано</span>
+                      <img
+                        src="../public/icons/arrow-down.svg"
+                        alt="Выбрать"
+                        class="w-7 h-7"
+                      />
+                    </div>
+                    <div id="ipv6-menu" class="custom-dropdown-menu hidden">
+                      <div class="py-1">
+                        <div
+                          class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="none"
+                        >
+                          Не выбрано
+                        </div>
+                        <div
+                          class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2"
+                          data-value="1"
+                        >
+                          1 адрес
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column - Order Summary / Правая колонка - Детали заказа -->
+            <div class="flex flex-col gap-6">
+              <!-- Order Details Card / Карточка деталей заказа -->
+              <div
+                class="bg-base-surface-2 border border-base-border rounded-6 px-10 py-8 flex flex-col gap-6 sticky top-6"
+              >
+                <h2 class="text-lg-medium text-text-dark-primary">
+                  Детали заказа VPS
+                </h2>
+                <div class="border-t border-base-border"></div>
+                <div class="flex flex-col gap-5">
+                  <div class="flex items-center justify-between">
+                    <span class="text-base-medium text-text-dark-secondary"
+                      >Кол-во ядер</span
+                    >
+                    <span class="text-base-medium text-text-dark-primary"
+                      >1 CORE</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-base-medium text-text-dark-secondary"
+                      >RAM</span
+                    >
+                    <span class="text-base-medium text-text-dark-primary"
+                      >1 GB</span
+                    >
+                  </div>
+                  <div class="flex items-center justify-between">
+                    <span class="text-base-medium text-text-dark-secondary"
+                      >SSD</span
+                    >
+                    <span class="text-base-medium text-text-dark-primary"
+                      >20 GB</span
+                    >
+                  </div>
+                </div>
+                <div class="border-t border-base-border"></div>
+                <div class="flex items-center justify-between">
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Итого к оплате</span
+                  >
+                  <span
+                    id="total-price"
+                    class="text-xl-semibold text-text-dark-primary"
+                    >412 ₽</span
+                  >
+                </div>
+                <button
+                  id="order-btn"
+                  class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+                >
+                  Заказать
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Initialize dropdowns / Инициализация выпадающих списков
+      function initDropdown(triggerId, menuId, selectedTextId, isComplex = false) {
+        const trigger = document.getElementById(triggerId);
+        const menu = document.getElementById(menuId);
+        const selectedText = document.getElementById(selectedTextId);
+
+        if (!trigger || !menu) return;
+
+        trigger.addEventListener("click", (e) => {
+          e.stopPropagation();
+          menu.classList.toggle("hidden");
+        });
+
+        menu.querySelectorAll(".custom-dropdown-item").forEach((item) => {
+          item.addEventListener("click", (e) => {
+            e.stopPropagation();
+
+            if (isComplex && menuId === 'os-menu') {
+              // For OS dropdown with complex structure
+              const title = item.getAttribute('data-title');
+              const subtitle = item.getAttribute('data-subtitle');
+
+              // Update trigger content
+              const contentDiv = trigger.querySelector('div');
+              if (contentDiv) {
+                contentDiv.innerHTML = `
+                  <span class="text-2xl">🐧</span>
+                  <div class="flex flex-col">
+                    <span class="text-base-medium text-text-dark-primary">${title}</span>
+                    <span class="text-sm-medium text-text-dark-secondary">${subtitle}</span>
+                  </div>
+                `;
+              }
+            } else {
+              selectedText.textContent = item.textContent.trim();
+            }
+
+            menu.classList.add("hidden");
+
+            menu.querySelectorAll(".custom-dropdown-item").forEach((i) => {
+              i.classList.remove("selected");
+            });
+            item.classList.add("selected");
+          });
+        });
+
+        document.addEventListener("click", () => {
+          menu.classList.add("hidden");
+        });
+      }
+
+      // Storage counter / Счетчик хранилища
+      function initStorageCounter() {
+        const decreaseBtn = document.getElementById("storage-decrease");
+        const increaseBtn = document.getElementById("storage-increase");
+        const valueInput = document.getElementById("storage-value");
+
+        decreaseBtn.addEventListener("click", () => {
+          const currentValue = parseInt(valueInput.value) || 0;
+          if (currentValue > 0) {
+            valueInput.value = currentValue - 1;
+          }
+        });
+
+        increaseBtn.addEventListener("click", () => {
+          const currentValue = parseInt(valueInput.value) || 0;
+          valueInput.value = currentValue + 1;
+        });
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        // Initialize all dropdowns / Инициализация всех выпадающих списков
+        initDropdown("period-trigger", "period-menu", "period-selected-text");
+        initDropdown("region-trigger", "region-menu", "region-selected-text");
+        initDropdown("virt-trigger", "virt-menu", "virt-selected-text");
+        initDropdown("os-trigger", "os-menu", "os-selected-text", true);
+        initDropdown("panel-trigger", "panel-menu", "panel-selected-text");
+        initDropdown("admin-trigger", "admin-menu", "admin-selected-text");
+        initDropdown("ipv4-trigger", "ipv4-menu", "ipv4-selected-text");
+        initDropdown("ipv6-trigger", "ipv6-menu", "ipv6-selected-text");
+
+        // Initialize storage counter / Инициализация счетчика хранилища
+        initStorageCounter();
+
+        // Order button / Кнопка заказа
+        document.getElementById("order-btn").addEventListener("click", () => {
+          alert("Оформление заказа VPS");
+        });
+      });
+    </script>
+  </body>
+</html>

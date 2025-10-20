@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Настройки домена - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+    <!-- Modal Web Component -->
+    <script src="../components/fe-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок с кнопкой назад -->
+        <fe-header
+          back-link="../Domains/index.html"
+          back-text="Список доменов"
+        ></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Domain Header / Шапка домена -->
+            <div class="flex items-center gap-4 mb-10">
+              <!-- Globe Icon / Иконка глобуса -->
+              <div
+                class="bg-base-surface-2 rounded-9 p-7 flex items-center justify-center flex-shrink-0"
+              >
+                <img
+                  src="../public/icons/globe.svg"
+                  alt="Domain"
+                  class="w-13 h-13"
+                />
+              </div>
+
+              <!-- Domain Info / Информация о домене -->
+              <div class="flex flex-col">
+                <h2 class="text-base-medium text-text-dark-secondary">
+                  Настройки домена
+                </h2>
+                <div class="flex items-center gap-[6px]">
+                  <h1
+                    class="text-xl-semibold text-text-dark-primary"
+                    id="domain-name"
+                  >
+                    testdomain.com
+                  </h1>
+                  <button
+                    id="copy-domain-btn"
+                    class="hover:bg-base-fill-1 rounded transition-colors"
+                  >
+                    <img
+                      src="../public/icons/copy-01.svg"
+                      alt="Копировать"
+                      class="w-4 h-4"
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tabs / Вкладки -->
+            <div
+              class="flex items-center gap-6 border-b border-base-border mb-11"
+            >
+              <button
+                class="tab-button active pb-2 border-b-2 border-state-brand-active text-base-medium text-text-dark-primary"
+                data-tab="management"
+              >
+                Управление
+              </button>
+              <button
+                class="tab-button pb-2 border-b-2 border-transparent text-base-medium text-text-dark-secondary hover:text-text-dark-primary transition-colors"
+                data-tab="contacts"
+              >
+                Контакты
+              </button>
+            </div>
+
+            <!-- Tab Content Container / Контейнер содержимого вкладок -->
+            <div id="tab-content">
+              <!-- Management Tab / Вкладка Управление -->
+              <div id="management-tab" class="tab-content flex flex-col gap-6">
+                <!-- Renewal Section / Секция продления -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/clock-05.svg"
+                        alt="Продление"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Продление
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Зарегестрирован до 12.02.2025
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap"
+                  >
+                    Продлить
+                  </button>
+                </div>
+
+                <!-- Auto-renewal Section / Секция автопродления -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/date-time.svg"
+                        alt="Автопродление"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Автопродление
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Следующие автопродление 12.01.2025
+                      </p>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Убедитесь, что у вас достаточно
+                        <span class="text-state-brand-active">средств</span> для
+                        автоматического списания
+                      </p>
+                    </div>
+                  </div>
+                  <label
+                    class="relative inline-flex items-center cursor-pointer flex-shrink-0"
+                  >
+                    <input
+                      type="checkbox"
+                      id="autorenew-toggle"
+                      class="sr-only peer"
+                      checked
+                    />
+                    <div
+                      class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"
+                    ></div>
+                  </label>
+                </div>
+
+                <!-- DNS Settings Section / Секция настроек DNS -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/connect.svg"
+                        alt="Настройки DNS"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Настройки DNS
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        ns1.fe.ru
+                      </p>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        ns1.fe.ru....
+                      </p>
+                    </div>
+                  </div>
+                  <a
+                    href="./domain-dns-settings.html"
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Редактировать"
+                      class="w-6 h-6"
+                    />
+                    Редактировать
+                  </a>
+                </div>
+
+                <!-- Domain Transfer Section / Секция передачи домена -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/link-forward.svg"
+                        alt="Передача домена"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Передача домена
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        По номеру договора в рамках нашей платформы
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Редактировать"
+                      class="w-6 h-6"
+                    />
+                    Редактировать
+                  </button>
+                </div>
+
+                <!-- Minimal Hosting Section / Секция минимального хостинга -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/hosting.svg"
+                        alt="Минимальный хостинг"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        Минимальный хостинг
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Активируйте минимальный хостинг и разместите сайт
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/shopping-cart.svg"
+                      alt="Заказать"
+                      class="w-6 h-6"
+                    />
+                    Заказать бесплатно
+                  </button>
+                </div>
+
+                <!-- SSL Section / Секция SSL -->
+                <div
+                  class="flex flex-col sm:flex-row sm:items-start justify-between gap-4"
+                >
+                  <div class="flex items-start gap-4">
+                    <div
+                      class="bg-base-surface-2 rounded-6 p-7 flex items-center justify-center flex-shrink-0"
+                    >
+                      <img
+                        src="../public/icons/square-lock-02.svg"
+                        alt="SSL"
+                        class="w-12 h-12 opacity-70"
+                      />
+                    </div>
+                    <div class="flex flex-col pt-1">
+                      <h3 class="text-base-semibold text-text-dark-primary">
+                        SSL
+                      </h3>
+                      <p class="text-sm-medium text-text-dark-secondary">
+                        Защита данных сайта и повышывешние позиции в поисковой
+                        выдаче
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors whitespace-nowrap flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/shopping-cart.svg"
+                      alt="Заказать"
+                      class="w-6 h-6"
+                    />
+                    Заказать
+                  </button>
+                </div>
+              </div>
+
+              <!-- Contacts Tab / Вкладка Контакты -->
+              <div id="contacts-tab" class="tab-content hidden flex-col gap-5">
+                <!-- Registrant Header / Заголовок регистранта -->
+                <div class="flex items-center mb-2 gap-4">
+                  <h2 class="text-xl-semibold text-text-dark-primary">
+                    Регистрант домена
+                  </h2>
+                  <button
+                    class="text-base-semibold text-text-dark-primary hover:text-text-dark-secondary transition-colors flex items-center gap-2"
+                  >
+                    <img
+                      src="../public/icons/edit-02.svg"
+                      alt="Редактировать"
+                      class="w-4 h-4"
+                    />
+                    Редактировать
+                  </button>
+                </div>
+
+                <!-- Registrant Info / Информация о регистранте -->
+                <div class="flex flex-col gap-8">
+                  <!-- Full Name / Ф.И.О. -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      Ф.И.О.
+                    </p>
+                    <p class="text-xl-medium text-text-dark-primary">
+                      Shtill Max
+                    </p>
+                  </div>
+
+                  <!-- Organization / Организация -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      Организация (латиницей)
+                    </p>
+                    <p class="text-xl-medium text-text-dark-primary">
+                      Private Person
+                    </p>
+                  </div>
+
+                  <!-- Country / Страна -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      Страна
+                    </p>
+                    <p class="text-xl-medium text-text-dark-primary">RU</p>
+                  </div>
+
+                  <!-- Address / Адрес -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">Адрес</p>
+                    <p class="text-xl-medium text-text-dark-primary">
+                      105042 Moscow Kremlin, 10, kv. 25
+                    </p>
+                  </div>
+
+                  <!-- Email / Почта -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">Почта</p>
+                    <p class="text-xl-medium text-text-dark-primary">
+                      farbx15@gmail.com
+                    </p>
+                  </div>
+
+                  <!-- Phone / Телефон -->
+                  <div class="flex flex-col gap-1">
+                    <p class="text-sm-medium text-text-dark-secondary">
+                      Телефон
+                    </p>
+                    <p class="text-xl-medium text-text-dark-primary">
+                      +79168803493
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+        initTabs();
+        initCopyButton();
+        initAutoRenewToggle();
+
+        // Wait a bit for tabs to be ready
+        setTimeout(() => {
+          initModal();
+        }, 100);
+      });
+
+      // Tab Management / Управление вкладками
+      function initTabs() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const managementTab = document.getElementById("management-tab");
+        const contactsTab = document.getElementById("contacts-tab");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tabName = button.dataset.tab;
+
+            // Update button states
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "border-state-brand-active",
+                "text-text-dark-primary"
+              );
+              btn.classList.add(
+                "border-transparent",
+                "text-text-dark-secondary"
+              );
+            });
+
+            button.classList.add(
+              "active",
+              "border-state-brand-active",
+              "text-text-dark-primary"
+            );
+            button.classList.remove(
+              "border-transparent",
+              "text-text-dark-secondary"
+            );
+
+            // Show/hide tabs
+            if (tabName === "management") {
+              managementTab.classList.remove("hidden");
+              managementTab.classList.add("flex");
+              contactsTab.classList.add("hidden");
+              contactsTab.classList.remove("flex");
+            } else if (tabName === "contacts") {
+              contactsTab.classList.remove("hidden");
+              contactsTab.classList.add("flex");
+              managementTab.classList.add("hidden");
+              managementTab.classList.remove("flex");
+            }
+          });
+        });
+      }
+
+      // Copy Domain Button / Кнопка копирования домена
+      function initCopyButton() {
+        const copyBtn = document.getElementById("copy-domain-btn");
+        const domainName = document.getElementById("domain-name").textContent;
+
+        copyBtn.addEventListener("click", () => {
+          navigator.clipboard
+            .writeText(domainName)
+            .then(() => {
+              console.log("Domain copied to clipboard:", domainName);
+              // You can show a tooltip or notification here
+            })
+            .catch((err) => {
+              console.error("Failed to copy domain:", err);
+            });
+        });
+      }
+
+      // Auto-renewal Toggle / Переключатель автопродления
+      function initAutoRenewToggle() {
+        const toggle = document.getElementById("autorenew-toggle");
+
+        toggle.addEventListener("change", (e) => {
+          const isEnabled = e.target.checked;
+          console.log("Auto-renewal:", isEnabled ? "Enabled" : "Disabled");
+          // Here you would typically send an API request to update the auto-renewal status
+        });
+      }
+
+      // Modal Management / Управление модалкой
+      function initModal() {
+        const modal = document.getElementById("editContactsModal");
+        const openModalBtn = document.querySelector("#contacts-tab button");
+        const cancelBtn = document.getElementById("cancelEditBtn");
+        const saveBtn = document.getElementById("saveEditBtn");
+
+        // Open modal / Открыть модалку
+        if (openModalBtn) {
+          openModalBtn.addEventListener("click", () => {
+            modal.open();
+          });
+        }
+
+        // Cancel button / Кнопка отмены
+        if (cancelBtn) {
+          cancelBtn.addEventListener("click", () => {
+            modal.close();
+          });
+        }
+
+        // Save button / Кнопка сохранения
+        if (saveBtn) {
+          saveBtn.addEventListener("click", () => {
+            // Here you would typically send an API request to save the changes
+            console.log("Saving changes...");
+            modal.close();
+          });
+        }
+      }
+    </script>
+
+    <!-- Edit Contacts Modal / Модалка редактирования контактов -->
+    <fe-modal
+      id="editContactsModal"
+      modal-title="Редактирование профиля домена testdomain.com"
+    >
+      <div slot="content">
+        <!-- Registrant Section / Секция регистранта -->
+        <div class="flex flex-col gap-10 px-6">
+          <div class="flex flex-col gap-4">
+            <!-- Section Header / Заголовок секции -->
+            <div class="flex flex-col gap-[2px]">
+              <h3 class="text-xl-medium text-text-dark-primary">
+                Регистрант домена
+              </h3>
+              <div class="flex gap-2 items-center">
+                <p class="text-sm-medium text-text-dark-secondary">
+                  Скопировать данные:
+                </p>
+                <div class="flex gap-[6px] items-center">
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Администратора
+                  </button>
+                  <span
+                    class="w-1 h-1 bg-text-dark-tertiary rounded-full"
+                  ></span>
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Техлица
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input Fields / Поля ввода -->
+            <div class="flex flex-col gap-4">
+              <!-- Email Input / Поле email -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Почта
+                </label>
+                <input
+                  type="email"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="farbx15@gmail.com"
+                />
+              </div>
+
+              <!-- Phone Input / Поле телефона -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="+79168803493"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Administrator Section / Секция администратора -->
+          <div class="flex flex-col gap-4">
+            <!-- Section Header / Заголовок секции -->
+            <div class="flex flex-col gap-[2px]">
+              <h3 class="text-xl-medium text-text-dark-primary">
+                Администратор домена
+              </h3>
+              <div class="flex gap-2 items-center">
+                <p class="text-sm-medium text-text-dark-secondary">
+                  Скопировать данные:
+                </p>
+                <div class="flex gap-[6px] items-center">
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Регистратора
+                  </button>
+                  <span
+                    class="w-1 h-1 bg-text-dark-tertiary rounded-full"
+                  ></span>
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Техлица
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input Fields / Поля ввода -->
+            <div class="flex flex-col gap-4">
+              <!-- Email Input / Поле email -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Почта
+                </label>
+                <input
+                  type="email"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="farbx15@gmail.com"
+                />
+              </div>
+
+              <!-- Phone Input / Поле телефона -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="+79168803493"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Technical Contact Section / Секция техлица -->
+          <div class="flex flex-col gap-4 pb-6">
+            <!-- Section Header / Заголовок секции -->
+            <div class="flex flex-col gap-[2px]">
+              <h3 class="text-xl-medium text-text-dark-primary">
+                Техническое лицо
+              </h3>
+              <div class="flex gap-2 items-center">
+                <p class="text-sm-medium text-text-dark-secondary">
+                  Скопировать данные:
+                </p>
+                <div class="flex gap-[6px] items-center">
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Регистратора
+                  </button>
+                  <span
+                    class="w-1 h-1 bg-text-dark-tertiary rounded-full"
+                  ></span>
+                  <button
+                    class="text-sm-semibold text-text-dark-tertiary hover:text-text-dark-primary transition-colors"
+                  >
+                    Администратора
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Input Fields / Поля ввода -->
+            <div class="flex flex-col gap-4">
+              <!-- Email Input / Поле email -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Почта
+                </label>
+                <input
+                  type="email"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="farbx15@gmail.com"
+                />
+              </div>
+
+              <!-- Phone Input / Поле телефона -->
+              <div class="flex flex-col gap-3">
+                <label class="text-lg-regular text-text-dark-secondary">
+                  Телефон
+                </label>
+                <input
+                  type="tel"
+                  class="bg-base-surface-1 border border-base-border rounded-6 px-9 h-17 text-lg-medium text-text-dark-secondary focus:border-state-brand-active focus:outline-none transition-colors"
+                  value="+79168803493"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Buttons / Кнопки в футере -->
+      <div slot="footer" class="flex gap-3 w-full">
+        <button
+          id="cancelEditBtn"
+          class="flex-1 bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 px-4 h-15 text-base-semibold transition-colors"
+        >
+          Отмена
+        </button>
+        <button
+          id="saveEditBtn"
+          class="flex-1 bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 px-4 h-15 text-base-semibold transition-colors"
+        >
+          Сохранить
+        </button>
+      </div>
+    </fe-modal>
+  </body>
+</html>

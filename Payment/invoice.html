@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Счет - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Cчет №<span id="invoice-number">683847</span>
+          </h1>
+
+          <!-- Content Section / Секция контента -->
+          <div class="flex flex-col gap-9">
+            <!-- Info Card / Информационная карточка -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 px-10 py-8"
+            >
+              <p class="text-base-medium text-text-dark-secondary leading-6">
+                Мы сформировали счет, его можно скачать и оплатить в течении N
+                дней
+                <br /><br />
+                Деньги зачисляются в течении 1-2 дней после оплаты
+              </p>
+            </div>
+
+            <!-- Actions Section / Секция действий -->
+            <div class="flex flex-col gap-7">
+              <!-- Download Button / Кнопка скачивания -->
+              <button
+                id="download-btn"
+                class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+              >
+                Скачать счет
+              </button>
+
+              <!-- Back to Cabinet Button / Кнопка возврата в ЛК -->
+              <button
+                id="cabinet-btn"
+                class="w-full bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-6 h-17 text-xl-semibold transition-colors"
+              >
+                В личный кабинет
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Generate random invoice number / Генерация случайного номера счета
+      function generateInvoiceNumber() {
+        return Math.floor(Math.random() * 900000) + 100000;
+      }
+
+      // Download invoice / Скачать счет
+      function downloadInvoice() {
+        const invoiceNumber = document.getElementById("invoice-number").textContent;
+
+        console.log("Скачивание счета №" + invoiceNumber);
+
+        // Here you would typically trigger file download
+        // For now, we'll just show an alert
+        alert(`Скачивание счета №${invoiceNumber}`);
+
+        // Example of how to trigger download:
+        // window.location.href = `/api/invoices/${invoiceNumber}/download`;
+      }
+
+      // Go to cabinet / Перейти в личный кабинет
+      function goToCabinet() {
+        console.log("Переход в личный кабинет");
+
+        // Here you would typically navigate to the cabinet
+        // For now, we'll just show an alert
+        alert("Переход в личный кабинет");
+
+        // Example navigation:
+        // window.location.href = '/cabinet';
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", function () {
+        const downloadBtn = document.getElementById("download-btn");
+        const cabinetBtn = document.getElementById("cabinet-btn");
+
+        // Set invoice number from URL params or generate random / Установка номера счета из URL или генерация случайного
+        const urlParams = new URLSearchParams(window.location.search);
+        const invoiceNumber = urlParams.get("invoice") || generateInvoiceNumber();
+        document.getElementById("invoice-number").textContent = invoiceNumber;
+
+        // Download button click / Клик по кнопке скачивания
+        downloadBtn.addEventListener("click", downloadInvoice);
+
+        // Cabinet button click / Клик по кнопке личного кабинета
+        cabinetBtn.addEventListener("click", goToCabinet);
+      });
+    </script>
+  </body>
+</html>

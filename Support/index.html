@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Поддержка - FE Платформа</title>
+    <link rel="stylesheet" href="../styles.css" />
+    <script src="../components/fe-header.js" defer></script>
+  </head>
+  <body class="bg-base-surface-1">
+    <!-- Layout Container -->
+    <div class="flex min-h-screen">
+      <!-- Sidebar / Боковая панель -->
+      <div
+        class="bg-base-surface-2 h-screen fixed left-0 top-0 z-10 shrink-0 w-64 border-r border-base-border hidden lg:block"
+        data-name="Sidebar"
+      >
+        <div class="h-full overflow-hidden relative w-64">
+          <!-- Logo Section / Секция логотипа -->
+          <div class="px-6 py-4 border-b border-base-border">
+            <div class="py-3.5">
+              <img
+                src="../public/logo.svg"
+                alt="FE ПЛАТФОРМА"
+                class="h-4 w-auto"
+              />
+            </div>
+          </div>
+
+          <!-- Navigation Menu / Навигационное меню -->
+          <div class="px-4 py-4 flex-1">
+            <div class="flex flex-col gap-4">
+              <!-- Services Section / Секция услуг -->
+              <div class="flex flex-col gap-1">
+                <div class="px-2 py-1">
+                  <p class="text-sm-medium text-text-dark-tertiary">Услуги</p>
+                </div>
+
+                <!-- Domains Menu Item / Пункт меню Домены -->
+                <a
+                  href="../Domains/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer w-full"
+                >
+                  <img
+                    src="../public/icons/globe.svg"
+                    alt="Домены"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Домены</span
+                  >
+                </a>
+
+                <!-- Hosting Menu Item / Пункт меню Хостинг -->
+                <a
+                  href="../Hosting/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/hosting.svg"
+                    alt="Хостинг"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Хостинг</span
+                  >
+                </a>
+
+                <!-- VPS/VDS Menu Item / Пункт меню VPS/VDS -->
+                <a
+                  href="../Servers/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/vps-vds.svg"
+                    alt="VPS/VDS"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >VPS/VDS</span
+                  >
+                </a>
+
+                <!-- Servers Menu Item / Пункт меню Серверы -->
+                <a
+                  href="../Servers/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/cloud-server.svg"
+                    alt="Серверы"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Серверы</span
+                  >
+                </a>
+
+                <!-- Other Services Menu Item / Пункт меню Другие услуги -->
+                <a
+                  href="../Services/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/more.svg"
+                    alt="Другие услуги"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Другие услуги</span
+                  >
+                </a>
+              </div>
+
+              <!-- Additional Section / Дополнительная секция -->
+              <div class="flex flex-col gap-1">
+                <div class="px-2 py-1">
+                  <p class="text-sm-medium text-text-dark-tertiary">
+                    Дополнительно
+                  </p>
+                </div>
+
+                <!-- Partnership Menu Item / Пункт меню Партнерство -->
+                <a
+                  href="#"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/coins.svg"
+                    alt="Партнерство"
+                    class="w-6 h-6 opacity-60"
+                  />
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Партнерство</span
+                  >
+                </a>
+
+                <!-- Support Menu Item / Пункт меню Поддержка -->
+                <a
+                  href="../Support/index.html"
+                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 bg-base-fill-1 cursor-pointer"
+                >
+                  <img
+                    src="../public/icons/customer-support.svg"
+                    alt="Поддержка"
+                    class="w-6 h-6"
+                  />
+                  <span class="text-base-medium text-text-dark-primary"
+                    >Поддержка</span
+                  >
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content / Основной контент -->
+      <div class="flex-1 flex flex-col lg:ml-64">
+        <!-- Header / Шапка сайта -->
+        <div class="bg-base-surface-2 w-full border-b border-base-border">
+          <div class="px-6 py-4 w-full">
+            <div
+              id="main-header"
+              class="flex items-center justify-between lg:justify-end w-full"
+            >
+              <!-- Logo / Логотип -->
+              <img
+                id="logo"
+                src="../public/images/small_logo.png"
+                alt="FE Платформа"
+                class="h-15 lg:hidden"
+              />
+
+              <!-- Account Buttons / Кнопки аккаунта -->
+              <div
+                id="account-buttons"
+                class="flex items-center gap-2 lg:justify-end"
+              >
+                <!-- Balance Button / Кнопка баланса -->
+                <button
+                  class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-15 flex items-center gap-2 hover:bg-base-fill-1 transition-colors"
+                >
+                  <img
+                    src="../public/icons/wallet-03.svg"
+                    alt="Баланс"
+                    class="w-6 h-6"
+                  />
+                  <span
+                    class="hidden sm:inline text-lg-semibold text-text-dark-primary"
+                    >1 123 ₽</span
+                  >
+                </button>
+
+                <!-- Profile Button / Кнопка профиля -->
+                <button
+                  class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-15 flex items-center gap-2 hover:bg-base-fill-1 transition-colors hidden lg:flex"
+                >
+                  <img
+                    src="../public/icons/user.svg"
+                    alt="Профиль"
+                    class="w-6 h-6"
+                  />
+                  <span
+                    class="hidden sm:inline text-lg-semibold text-text-dark-primary"
+                    >farbx15@gmail.com</span
+                  >
+                </button>
+
+                <!-- Mobile Menu Button / Кнопка мобильного меню -->
+                <button
+                  id="mobile-menu-button"
+                  class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200 lg:hidden"
+                >
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 12H21M3 6H21M3 18H21"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Page Content / Контент страницы -->
+        <div class="flex-1 bg-base-surface-1 px-6 py-8 md:px-11 md:py-14">
+          <div class="max-w-[544px] mx-auto flex flex-col gap-6">
+            <!-- Page Header / Заголовок страницы -->
+            <div
+              class="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
+            >
+              <h1 class="text-4xl-semibold text-text-dark-primary">Вопросы</h1>
+              <a
+                href="ask-question.html"
+                class="bg-state-brand-active border border-alpha-dark-200 rounded-6 px-4 h-15 flex items-center justify-center hover:bg-state-brand-hover transition-colors"
+              >
+                <span class="text-xl-semibold text-text-light-primary"
+                  >Связаться с поддержкой</span
+                >
+              </a>
+            </div>
+
+            <!-- Tabs Toggle / Переключатель вкладок -->
+            <div class="bg-base-fill-1 p-0.5 rounded-6 flex gap-0.5">
+              <button
+                class="flex-1 bg-base-surface-1 border border-base-border rounded-5 px-4 h-[52px] flex items-center justify-center cursor-pointer transition-colors"
+                id="tab-active"
+              >
+                <span class="text-lg-semibold text-text-dark-primary"
+                  >Активные</span
+                >
+              </button>
+              <button
+                class="flex-1 rounded-5 px-4 h-[52px] flex items-center justify-center cursor-pointer hover:bg-base-surface-2 transition-colors"
+                id="tab-closed"
+              >
+                <span class="text-lg-medium text-text-dark-tertiary"
+                  >Закрытые</span
+                >
+              </button>
+            </div>
+
+            <!-- Empty State / Пустое состояние -->
+            <div
+              class="bg-base-surface-2 border border-dashed border-base-border rounded-6 px-8 py-8 flex items-center justify-center"
+              id="empty-state"
+            >
+              <p class="text-base-semibold text-text-dark-secondary">
+                <span class="font-semibold">Список </span>активных запросов<span
+                  class="font-semibold"
+                >
+                  пуст</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Menu Items / Элементы мобильного меню -->
+    <div
+      id="mobile-menu-items"
+      class="fixed inset-0 bg-base-surface-1 z-50 hidden flex-col h-full"
+    >
+      <!-- Menu Header -->
+      <div
+        class="flex items-center justify-between p-4 border-b border-base-border"
+      >
+        <img
+          src="../public/images/small_logo.png"
+          alt="FE Платформа"
+          class="h-15"
+        />
+        <button
+          id="close-menu-button"
+          class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M18 6L6 18M6 6l12 12"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menu Content -->
+      <div class="flex-1 overflow-auto p-4">
+        <!-- Services Section -->
+        <div class="flex flex-col gap-1 mb-6">
+          <h3 class="text-sm-medium text-text-dark-secondary px-2 py-1">
+            Услуги
+          </h3>
+          <a
+            href="../Domains/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/globe.svg"
+              alt="Домены"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Домены</span
+            >
+          </a>
+          <a
+            href="../Hosting/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/hosting.svg"
+              alt="Хостинг"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Хостинг</span
+            >
+          </a>
+          <a
+            href="../Servers/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/vps-vds.svg"
+              alt="VPS/VDS"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >VPS/VDS</span
+            >
+          </a>
+          <a
+            href="../Servers/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/cloud-server.svg"
+              alt="Серверы"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Серверы</span
+            >
+          </a>
+          <a
+            href="../Services/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/more.svg"
+              alt="Другие услуги"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Другие услуги</span
+            >
+          </a>
+        </div>
+
+        <!-- Additional Section -->
+        <div class="flex flex-col gap-1 mb-6">
+          <h3 class="text-sm-medium text-text-dark-secondary px-2 py-1">
+            Дополнительно
+          </h3>
+          <a
+            href="#"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/coins.svg"
+              alt="Партнерство"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Партнерство</span
+            >
+          </a>
+          <a
+            href="../Support/index.html"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 bg-base-fill-1"
+          >
+            <img
+              src="../public/icons/customer-support.svg"
+              alt="Поддержка"
+              class="w-6 h-6"
+            />
+            <span class="text-base-medium text-text-dark-primary"
+              >Поддержка</span
+            >
+          </a>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="flex flex-col gap-1">
+          <h3 class="text-sm-medium text-text-dark-secondary px-2 py-1">
+            Профиль
+          </h3>
+          <a
+            href="#"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/user-02.svg"
+              alt="Общая информация"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Общая информация</span
+            >
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/coins.svg"
+              alt="Управление счетом"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Управление счетом</span
+            >
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/folder-management.svg"
+              alt="Документы и акты"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Документы и акты</span
+            >
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 transition-colors"
+          >
+            <img
+              src="../public/icons/settings-01.svg"
+              alt="Настройки"
+              class="w-6 h-6 opacity-60"
+            />
+            <span class="text-base-medium text-text-dark-secondary"
+              >Настройки</span
+            >
+          </a>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <div class="p-4 border-t border-base-border">
+        <button
+          class="w-full bg-base-surface-2 border border-base-border rounded-6 px-4 py-3 flex items-center justify-center hover:bg-base-fill-1 transition-colors"
+        >
+          <span class="text-base-semibold text-text-dark-primary">Выйти</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenuItems = document.getElementById("mobile-menu-items");
+      const closeMenuButton = document.getElementById("close-menu-button");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenuItems.classList.remove("hidden");
+        mobileMenuItems.classList.add("flex");
+      });
+
+      closeMenuButton.addEventListener("click", () => {
+        mobileMenuItems.classList.add("hidden");
+        mobileMenuItems.classList.remove("flex");
+      });
+
+      // Tabs functionality
+      const tabActive = document.getElementById("tab-active");
+      const tabClosed = document.getElementById("tab-closed");
+      const emptyState = document.getElementById("empty-state");
+
+      tabActive.addEventListener("click", () => {
+        // Activate tab
+        tabActive.classList.add(
+          "bg-base-surface-1",
+          "border",
+          "border-base-border"
+        );
+        tabActive
+          .querySelector("span")
+          .classList.remove("text-text-dark-tertiary");
+        tabActive
+          .querySelector("span")
+          .classList.add("text-text-dark-primary", "font-semibold");
+
+        // Deactivate other tab
+        tabClosed.classList.remove(
+          "bg-base-surface-1",
+          "border",
+          "border-base-border"
+        );
+        tabClosed
+          .querySelector("span")
+          .classList.remove("text-text-dark-primary", "font-semibold");
+        tabClosed
+          .querySelector("span")
+          .classList.add("text-text-dark-tertiary");
+        tabClosed.querySelector("span").classList.remove("text-base-semibold");
+        tabClosed.querySelector("span").classList.add("text-base-medium");
+
+        // Update empty state text
+        emptyState.querySelector("p").innerHTML =
+          '<span class="font-semibold">Список </span>активных запросов<span class="font-semibold"> пуст</span>';
+      });
+
+      tabClosed.addEventListener("click", () => {
+        // Activate tab
+        tabClosed.classList.add(
+          "bg-base-surface-1",
+          "border",
+          "border-base-border"
+        );
+        tabClosed
+          .querySelector("span")
+          .classList.remove("text-text-dark-tertiary", "text-base-medium");
+        tabClosed
+          .querySelector("span")
+          .classList.add("text-text-dark-primary", "text-base-semibold");
+
+        // Deactivate other tab
+        tabActive.classList.remove(
+          "bg-base-surface-1",
+          "border",
+          "border-base-border"
+        );
+        tabActive
+          .querySelector("span")
+          .classList.remove("text-text-dark-primary");
+        tabActive
+          .querySelector("span")
+          .classList.add("text-text-dark-tertiary");
+        tabActive.querySelector("span").classList.remove("text-base-semibold");
+        tabActive.querySelector("span").classList.add("text-base-medium");
+
+        // Update empty state text
+        emptyState.querySelector("p").innerHTML =
+          '<span class="font-semibold">Список </span>закрытых запросов<span class="font-semibold"> пуст</span>';
+      });
+    </script>
+  </body>
+</html>

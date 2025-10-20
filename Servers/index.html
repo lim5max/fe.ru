@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VPS/VDS - FE Платформа</title>
+  <link href="../styles.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Grid.js CSS / Стили Grid.js -->
+  <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet">
+  <!-- Grid.js JavaScript -->
+  <script src="https://unpkg.com/gridjs/dist/gridjs.umd.js"></script>
+  <!-- Header Web Component -->
+  <script src="../components/fe-header.js"></script>
+</head>
+<body class="bg-base-surface-1 font-sans">
+
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
+
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-15 w-full lg:pl-[300px]">
+          <div class="basis-0 content-stretch flex flex-col gap-6 grow items-center justify-start max-h-[850px] min-h-px min-w-px relative shrink-0 w-full">
+
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div class="content-stretch flex flex-col gap-3 items-center justify-start relative shrink-0 w-full">
+              <div class="content-stretch flex flex-col md:flex-row md:items-center md:justify-between relative shrink-0 w-full gap-4 md:gap-0">
+                <div class="flex items-center gap-4">
+                  <h1 class="text-4xl-semibold text-text-dark-primary">VPS/VDS</h1>
+                </div>
+                <button class="bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active transition-colors rounded-6 px-4 h-15 flex items-center gap-2 justify-center w-full md:w-auto md:self-auto">
+                  <img src="../public/icons/shopping-cart.svg" alt="Заказать" class="w-6 h-6 brightness-0 invert" />
+                  <span class="text-lg-semibold text-text-light-primary">Заказать новый</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Search and Table Container / Контейнер поиска и таблицы -->
+            <div class="content-stretch flex flex-col gap-4 items-start justify-start relative shrink-0 w-full">
+              <!-- Search Bar / Строка поиска -->
+              <div class="w-full max-w-md">
+                <div class="relative">
+                  <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <img src="../public/icons/search.svg" alt="Поиск" class="h-6 w-6" />
+                  </div>
+                  <input
+                    type="text"
+                    id="servers-search"
+                    placeholder="Поиск"
+                    class="input w-full pl-12"
+                  />
+                </div>
+              </div>
+
+              <!-- Servers Table / Таблица серверов -->
+              <!-- Desktop Table / Десктопная таблица -->
+              <div id="servers-table" class="w-full hidden md:block"></div>
+
+              <!-- Mobile Table / Мобильная таблица -->
+              <div id="servers-table-mobile" class="block md:hidden w-full border border-base-border rounded-7 overflow-hidden">
+                <!-- Mobile table content will be inserted here by JavaScript -->
+              </div>
+
+              <!-- Figma Pagination / Пагинация по дизайну Figma -->
+              <!-- Desktop Version -->
+              <div class="hidden md:flex bg-white content-stretch items-center justify-between relative shrink-0 w-full" style="margin-bottom: 82px;">
+                <!-- Total Count / Общее количество -->
+                <div class="content-stretch flex gap-2.5 items-center justify-start relative shrink-0">
+                  <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                    <p class="leading-[22px] whitespace-pre">Всего 30 серверов</p>
+                  </div>
+                </div>
+
+                <!-- Pagination Controls / Управление пагинацией -->
+                <div class="absolute content-stretch flex gap-3 h-[36px] items-center justify-center left-1/2 top-1/2 translate-x-[-50%] translate-y-[-50%]">
+                  <!-- Previous Button / Кнопка "Назад" -->
+                  <div class="prev-button bg-base-fill-1 content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] cursor-pointer hover:bg-base-fill-2">
+                    <div class="overflow-clip relative shrink-0 size-[12px]">
+                      <img src="../public/icons/arrow-left.svg" alt="Назад" class="block max-w-none size-full" />
+                    </div>
+                  </div>
+
+                  <!-- Page Numbers / Номера страниц -->
+                  <div class="content-stretch flex gap-1 h-7 items-center justify-center relative shrink-0">
+                    <!-- Page 1 (Active) / Страница 1 (Активная) -->
+                    <div class="page-button bg-state-brand-active overflow-clip relative rounded-full shadow-[0.5px_0.5px_3px_0px_rgba(26,26,26,0.08)] shrink-0 size-[28px]" data-page="1">
+                      <div class="absolute flex flex-col font-['Inter_Variable:SemiBold',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-center text-white">
+                        <p class="leading-[22px]">1</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 2 / Страница 2 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="2">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">2</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 3 / Страница 3 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="3">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">3</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 4 / Страница 4 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="4">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">4</p>
+                      </div>
+                    </div>
+
+                    <!-- Ellipsis / Многоточие -->
+                    <div class="overflow-clip relative rounded-full shrink-0 size-[28px]">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">...</p>
+                      </div>
+                    </div>
+
+                    <!-- Page 10 / Страница 10 -->
+                    <div class="page-button overflow-clip relative rounded-full shrink-0 size-[28px] cursor-pointer hover:bg-base-fill-1" data-page="10">
+                      <div class="absolute flex flex-col font-['Inter_Variable:Medium',_sans-serif] inset-0 justify-center leading-[0] not-italic text-sm text-[rgba(26,26,26,0.36)] text-center">
+                        <p class="leading-[22px]">10</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Next Button / Кнопка "Вперед" -->
+                  <div class="next-button bg-[#fcfcfc] content-stretch flex flex-col items-center justify-center relative rounded-full shrink-0 size-[36px] border border-base-border cursor-pointer hover:bg-base-fill-1">
+                    <div class="overflow-clip relative shrink-0 size-[12px]">
+                      <img src="../public/icons/arrow-right.svg" alt="Вперед" class="block max-w-none size-full" />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Rows Per Page / Строк на странице -->
+                <div class="content-stretch flex gap-2.5 items-center justify-end relative shrink-0">
+                  <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                    <p class="leading-[22px] whitespace-pre">Показывать</p>
+                  </div>
+
+                  <!-- Dropdown for rows count / Выпадающий список количества строк -->
+                  <div class="dropdown-container relative">
+                    <div class="rows-dropdown-trigger bg-white box-border content-stretch flex gap-[6px] h-[36px] items-center justify-start min-h-[36px] pl-[12px] pr-[10px] py-0 relative rounded-full shrink-0 border border-base-border cursor-pointer hover:bg-base-fill-1">
+                      <div class="flex flex-col font-['Inter_Variable:Medium',_sans-serif] justify-center leading-[0] not-italic relative shrink-0 text-sm text-text-dark-secondary text-nowrap">
+                        <span id="rows-count-text" class="leading-[22px] whitespace-pre">8 строк</span>
+                      </div>
+                      <div class="overflow-clip relative shrink-0 size-[12px]">
+                        <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="block max-w-none size-full" />
+                      </div>
+                    </div>
+
+                    <!-- Dropdown Menu -->
+                    <div id="rows-dropdown-menu" class="dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[120px] hidden">
+                      <div class="py-1">
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="8">8 строк</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="16">16 строк</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="24">24 строки</button>
+                        <button class="dropdown-item w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="32">32 строки</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mobile Version / Мобильная версия -->
+              <div class="flex md:hidden flex-col gap-4 bg-white relative shrink-0 w-full pb-8">
+                <!-- Total Count / Общее количество -->
+                <div class="flex items-center justify-center">
+                  <p class="text-sm-medium text-text-dark-secondary">Всего 30 серверов</p>
+                </div>
+
+                <!-- Pagination Controls / Управление пагинацией -->
+                <div class="flex items-center justify-center gap-3">
+                  <!-- Previous Button / Кнопка "Назад" -->
+                  <div class="prev-button-mobile bg-base-fill-1 flex items-center justify-center rounded-full size-[36px] cursor-pointer hover:bg-base-fill-2">
+                    <img src="../public/icons/arrow-left.svg" alt="Назад" class="size-[12px]" />
+                  </div>
+
+                  <!-- Page Numbers / Номера страниц -->
+                  <div class="flex gap-1 items-center justify-center">
+                    <!-- Page 1 (Active) / Страница 1 (Активная) -->
+                    <div class="page-button-mobile bg-state-brand-active rounded-full size-[28px] flex items-center justify-center shadow-[0.5px_0.5px_3px_0px_rgba(26,26,26,0.08)]" data-page="1">
+                      <p class="text-sm font-semibold text-white leading-[22px]">1</p>
+                    </div>
+
+                    <!-- Page 2 / Страница 2 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="2">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">2</p>
+                    </div>
+
+                    <!-- Page 3 / Страница 3 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="3">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">3</p>
+                    </div>
+
+                    <!-- Page 4 / Страница 4 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="4">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">4</p>
+                    </div>
+
+                    <!-- Ellipsis / Многоточие -->
+                    <div class="rounded-full size-[28px] flex items-center justify-center">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">...</p>
+                    </div>
+
+                    <!-- Page 10 / Страница 10 -->
+                    <div class="page-button-mobile rounded-full size-[28px] flex items-center justify-center cursor-pointer hover:bg-base-fill-1" data-page="10">
+                      <p class="text-sm font-medium text-[rgba(26,26,26,0.36)] leading-[22px]">10</p>
+                    </div>
+                  </div>
+
+                  <!-- Next Button / Кнопка "Вперед" -->
+                  <div class="next-button-mobile bg-[#fcfcfc] border border-base-border flex items-center justify-center rounded-full size-[36px] cursor-pointer hover:bg-base-fill-1">
+                    <img src="../public/icons/arrow-right.svg" alt="Вперед" class="size-[12px]" />
+                  </div>
+                </div>
+
+                <!-- Rows Per Page / Строк на странице -->
+                <div class="flex items-center justify-center gap-2.5">
+                  <p class="text-sm-medium text-text-dark-secondary">Показывать</p>
+                  <div class="dropdown-container relative">
+                    <div class="rows-dropdown-trigger-mobile bg-white border border-base-border flex gap-[6px] h-[36px] items-center pl-[12px] pr-[10px] rounded-full cursor-pointer hover:bg-base-fill-1">
+                      <span id="rows-count-text-mobile" class="text-sm-medium text-text-dark-secondary">8 строк</span>
+                      <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="size-[12px]" />
+                    </div>
+                    <!-- Dropdown Menu -->
+                    <div id="rows-dropdown-menu-mobile" class="dropdown-menu absolute top-full left-1/2 -translate-x-1/2 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[120px] hidden">
+                      <div class="py-1">
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="8">8 строк</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="16">16 строк</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="24">24 строки</button>
+                        <button class="dropdown-item-mobile w-full text-left pl-5 px-3 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="32">32 строки</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- JavaScript / Скрипты -->
+  <script>
+    // Load Components / Загрузка компонентов
+    async function loadComponent(containerId, componentPath) {
+      try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+      }
+    }
+
+    // Initialize Components / Инициализация компонентов
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('sidebar-container', '../components/sidebar.html');
+
+      // Initialize Grid.js Table / Инициализация таблицы Grid.js
+      initServersTable();
+
+      // Initialize Mobile Table / Инициализация мобильной таблицы
+      initMobileServersTable();
+    });
+
+    // Global variables for pagination
+    let currentPage = 1;
+    let rowsPerPage = 8;
+    let totalRecords = 0;
+
+    // Update pagination display function
+    function updatePaginationDisplay(totalRecords, rowsPerPage) {
+      const totalPages = Math.ceil(totalRecords / rowsPerPage);
+      const totalCountElement = document.querySelector('.gridjs-pagination p');
+      if (totalCountElement) {
+        totalCountElement.textContent = `Всего ${totalRecords} серверов`;
+      }
+
+      // Update page buttons
+      const pageButtons = document.querySelectorAll('.page-button');
+      pageButtons.forEach((btn, index) => {
+        const pageNum = index + 1;
+        if (pageNum <= totalPages) {
+          btn.style.display = 'block';
+          btn.dataset.page = pageNum;
+          btn.querySelector('p').textContent = pageNum;
+
+          // Update active state
+          const textElement = btn.querySelector('div');
+          if (pageNum === currentPage) {
+            btn.classList.remove('text-[rgba(26,26,26,0.36)]');
+            btn.classList.add('bg-state-brand-active', 'text-white');
+            if (textElement) {
+              textElement.classList.remove('text-[rgba(26,26,26,0.36)]');
+              textElement.classList.add('text-white');
+            }
+          } else {
+            btn.classList.remove('bg-state-brand-active', 'text-white');
+            btn.classList.add('text-[rgba(26,26,26,0.36)]');
+            if (textElement) {
+              textElement.classList.remove('text-white');
+              textElement.classList.add('text-[rgba(26,26,26,0.36)]');
+            }
+          }
+        } else {
+          btn.style.display = 'none';
+        }
+      });
+
+      // Hide ellipsis and last page if not needed
+      const ellipsis = document.querySelector('.gridjs-pagination .overflow-clip');
+      const lastPage = document.querySelector('.page-button[data-page="10"]');
+      if (totalPages <= 4) {
+        if (ellipsis) ellipsis.style.display = 'none';
+        if (lastPage) lastPage.style.display = 'none';
+      }
+    }
+
+
+    // Initialize Servers Table / Инициализация таблицы серверов
+    function initServersTable() {
+      // Sample data / Примеры данных
+      const serversData = [
+        {
+          name: 'v53q34u5cqvvz7l.feserver.ru',
+          ip: '81.177.3.175',
+          price: '100 ₽',
+          expiry: '12.02.2025',
+          status: 'active'
+        },
+        {
+          name: 'test',
+          ip: '81.177.3.175',
+          price: '200,01 ₽',
+          expiry: '08.03.2025',
+          status: 'active'
+        },
+        {
+          name: '3213.feserver.ru',
+          ip: '42.421.4.175',
+          price: '120 ₽',
+          expiry: '21.02.2025',
+          status: 'active'
+        },
+        {
+          name: 'rewr324.website.ru',
+          ip: '21.412.12.175',
+          price: '2000 ₽',
+          expiry: '21.02.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'sdfsdf.website.ru',
+          ip: '81.177.3.175',
+          price: '400 ₽',
+          expiry: '08.03.2025',
+          status: 'active'
+        },
+        {
+          name: 'kerewr.test.ru',
+          ip: '14.53.2.53',
+          price: '412 ₽',
+          expiry: '21.02.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'rewr.feserver.ru',
+          ip: '12.25.5.240',
+          price: '600 ₽',
+          expiry: '14.04.2025',
+          status: 'active'
+        },
+        {
+          name: 'test-7',
+          ip: '81.177.3.175',
+          price: '20,42 ₽',
+          expiry: '14.05.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'prod-server-01',
+          ip: '192.168.1.100',
+          price: '850 ₽',
+          expiry: '25.06.2025',
+          status: 'active'
+        },
+        {
+          name: 'dev-server-02',
+          ip: '192.168.1.101',
+          price: '550 ₽',
+          expiry: '15.08.2025',
+          status: 'active'
+        },
+        {
+          name: 'backup-srv-01',
+          ip: '10.0.0.50',
+          price: '1200 ₽',
+          expiry: '30.09.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'web-app-server',
+          ip: '172.16.0.10',
+          price: '920 ₽',
+          expiry: '12.11.2025',
+          status: 'active'
+        },
+        {
+          name: 'db-primary-01',
+          ip: '172.16.0.20',
+          price: '1500 ₽',
+          expiry: '05.12.2025',
+          status: 'active'
+        },
+        {
+          name: 'cdn-node-01',
+          ip: '203.0.113.1',
+          price: '750 ₽',
+          expiry: '18.01.2026',
+          status: 'blocked'
+        },
+        {
+          name: 'api-gateway-01',
+          ip: '203.0.113.2',
+          price: '880 ₽',
+          expiry: '22.02.2026',
+          status: 'active'
+        },
+        {
+          name: 'monitoring-srv',
+          ip: '10.0.0.100',
+          price: '320 ₽',
+          expiry: '07.03.2026',
+          status: 'active'
+        },
+        {
+          name: 'mail-server-01',
+          ip: '198.51.100.1',
+          price: '650 ₽',
+          expiry: '19.04.2026',
+          status: 'active'
+        }
+      ];
+
+      // Manual pagination - we'll handle data slicing ourselves
+      let currentData = serversData;
+      const initialPageData = currentData.slice(0, rowsPerPage).map(row => [
+        row.name,
+        row.ip,
+        row.price,
+        row.expiry,
+        row.status
+      ]);
+
+      const grid = new gridjs.Grid({
+        pagination: false, // Disable built-in pagination
+        columns: [
+          {
+            name: 'Название',
+            id: 'name',
+            formatter: (cell) => gridjs.html(`<div style="width: 276px; min-width: 276px; max-width: 276px;">${cell}</div>`),
+            width: '276px',
+            sort: false
+          },
+          {
+            name: 'Главный IP',
+            id: 'ip',
+            formatter: (cell) => gridjs.html(`<div style="width: 276px; min-width: 276px; max-width: 276px;">${cell}</div>`),
+            width: '276px',
+            sort: false
+          },
+          {
+            name: 'Стоимость в месяц',
+            id: 'price',
+            formatter: (cell) => gridjs.html(`<div style="width: 276px; min-width: 276px; max-width: 276px;">${cell}</div>`),
+            width: '276px',
+            sort: false
+          },
+          {
+            name: 'Оплачен до',
+            id: 'expiry',
+            formatter: (cell) => gridjs.html(`<div style="width: 160px; min-width: 160px; max-width: 160px;">${cell}</div>`),
+            width: '160px',
+            sort: {
+              compare: (a, b) => {
+                // Custom sort function for dates
+                const dateA = new Date(a.split('.').reverse().join('-'));
+                const dateB = new Date(b.split('.').reverse().join('-'));
+                return dateA - dateB;
+              }
+            }
+          },
+          {
+            name: 'Состояние',
+            id: 'status',
+            formatter: (cell) => {
+              if (cell === 'active') {
+                return gridjs.html(`
+                  <div class="flex items-center gap-2" style="width: 180px; min-width: 180px; max-width: 180px;">
+                    <span class="text-sm-medium text-[#10b77f]">Работает</span>
+                  </div>
+                `);
+              } else {
+                return gridjs.html(`
+                  <div class="flex items-center gap-2" style="width: 180px; min-width: 180px; max-width: 180px;">
+                    <img src="../public/icons/alert-02.svg" alt="Заблокирован" class="w-6 h-6" style="filter: invert(27%) sepia(89%) saturate(3165%) hue-rotate(339deg) brightness(86%) contrast(94%);" />
+                    <span class="text-sm-medium text-[#dc2828]">Заблокирован</span>
+                  </div>
+                `);
+              }
+            },
+            width: '180px',
+            sort: {
+              compare: (a, b) => {
+                // Sort by status: active first, then blocked
+                if (a === 'active' && b === 'blocked') return -1;
+                if (a === 'blocked' && b === 'active') return 1;
+                return 0;
+              }
+            }
+          }
+        ],
+        data: initialPageData,
+        search: false,
+        sort: false,
+        resizable: false,
+        footer: false,
+        style: {
+          footer: {
+            display: 'none',
+            height: '0',
+            overflow: 'hidden'
+          }
+        },
+        className: {
+          table: 'gridjs-table-figma',
+          th: 'gridjs-th-figma',
+          td: 'gridjs-td-figma',
+          container: 'gridjs-container-figma',
+          pagination: 'gridjs-pagination-figma',
+          footer: 'hidden'
+        }
+      }).render(document.getElementById('servers-table'));
+
+      // Set total records and update pagination
+      totalRecords = serversData.length;
+      updatePaginationDisplay(totalRecords, rowsPerPage);
+
+      // Connect search input to Grid.js search
+      const searchInput = document.getElementById('servers-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          let filteredData = serversData;
+          if (searchTerm !== '') {
+            // Filter data based on search term
+            filteredData = serversData.filter(row =>
+              row.name.toLowerCase().includes(searchTerm) ||
+              row.ip.toLowerCase().includes(searchTerm)
+            );
+          }
+          // Update current data
+          currentData = filteredData;
+          totalRecords = currentData.length;
+          currentPage = 1;
+
+          // Update table with first page of filtered data
+          const pageData = currentData.slice(0, rowsPerPage).map(row => [
+            row.name, row.ip, row.price, row.expiry, row.status
+          ]);
+          grid.updateConfig({ data: pageData }).forceRender();
+
+          updatePaginationDisplay(totalRecords, rowsPerPage);
+        });
+      }
+
+        // Handle pagination clicks
+        document.addEventListener('click', (e) => {
+          // Handle direct page navigation
+          if (e.target.closest('.page-button')) {
+            const pageButton = e.target.closest('.page-button');
+            currentPage = parseInt(pageButton.dataset.page);
+            const start = (currentPage - 1) * rowsPerPage;
+            const end = start + rowsPerPage;
+            const pageData = currentData.slice(start, end).map(row => [
+              row.name, row.ip, row.price, row.expiry, row.status
+            ]);
+            grid.updateConfig({ data: pageData }).forceRender();
+
+            updatePaginationDisplay(totalRecords, rowsPerPage);
+            console.log(`Navigate to page ${currentPage}`);
+          }
+
+          if (e.target.closest('.prev-button')) {
+            if (currentPage > 1) {
+              currentPage--;
+              const start = (currentPage - 1) * rowsPerPage;
+              const end = start + rowsPerPage;
+              const pageData = currentData.slice(start, end).map(row => [
+                row.name, row.ip, row.price, row.expiry, row.status
+              ]);
+              grid.updateConfig({ data: pageData }).forceRender();
+
+              updatePaginationDisplay(totalRecords, rowsPerPage);
+            }
+            console.log('Navigate to previous page');
+          }
+
+          if (e.target.closest('.next-button')) {
+            const totalPages = Math.ceil(totalRecords / rowsPerPage);
+            if (currentPage < totalPages) {
+              currentPage++;
+              const start = (currentPage - 1) * rowsPerPage;
+              const end = start + rowsPerPage;
+              const pageData = currentData.slice(start, end).map(row => [
+                row.name, row.ip, row.price, row.expiry, row.status
+              ]);
+              grid.updateConfig({ data: pageData }).forceRender();
+
+              updatePaginationDisplay(totalRecords, rowsPerPage);
+            }
+            console.log('Navigate to next page');
+          }
+
+          // Handle row count dropdown trigger
+          if (e.target.closest('.rows-dropdown-trigger')) {
+            const menu = document.getElementById('rows-dropdown-menu');
+            menu.classList.toggle('hidden');
+          }
+
+          // Handle dropdown item selection
+          if (e.target.classList.contains('dropdown-item')) {
+            const value = e.target.dataset.value;
+            const text = e.target.textContent;
+            document.getElementById('rows-count-text').textContent = text;
+
+            // Hide dropdown
+            document.getElementById('rows-dropdown-menu').classList.add('hidden');
+
+            // Update global variables
+            const newLimit = parseInt(value);
+            rowsPerPage = newLimit;
+            currentPage = 1; // Reset to first page
+
+            // Update table with new page size
+            const pageData = currentData.slice(0, rowsPerPage).map(row => [
+              row.name, row.ip, row.price, row.expiry, row.status
+            ]);
+            grid.updateConfig({ data: pageData }).forceRender();
+
+            // Update pagination display
+            updatePaginationDisplay(totalRecords, rowsPerPage);
+
+            console.log(`Changed rows per page to ${newLimit}`);
+          }
+
+          // Close dropdown when clicking outside
+          if (!e.target.closest('.dropdown-container')) {
+            document.getElementById('rows-dropdown-menu').classList.add('hidden');
+          }
+        });
+
+    }
+
+    // Initialize Mobile Servers Table / Инициализация мобильной таблицы серверов
+    function initMobileServersTable() {
+      // Sample data - same as desktop / Те же данные что и для десктопа
+      const serversData = [
+        {
+          name: 'v53q34u5cqvvz7l.feserver.ru',
+          ip: '81.177.3.175',
+          price: '100 ₽',
+          expiry: '12.02.2025',
+          status: 'active'
+        },
+        {
+          name: 'test',
+          ip: '81.177.3.175',
+          price: '200,01 ₽',
+          expiry: '08.03.2025',
+          status: 'active'
+        },
+        {
+          name: '3213.feserver.ru',
+          ip: '42.421.4.175',
+          price: '120 ₽',
+          expiry: '21.02.2025',
+          status: 'active'
+        },
+        {
+          name: 'rewr324.website.ru',
+          ip: '21.412.12.175',
+          price: '2000 ₽',
+          expiry: '21.02.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'sdfsdf.website.ru',
+          ip: '81.177.3.175',
+          price: '400 ₽',
+          expiry: '08.03.2025',
+          status: 'active'
+        },
+        {
+          name: 'kerewr.test.ru',
+          ip: '14.53.2.53',
+          price: '412 ₽',
+          expiry: '21.02.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'rewr.feserver.ru',
+          ip: '12.25.5.240',
+          price: '600 ₽',
+          expiry: '14.04.2025',
+          status: 'active'
+        },
+        {
+          name: 'test-7',
+          ip: '81.177.3.175',
+          price: '20,42 ₽',
+          expiry: '14.05.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'prod-server-01',
+          ip: '192.168.1.100',
+          price: '850 ₽',
+          expiry: '25.06.2025',
+          status: 'active'
+        },
+        {
+          name: 'dev-server-02',
+          ip: '192.168.1.101',
+          price: '550 ₽',
+          expiry: '15.08.2025',
+          status: 'active'
+        },
+        {
+          name: 'backup-srv-01',
+          ip: '10.0.0.50',
+          price: '1200 ₽',
+          expiry: '30.09.2025',
+          status: 'blocked'
+        },
+        {
+          name: 'web-app-server',
+          ip: '172.16.0.10',
+          price: '920 ₽',
+          expiry: '12.11.2025',
+          status: 'active'
+        },
+        {
+          name: 'db-primary-01',
+          ip: '172.16.0.20',
+          price: '1500 ₽',
+          expiry: '05.12.2025',
+          status: 'active'
+        },
+        {
+          name: 'cdn-node-01',
+          ip: '203.0.113.1',
+          price: '750 ₽',
+          expiry: '18.01.2026',
+          status: 'blocked'
+        },
+        {
+          name: 'api-gateway-01',
+          ip: '203.0.113.2',
+          price: '880 ₽',
+          expiry: '22.02.2026',
+          status: 'active'
+        },
+        {
+          name: 'monitoring-srv',
+          ip: '10.0.0.100',
+          price: '320 ₽',
+          expiry: '07.03.2026',
+          status: 'active'
+        },
+        {
+          name: 'mail-server-01',
+          ip: '198.51.100.1',
+          price: '650 ₽',
+          expiry: '19.04.2026',
+          status: 'active'
+        }
+      ];
+
+      let currentMobileData = serversData;
+
+      // Function to render mobile table rows
+      function renderMobileTable(data, startIndex, limit) {
+        const container = document.getElementById('servers-table-mobile');
+        const endIndex = Math.min(startIndex + limit, data.length);
+        const pageData = data.slice(startIndex, endIndex);
+
+        let html = '';
+
+        // Add data rows
+        pageData.forEach((row, index) => {
+          const rowId = `mobile-row-${startIndex + index}`;
+          const statusDisplay = row.status === 'active'
+            ? `<span class="text-sm-medium text-[#10b77f]">Работает</span>`
+            : `<div class="flex items-center gap-2">
+                <img src="../public/icons/alert-02.svg" alt="Заблокирован" class="w-6 h-6" style="filter: invert(27%) sepia(89%) saturate(3165%) hue-rotate(339deg) brightness(86%) contrast(94%);" />
+                <span class="text-sm-medium text-[#dc2828]">Заблокирован</span>
+               </div>`;
+
+          html += `
+            <div id="${rowId}" class="bg-white border-b border-base-border last:border-b-0 flex items-start px-4 py-4 hover:bg-base-surface-2 transition-colors">
+              <!-- Info Column / Информационная колонка -->
+              <div class="flex flex-col gap-3 flex-1 min-w-0">
+                <!-- Server Name / Имя сервера -->
+                <div class="flex items-center justify-between">
+                  <h3 class="text-base font-semibold text-text-dark-primary overflow-ellipsis overflow-hidden">${row.name}</h3>
+                  <button class="p-1 hover:bg-base-fill-1 rounded flex-shrink-0">
+                    <img src="../public/icons/more-vertical.svg" alt="Действия" class="w-4 h-4" />
+                  </button>
+                </div>
+
+                <!-- IP Address / IP адрес -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">IP:</span>
+                  <span class="text-sm-medium text-text-dark-primary">${row.ip}</span>
+                </div>
+
+                <!-- Price / Стоимость -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Стоимость:</span>
+                  <span class="text-sm-medium text-text-dark-primary">${row.price}</span>
+                </div>
+
+                <!-- Expiry Date / Дата оплаты -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Оплачен до:</span>
+                  <span class="text-sm-medium text-text-dark-primary">${row.expiry}</span>
+                </div>
+
+                <!-- Status / Состояние -->
+                <div class="flex items-start gap-2">
+                  <span class="text-sm-medium text-text-dark-secondary whitespace-nowrap">Состояние:</span>
+                  <div class="min-w-0 flex-1">
+                    ${statusDisplay}
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Initial render
+      renderMobileTable(currentMobileData, 0, rowsPerPage);
+
+      // Connect search to mobile table
+      const searchInput = document.getElementById('servers-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          let filteredData = serversData;
+          if (searchTerm !== '') {
+            filteredData = serversData.filter(row =>
+              row.name.toLowerCase().includes(searchTerm) ||
+              row.ip.toLowerCase().includes(searchTerm)
+            );
+          }
+          currentMobileData = filteredData;
+          renderMobileTable(currentMobileData, 0, rowsPerPage);
+        });
+      }
+
+      // Handle mobile pagination clicks
+      document.addEventListener('click', (e) => {
+        // Handle mobile page buttons
+        if (e.target.closest('.page-button-mobile')) {
+          const pageButton = e.target.closest('.page-button-mobile');
+          const page = parseInt(pageButton.dataset.page);
+          const start = (page - 1) * rowsPerPage;
+          renderMobileTable(currentMobileData, start, rowsPerPage);
+        }
+
+        // Handle mobile prev button
+        if (e.target.closest('.prev-button-mobile')) {
+          if (currentPage > 1) {
+            const start = (currentPage - 2) * rowsPerPage;
+            renderMobileTable(currentMobileData, start, rowsPerPage);
+          }
+        }
+
+        // Handle mobile next button
+        if (e.target.closest('.next-button-mobile')) {
+          const totalPages = Math.ceil(currentMobileData.length / rowsPerPage);
+          if (currentPage < totalPages) {
+            const start = currentPage * rowsPerPage;
+            renderMobileTable(currentMobileData, start, rowsPerPage);
+          }
+        }
+
+        // Handle mobile dropdown
+        if (e.target.closest('.rows-dropdown-trigger-mobile')) {
+          const menu = document.getElementById('rows-dropdown-menu-mobile');
+          menu.classList.toggle('hidden');
+        }
+
+        // Handle mobile dropdown item selection
+        if (e.target.classList.contains('dropdown-item-mobile')) {
+          const value = e.target.dataset.value;
+          const text = e.target.textContent;
+          document.getElementById('rows-count-text-mobile').textContent = text;
+          document.getElementById('rows-dropdown-menu-mobile').classList.add('hidden');
+
+          const newLimit = parseInt(value);
+          rowsPerPage = newLimit;
+          currentPage = 1;
+
+          renderMobileTable(currentMobileData, 0, rowsPerPage);
+        }
+      });
+    }
+
+  </script>
+</body>
+</html>

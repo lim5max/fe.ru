@@ -5,24 +5,37 @@ class FeHeader extends HTMLElement {
   }
 
   connectedCallback() {
+    const backLink = this.getAttribute('back-link');
+    const backText = this.getAttribute('back-text') || 'Назад';
+
     this.shadowRoot.innerHTML = `
       <link rel="stylesheet" href="../styles.css">
       <div class="bg-base-surface-2 w-full border-b border-base-border">
-        <div class="px-4 lg:px-6 py-4 w-full">
-          <div id="main-header" class="flex items-center justify-between lg:justify-end w-full">
-            <!-- Logo / Логотип -->
-            <img id="logo" src="../public/images/small_logo.png" alt="FE Платформа" class="h-11 lg:hidden" />
+        <div class="px-4 lg:px-6 py-4 w-full ${backLink ? 'lg:pl-[300px]' : ''}">
+          <div id="main-header" class="flex items-center ${backLink ? 'justify-between' : 'justify-between lg:justify-end'} w-full">
+            <!-- Logo / Логотип (Mobile only) -->
+            <img id="logo" src="../public/images/small_logo.png" alt="FE Платформа" class="h-15 lg:hidden" />
+
+            <!-- Back Button / Кнопка назад (Optional, Desktop only) -->
+            ${backLink ? `
+              <a href="${backLink}" class="hidden lg:flex items-center gap-2 text-text-dark-secondary hover:text-text-dark-primary transition-colors cursor-pointer">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="text-base-medium">${backText}</span>
+              </a>
+            ` : ''}
 
             <!-- Account Buttons / Кнопки аккаунта -->
-            <div id="account-buttons" class="flex items-center gap-2 lg:justify-end">
+            <div id="account-buttons" class="flex items-center gap-2">
               <!-- Balance Button / Кнопка баланса -->
-              <button class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-11 flex items-center gap-3 hover:bg-base-fill-1 transition-colors">
+              <button class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-15 flex items-center gap-3 hover:bg-base-fill-1 transition-colors">
                 <img src="../public/icons/coins.svg" alt="Баланс" class="w-6 h-6" />
                 <span class="hidden sm:inline text-lg-semibold text-text-dark-primary">1 123 ₽</span>
               </button>
 
               <!-- Profile Button / Кнопка профиля -->
-              <button class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-11 flex items-center gap-3 hover:bg-base-fill-1 transition-colors hidden lg:flex">
+              <button class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-15 flex items-center gap-3 hover:bg-base-fill-1 transition-colors hidden lg:flex">
                 <img src="../public/icons/user.svg" alt="Профиль" class="w-6 h-6" />
                 <span class="hidden sm:inline text-lg-semibold text-text-dark-primary">farbx15@gmail.com</span>
               </button>
@@ -42,7 +55,7 @@ class FeHeader extends HTMLElement {
       <div id="mobile-menu-items" class="fixed inset-0 bg-base-surface-1 z-50 hidden flex flex-col h-full">
         <!-- Menu Header -->
         <div class="flex items-center justify-between p-4 border-b border-base-border">
-          <img src="../public/images/small_logo.png" alt="FE Платформа" class="h-11" />
+          <img src="../public/images/small_logo.png" alt="FE Платформа" class="h-15" />
           <button id="close-menu-button" class="bg-state-brand-active hover:bg-state-brand-hover text-white rounded-6 p-2 transition-colors duration-200">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -114,7 +127,7 @@ class FeHeader extends HTMLElement {
 
         <!-- Logout Button -->
         <div class="p-4">
-          <button class="bg-base-surface-2 border border-base-border rounded-lg w-full h-11 flex items-center justify-center hover:bg-base-fill-1 transition-colors">
+          <button class="bg-base-surface-2 border border-base-border rounded-lg w-full h-15 flex items-center justify-center hover:bg-base-fill-1 transition-colors">
             <span class="text-base font-semibold text-text-dark-primary">Выйти</span>
           </button>
         </div>

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль - Юридическое лицо - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+    <!-- Profile Menu Web Component -->
+    <script src="../components/fe-profile-menu.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-17 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] w-full mx-auto">
+            <!-- Two Column Layout / Двухколоночный макет -->
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-12 items-start">
+              <!-- Left Column - Profile Menu / Левая колонка - Меню профиля -->
+              <div class="w-full lg:w-[272px] shrink-0">
+                <fe-profile-menu active="about"></fe-profile-menu>
+              </div>
+
+              <!-- Right Column - Profile Content / Правая колонка - Контент профиля -->
+              <div class="flex-1 flex flex-col gap-6 lg:gap-8 w-full">
+                <!-- Contract Info Card / Карточка информации о договоре -->
+                <div
+                  class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-7"
+                >
+                  <!-- Header / Заголовок -->
+                  <div class="flex flex-col">
+                    <p class="text-base-medium text-text-dark-secondary">
+                      От 21.02.2022
+                    </p>
+                    <h2 class="text-3xl-semibold text-text-dark-primary">
+                      Договор №7919807
+                    </h2>
+                  </div>
+
+                  <!-- Account Information / Информация об аккаунте -->
+                  <div class="flex flex-col gap-5">
+                    <p class="text-sm-medium text-text-dark-tertiary">
+                      Информация о аккаунте
+                    </p>
+
+                    <!-- Mobile: Stack layout / Мобильные: стековая раскладка -->
+                    <div class="flex flex-col gap-4 sm:hidden">
+                      <div class="flex flex-col gap-1">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Название компании
+                        </p>
+                        <p class="text-base-regular text-text-dark-primary">
+                          ООО "Ромашка"
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Телефон
+                        </p>
+                        <p class="text-base-regular text-state-danger-active">
+                          Не заполнено
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Почта
+                        </p>
+                        <p
+                          class="text-base-regular text-text-dark-primary break-all"
+                        >
+                          farbx15@gmail.com
+                        </p>
+                      </div>
+                      <div class="flex flex-col gap-1">
+                        <p class="text-base-regular text-text-dark-secondary">
+                          Дата регистрации
+                        </p>
+                        <p class="text-base-regular text-text-dark-primary">
+                          12.12.12
+                        </p>
+                      </div>
+                    </div>
+
+                    <!-- Desktop: Two column layout / Десктоп: двухколоночная раскладка -->
+                    <div class="hidden sm:flex gap-12">
+                      <!-- Labels Column / Колонка меток -->
+                      <div
+                        class="flex flex-col gap-2.5 text-base-regular text-text-dark-secondary w-[156px]"
+                      >
+                        <p>ФИО</p>
+                        <p>Телефон</p>
+                        <p>Почта</p>
+                        <p>Дата регистрации</p>
+                      </div>
+
+                      <!-- Values Column / Колонка значений -->
+                      <div class="flex flex-col gap-2.5 text-base-regular">
+                        <p class="text-text-dark-primary">ООО "Ромашка"</p>
+                        <p class="text-state-danger-active">Не заполнено</p>
+                        <p class="text-text-dark-primary">farbx15@gmail.com</p>
+                        <p class="text-text-dark-primary">12.12.12</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Tariff Card / Карточка тарифа -->
+                <div
+                  class="bg-base-surface-2 border border-base-border rounded-9 p-6 flex flex-col gap-5 relative"
+                >
+                  <!-- Header / Заголовок -->
+                  <div
+                    class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-0"
+                  >
+                    <div class="flex flex-col">
+                      <p class="text-base-medium text-text-dark-secondary">
+                        Тариф
+                      </p>
+                      <h2 class="text-3xl-semibold text-text-dark-primary">
+                        Стандартный
+                      </h2>
+                    </div>
+
+                    <!-- Contact Admin Button / Кнопка связи с админом -->
+                    <button
+                      class="sm:absolute sm:top-3.5 sm:right-6 bg-base-surface-2 hover:bg-base-fill-1 border border-base-border text-text-dark-primary rounded-9 px-4 h-13 min-h-13 text-sm-semibold transition-colors whitespace-nowrap"
+                    >
+                      Написать админу
+                    </button>
+                  </div>
+
+                  <!-- Description / Описание -->
+                  <div class="flex flex-col">
+                    <p class="text-base-regular text-text-dark-secondary">
+                      Стоимость услуг меняется в зависимости от тарифа.
+                      <br />
+                      Его назначает администратор сервиса.
+                      <a
+                        href="#"
+                        class="text-state-brand-active hover:text-state-brand-hover transition-colors"
+                        >Таблица тарифов</a
+                      >
+                    </p>
+                  </div>
+                </div>
+
+                <!-- Empty State Card / Карточка пустого состояния -->
+                <div
+                  class="bg-base-surface-2 border border-base-border border-dashed rounded-6 py-8 px-6 sm:px-16 flex items-center justify-center"
+                >
+                  <p
+                    class="text-base-semibold text-text-dark-secondary text-center"
+                  >
+                    Список услуг пуст
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+
+        // Listen for logout event from profile menu
+        document.addEventListener("profile-logout", function () {
+          console.log("User logged out");
+          // Redirect to login page or perform logout
+          // window.location.href = '/login.html';
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация домена - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Имя домена
+          </h1>
+
+          <!-- Domain Input Section / Секция ввода домена -->
+          <div class="flex flex-col gap-8 mb-10">
+            <!-- Domain Input / Поле ввода домена -->
+            <div class="flex gap-3 w-full">
+              <!-- Input with prefix and error / Поле с префиксом и ошибкой -->
+              <div class="flex-1 flex flex-col gap-3">
+                <div class="border border-state-danger-active rounded-6 overflow-hidden h-17 flex items-center focus-within:border-state-brand-selected transition-colors">
+                  <!-- Prefix / Префикс -->
+                  <div
+                    class="bg-base-fill-1 h-full px-8 flex items-center"
+                  >
+                    <span class="text-lg-medium text-text-dark-tertiary">https://</span>
+                  </div>
+
+                  <!-- Input / Поле ввода -->
+                  <input
+                    type="text"
+                    id="domain-name"
+                    class="flex-1 h-full px-8 text-lg-medium text-text-dark-primary focus:outline-none border-none"
+                    value="google.com"
+                  />
+                </div>
+
+                <!-- Error Message / Сообщение об ошибке -->
+                <div class="flex items-center gap-1.5 h-6">
+                  <!-- Error Icon / Иконка ошибки -->
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8V12M12 16H12.01M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z" stroke="#DC2828" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  <p class="text-sm-medium text-state-danger-active">
+                    Данный домен занят, попробуйте другой
+                  </p>
+                </div>
+              </div>
+
+              <!-- Domain Zone Select / Выбор доменной зоны -->
+              <div class="custom-dropdown relative w-[218px]">
+                <div
+                  id="domain-zone-trigger"
+                  class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span id="domain-zone-selected-text">.photography</span>
+                  <img src="../public/icons/arrow-down.svg" alt="Выбрать" class="w-7 h-7" />
+                </div>
+
+                <div id="domain-zone-menu" class="custom-dropdown-menu hidden">
+                  <div class="py-1">
+                    <div class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".photography">
+                      .photography
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".com">
+                      .com
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".ru">
+                      .ru
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".net">
+                      .net
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".org">
+                      .org
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".info">
+                      .info
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".biz">
+                      .biz
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price Box / Блок стоимости -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 flex items-center justify-between"
+            >
+              <p class="text-base-medium text-text-dark-secondary">
+                Стоимость
+              </p>
+              <p class="text-xl-semibold text-text-dark-primary" id="domain-price">
+                2 344 ₽
+              </p>
+            </div>
+          </div>
+
+          <!-- Check Button (Disabled) / Кнопка проверки (неактивная) -->
+          <button
+            id="check-domain-btn"
+            class="w-full bg-base-fill-1 text-base-disabled rounded-6 h-17 text-xl-semibold cursor-not-allowed"
+            disabled
+          >
+            Проверить домен
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Domain prices / Цены доменов
+      const domainPrices = {
+        '.photography': 2500,
+        '.com': 800,
+        '.ru': 300,
+        '.net': 900,
+        '.org': 850,
+        '.info': 600,
+        '.biz': 700
+      };
+
+      // Selected domain zone value / Выбранная доменная зона
+      let selectedDomainZone = '.photography';
+
+      // Update price based on selected zone / Обновление цены в зависимости от выбранной зоны
+      function updatePrice() {
+        const priceElement = document.getElementById('domain-price');
+        const price = domainPrices[selectedDomainZone] || 0;
+        priceElement.textContent = `${price.toLocaleString('ru-RU')} ₽`;
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener('DOMContentLoaded', function() {
+        const domainZoneTrigger = document.getElementById('domain-zone-trigger');
+        const domainZoneMenu = document.getElementById('domain-zone-menu');
+        const domainZoneSelectedText = document.getElementById('domain-zone-selected-text');
+
+        // Custom dropdown handling / Обработка кастомного выпадающего списка
+        if (domainZoneTrigger && domainZoneMenu) {
+          // Toggle dropdown on trigger click / Переключение выпадающего списка при клике
+          domainZoneTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            domainZoneMenu.classList.toggle('hidden');
+          });
+
+          // Handle dropdown item selection / Обработка выбора элемента
+          domainZoneMenu.querySelectorAll('.custom-dropdown-item').forEach((item) => {
+            item.addEventListener('click', (e) => {
+              e.stopPropagation();
+              selectedDomainZone = item.dataset.value;
+              domainZoneSelectedText.textContent = item.textContent.trim();
+              domainZoneMenu.classList.add('hidden');
+
+              // Update selected state / Обновление состояния выбранного элемента
+              domainZoneMenu.querySelectorAll('.custom-dropdown-item').forEach((i) => {
+                i.classList.remove('selected');
+              });
+              item.classList.add('selected');
+
+              // Update price / Обновление цены
+              updatePrice();
+            });
+          });
+
+          // Close dropdown when clicking outside / Закрытие при клике вне элемента
+          document.addEventListener('click', () => {
+            domainZoneMenu.classList.add('hidden');
+          });
+        }
+
+        // Initial price update / Начальное обновление цены
+        updatePrice();
+      });
+    </script>
+  </body>
+</html>

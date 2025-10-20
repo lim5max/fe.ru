@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация домена - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex flex-col">
+      <!-- Header / Заголовок -->
+      <fe-header></fe-header>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div
+        class="bg-base-surface-1 flex flex-col gap-2.5 grow px-6 lg:px-[153px] py-18 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+      >
+        <div class="max-w-[640px] w-full mx-auto">
+          <!-- Stepper / Индикатор шагов -->
+          <div class="flex items-center gap-3 mb-11 w-[208px]">
+            <!-- Step 1 / Шаг 1 -->
+            <div
+              class="bg-state-brand-active border-[3px] border-state-brand-selected border-solid rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-white">1</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 2 / Шаг 2 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">2</span>
+            </div>
+
+            <!-- Line / Линия -->
+            <div class="flex-1 h-3 bg-base-fill-2 rounded-[2000px]"></div>
+
+            <!-- Step 3 / Шаг 3 -->
+            <div
+              class="bg-base-fill-1 rounded-6 w-12 h-12 flex items-center justify-center"
+            >
+              <span class="text-base-bold text-text-dark-secondary">3</span>
+            </div>
+          </div>
+
+          <!-- Title / Заголовок -->
+          <h1 class="text-3xl-semibold text-text-dark-primary mb-10">
+            Имя домена
+          </h1>
+
+          <!-- Domain Input Section / Секция ввода домена -->
+          <div class="flex flex-col gap-8 mb-10">
+            <!-- Domain Input / Поле ввода домена -->
+            <div class="flex gap-3 w-full">
+              <!-- Input with prefix / Поле с префиксом -->
+              <div class="flex-1 border border-base-border rounded-6 overflow-hidden h-17 flex items-center focus-within:border-state-brand-selected transition-colors">
+                <!-- Prefix / Префикс -->
+                <div
+                  class="bg-base-fill-1 h-full px-8 flex items-center"
+                >
+                  <span class="text-lg-medium text-text-dark-tertiary">https://</span>
+                </div>
+
+                <!-- Input / Поле ввода -->
+                <input
+                  type="text"
+                  id="domain-name"
+                  class="flex-1 h-full px-8 text-lg-medium text-text-dark-secondary focus:outline-none border-none"
+                  placeholder="testdomain"
+                />
+              </div>
+
+              <!-- Domain Zone Select / Выбор доменной зоны -->
+              <div class="custom-dropdown relative w-[218px]">
+                <div
+                  id="domain-zone-trigger"
+                  class="custom-dropdown-trigger w-full h-17 px-9 bg-white border border-base-border rounded-6 text-lg-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                >
+                  <span id="domain-zone-selected-text">.photography</span>
+                  <img src="../public/icons/arrow-down.svg" alt="Выбрать" class="w-7 h-7" />
+                </div>
+
+                <div id="domain-zone-menu" class="custom-dropdown-menu hidden">
+                  <div class="py-1">
+                    <div class="custom-dropdown-item selected text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".photography">
+                      .photography
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".com">
+                      .com
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".ru">
+                      .ru
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".net">
+                      .net
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".org">
+                      .org
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".info">
+                      .info
+                    </div>
+                    <div class="custom-dropdown-item text-lg-medium text-text-dark-secondary pl-9 px-3 py-2" data-value=".biz">
+                      .biz
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Price Box / Блок стоимости -->
+            <div
+              class="bg-base-surface-2 border border-base-border rounded-6 p-8 flex items-center justify-between"
+            >
+              <p class="text-base-medium text-text-dark-secondary">
+                Стоимость
+              </p>
+              <p class="text-xl-semibold text-text-dark-primary" id="domain-price">
+                0 ₽
+              </p>
+            </div>
+          </div>
+
+          <!-- Check Button / Кнопка проверки -->
+          <button
+            id="check-domain-btn"
+            class="w-full bg-state-brand-active hover:bg-state-brand-hover border border-alpha-dark-100 text-white rounded-6 h-17 text-xl-semibold transition-colors"
+          >
+            Проверить домен
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Domain prices / Цены доменов
+      const domainPrices = {
+        '.photography': 2500,
+        '.com': 800,
+        '.ru': 300,
+        '.net': 900,
+        '.org': 850,
+        '.info': 600,
+        '.biz': 700
+      };
+
+      // Selected domain zone value / Выбранная доменная зона
+      let selectedDomainZone = '.photography';
+
+      // Update price based on selected zone / Обновление цены в зависимости от выбранной зоны
+      function updatePrice() {
+        const priceElement = document.getElementById('domain-price');
+        const price = domainPrices[selectedDomainZone] || 0;
+        priceElement.textContent = `${price.toLocaleString('ru-RU')} ₽`;
+      }
+
+      // Check domain availability / Проверка доступности домена
+      function checkDomain() {
+        const domainName = document.getElementById('domain-name').value.trim();
+
+        if (!domainName) {
+          alert('Пожалуйста, введите имя домена');
+          return;
+        }
+
+        const fullDomain = domainName + selectedDomainZone;
+        console.log('Проверка домена:', fullDomain);
+
+        // Here you would typically make an API call to check domain availability
+        // For now, we'll just show an alert
+        alert(`Проверяем доступность домена: ${fullDomain}`);
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener('DOMContentLoaded', function() {
+        const checkBtn = document.getElementById('check-domain-btn');
+        const domainZoneTrigger = document.getElementById('domain-zone-trigger');
+        const domainZoneMenu = document.getElementById('domain-zone-menu');
+        const domainZoneSelectedText = document.getElementById('domain-zone-selected-text');
+
+        // Custom dropdown handling / Обработка кастомного выпадающего списка
+        if (domainZoneTrigger && domainZoneMenu) {
+          // Toggle dropdown on trigger click / Переключение выпадающего списка при клике
+          domainZoneTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            domainZoneMenu.classList.toggle('hidden');
+          });
+
+          // Handle dropdown item selection / Обработка выбора элемента
+          domainZoneMenu.querySelectorAll('.custom-dropdown-item').forEach((item) => {
+            item.addEventListener('click', (e) => {
+              e.stopPropagation();
+              selectedDomainZone = item.dataset.value;
+              domainZoneSelectedText.textContent = item.textContent.trim();
+              domainZoneMenu.classList.add('hidden');
+
+              // Update selected state / Обновление состояния выбранного элемента
+              domainZoneMenu.querySelectorAll('.custom-dropdown-item').forEach((i) => {
+                i.classList.remove('selected');
+              });
+              item.classList.add('selected');
+
+              // Update price / Обновление цены
+              updatePrice();
+            });
+          });
+
+          // Close dropdown when clicking outside / Закрытие при клике вне элемента
+          document.addEventListener('click', () => {
+            domainZoneMenu.classList.add('hidden');
+          });
+        }
+
+        // Check domain on button click / Проверка домена при клике на кнопку
+        checkBtn.addEventListener('click', checkDomain);
+
+        // Initial price update / Начальное обновление цены
+        updatePrice();
+
+        // Check domain on Enter key / Проверка домена при нажатии Enter
+        document.getElementById('domain-name').addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            checkDomain();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

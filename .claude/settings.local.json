@@ -12,7 +12,11 @@
       "Bash(npm install:*)",
       "Bash(npx tailwindcss:*)",
       "mcp__context7__get-library-docs",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "mcp__figma-dev-mode-mcp-server__get_metadata",
+      "Bash(xargs sed:*)",
+      "WebFetch(domain:www.figma.com)",
+      "mcp__figma-dev-mode-mcp-server__get_design_context"
     ],
     "deny": [],
     "ask": []

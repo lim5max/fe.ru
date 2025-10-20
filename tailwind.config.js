@@ -51,23 +51,36 @@ module.exports = {
         8: "16px",
         9: "20px",
         10: "24px",
-        15: "44px",
+        11: "28px", // For icons (icon-xl)
+        12: "32px", // For icons (icon-2xl)
+        13: "36px",
+        14: "40px",
+        15: "44px", // For buttons
+        16: "48px", // For larger buttons
+        17: "56px", // For large inputs and buttons
         18: "64px",
         20: "80px",
         21: "96px",
       },
       fontSize: {
         // Complete text styles from Figma design system
+        xs: ["12px", { lineHeight: "18px" }],
         sm: ["14px", { lineHeight: "22px" }],
         base: ["16px", { lineHeight: "24px" }],
         lg: ["18px", { lineHeight: "28px" }],
         xl: ["20px", { lineHeight: "32px" }],
+        "2xl": ["24px", { lineHeight: "36px" }],
         "3xl": ["30px", { lineHeight: "42px" }],
         "4xl": ["36px", { lineHeight: "52px" }],
       },
 
       // Text style utilities from Figma
       textStyles: {
+        "xs-regular": ["12px", { lineHeight: "18px", fontWeight: "400" }],
+        "xs-medium": ["12px", { lineHeight: "18px", fontWeight: "500" }],
+        "xs-semibold": ["12px", { lineHeight: "18px", fontWeight: "600" }],
+        "xs-bold": ["12px", { lineHeight: "18px", fontWeight: "700" }],
+
         "sm-regular": ["14px", { lineHeight: "22px", fontWeight: "400" }],
         "sm-medium": ["14px", { lineHeight: "22px", fontWeight: "500" }],
         "sm-semibold": ["14px", { lineHeight: "22px", fontWeight: "600" }],
@@ -87,6 +100,11 @@ module.exports = {
         "xl-medium": ["20px", { lineHeight: "32px", fontWeight: "500" }],
         "xl-semibold": ["20px", { lineHeight: "32px", fontWeight: "600" }],
         "xl-bold": ["20px", { lineHeight: "32px", fontWeight: "700" }],
+
+        "2xl-regular": ["24px", { lineHeight: "36px", fontWeight: "400" }],
+        "2xl-medium": ["24px", { lineHeight: "36px", fontWeight: "500" }],
+        "2xl-semibold": ["24px", { lineHeight: "36px", fontWeight: "600" }],
+        "2xl-bold": ["24px", { lineHeight: "36px", fontWeight: "700" }],
 
         "3xl-regular": ["30px", { lineHeight: "42px", fontWeight: "400" }],
         "3xl-medium": ["30px", { lineHeight: "42px", fontWeight: "500" }],
