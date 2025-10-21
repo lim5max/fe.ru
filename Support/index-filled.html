@@ -130,9 +130,12 @@
               </button>
             </div>
 
-            <!-- Empty State / Пустое состояние -->
+            <!-- Questions List / Список вопросов -->
+            <div id="questions-container" class="flex flex-col gap-2.5"></div>
+
+            <!-- Empty State (hidden by default) / Пустое состояние (скрыто по умолчанию) -->
             <div
-              class="bg-base-surface-2 border border-dashed border-base-border rounded-6 px-8 py-8 flex items-center justify-center"
+              class="bg-base-surface-2 border border-dashed border-base-border rounded-6 px-8 py-8 flex items-center justify-center hidden"
               id="empty-state"
             >
               <p class="text-base-semibold text-text-dark-secondary">
@@ -361,49 +364,118 @@
       </div>
     </div>
 
-  <!-- JavaScript / Скрипты -->
-  <script>
-    // Load Components / Загрузка компонентов
-    async function loadComponent(containerId, componentPath) {
-      try {
-        const response = await fetch(componentPath);
-        const html = await response.text();
-        document.getElementById(containerId).innerHTML = html;
-      } catch (error) {
-        console.error(`Error loading component ${componentPath}:`, error);
-      }
-    }
+    <!-- Scripts -->
+    <script>
+      // Questions data / Данные вопросов
+      const questionsData = [
+        {
+          id: 1,
+          title: "Не работает вкладка хостинга",
+          status: "answered",
+          statusText: "Вам ответили",
+          type: "active"
+        },
+        {
+          id: 2,
+          title: "Вопрос по оплате за домен",
+          status: "waiting",
+          statusText: "Ожидает ответа",
+          type: "active"
+        },
+        {
+          id: 3,
+          title: "Как настроить DNS для моего домена?",
+          status: "error",
+          statusText: "Ошибка",
+          type: "active"
+        },
+        {
+          id: 4,
+          title: "Проблема с доступом к VPS",
+          status: "waiting",
+          statusText: "Ожидает ответа",
+          type: "active"
+        }
+      ];
 
-    // Initialize Components / Инициализация компонентов
-    document.addEventListener('DOMContentLoaded', async function() {
-      await loadComponent('sidebar-container', '../components/sidebar.html');
-    });
+      // Mobile menu toggle
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenuItems = document.getElementById("mobile-menu-items");
+      const closeMenuButton = document.getElementById("close-menu-button");
 
-    // Mobile menu toggle
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenuItems = document.getElementById("mobile-menu-items");
-    const closeMenuButton = document.getElementById("close-menu-button");
-
-    if (mobileMenuButton) {
       mobileMenuButton.addEventListener("click", () => {
         mobileMenuItems.classList.remove("hidden");
         mobileMenuItems.classList.add("flex");
       });
-    }
 
-    if (closeMenuButton) {
       closeMenuButton.addEventListener("click", () => {
         mobileMenuItems.classList.add("hidden");
         mobileMenuItems.classList.remove("flex");
       });
-    }
 
-    // Tabs functionality
-    const tabActive = document.getElementById("tab-active");
-    const tabClosed = document.getElementById("tab-closed");
-    const emptyState = document.getElementById("empty-state");
+      // Render questions / Рендер вопросов
+      function renderQuestions(type) {
+        const questionsContainer = document.getElementById("questions-container");
+        const emptyState = document.getElementById("empty-state");
+        const filteredQuestions = questionsData.filter(q => q.type === type);
 
-    if (tabActive && tabClosed && emptyState) {
+        if (filteredQuestions.length === 0) {
+          questionsContainer.classList.add("hidden");
+          emptyState.classList.remove("hidden");
+          return;
+        }
+
+        questionsContainer.classList.remove("hidden");
+        emptyState.classList.add("hidden");
+        questionsContainer.innerHTML = "";
+
+        filteredQuestions.forEach(question => {
+          const card = document.createElement("div");
+          card.className = "bg-base-surface-2 border border-base-border rounded-6 px-6 py-4 hover:bg-base-fill-1 transition-colors cursor-pointer";
+
+          // Determine badge color based on status
+          let statusBadgeClass = "";
+          let iconSvg = "";
+
+          if (question.status === "answered") {
+            statusBadgeClass = "bg-state-success-active";
+            iconSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.3346 4L6.0013 11.3333L2.66797 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;
+          } else if (question.status === "waiting") {
+            statusBadgeClass = "bg-state-highlight-active";
+            iconSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="6.5" stroke="white" stroke-width="1.5"/>
+              <path d="M8 5v3M8 11h.01" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>`;
+          } else if (question.status === "error") {
+            statusBadgeClass = "bg-state-error-active";
+            iconSvg = `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 5v4M8 11h.01M14 8c0 3.314-2.686 6-6 6s-6-2.686-6-6 2.686-6 6-6 6 2.686 6 6z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>`;
+          }
+
+          card.innerHTML = `
+            <div class="flex flex-col gap-1.5">
+              <div class="h-6 min-h-6 inline-flex">
+                <div class="${statusBadgeClass} border border-alpha-dark-200 rounded-6 h-6 px-2.5 flex items-center justify-center gap-1">
+                  ${iconSvg}
+                  <span class="text-sm-medium text-text-light-primary">${question.statusText}</span>
+                </div>
+              </div>
+              <h3 class="text-lg-semibold text-text-dark-primary">${question.title}</h3>
+            </div>
+          `;
+
+          questionsContainer.appendChild(card);
+        });
+      }
+
+      // Tabs functionality
+      const tabActive = document.getElementById("tab-active");
+      const tabClosed = document.getElementById("tab-closed");
+      const emptyState = document.getElementById("empty-state");
+
       tabActive.addEventListener("click", () => {
         // Activate tab
         tabActive.classList.add(
@@ -413,10 +485,10 @@
         );
         tabActive
           .querySelector("span")
-          .classList.remove("text-text-dark-tertiary");
+          .classList.remove("text-text-dark-tertiary", "text-lg-medium");
         tabActive
           .querySelector("span")
-          .classList.add("text-text-dark-primary", "font-semibold");
+          .classList.add("text-text-dark-primary", "text-lg-semibold");
 
         // Deactivate other tab
         tabClosed.classList.remove(
@@ -426,16 +498,17 @@
         );
         tabClosed
           .querySelector("span")
-          .classList.remove("text-text-dark-primary", "font-semibold");
+          .classList.remove("text-text-dark-primary", "text-lg-semibold");
         tabClosed
           .querySelector("span")
-          .classList.add("text-text-dark-tertiary");
-        tabClosed.querySelector("span").classList.remove("text-base-semibold");
-        tabClosed.querySelector("span").classList.add("text-base-medium");
+          .classList.add("text-text-dark-tertiary", "text-lg-medium");
 
         // Update empty state text
         emptyState.querySelector("p").innerHTML =
           '<span class="font-semibold">Список </span>активных запросов<span class="font-semibold"> пуст</span>';
+
+        // Render active questions
+        renderQuestions("active");
       });
 
       tabClosed.addEventListener("click", () => {
@@ -447,10 +520,10 @@
         );
         tabClosed
           .querySelector("span")
-          .classList.remove("text-text-dark-tertiary", "text-base-medium");
+          .classList.remove("text-text-dark-tertiary", "text-lg-medium");
         tabClosed
           .querySelector("span")
-          .classList.add("text-text-dark-primary", "text-base-semibold");
+          .classList.add("text-text-dark-primary", "text-lg-semibold");
 
         // Deactivate other tab
         tabActive.classList.remove(
@@ -460,18 +533,40 @@
         );
         tabActive
           .querySelector("span")
-          .classList.remove("text-text-dark-primary");
+          .classList.remove("text-text-dark-primary", "text-lg-semibold");
         tabActive
           .querySelector("span")
-          .classList.add("text-text-dark-tertiary");
-        tabActive.querySelector("span").classList.remove("text-base-semibold");
-        tabActive.querySelector("span").classList.add("text-base-medium");
+          .classList.add("text-text-dark-tertiary", "text-lg-medium");
 
         // Update empty state text
         emptyState.querySelector("p").innerHTML =
           '<span class="font-semibold">Список </span>закрытых запросов<span class="font-semibold"> пуст</span>';
+
+        // Render closed questions
+        renderQuestions("closed");
       });
-    }
-  </script>
+
+      // Initial render / Начальный рендер
+      renderQuestions("active");
+    </script>
+
+    <!-- Load Sidebar Component / Загрузка компонента Sidebar -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener('DOMContentLoaded', async function() {
+        await loadComponent('sidebar-container', '../components/sidebar.html');
+      });
+    </script>
   </body>
 </html>

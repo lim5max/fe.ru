@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Изменение страницы - FE Платформа</title>
+  <link href="../styles.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Header Web Component -->
+  <script src="../components/fe-header-partnership.js"></script>
+</head>
+<body class="bg-base-surface-1 font-sans">
+
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
+
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
+      <!-- Header / Заголовок -->
+      <fe-header-partnership></fe-header-partnership>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]">
+        <div class="flex flex-col gap-6 grow items-center justify-start w-full">
+
+          <!-- Page Header Section / Секция заголовка страницы -->
+          <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full max-w-[880px]">
+            <h1 class="text-2xl-semibold text-text-dark-primary">Изменение страницы</h1>
+
+            <!-- Main Section / Основная секция -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Основное</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- ID страницы (read-only) -->
+                  <div class="content-stretch flex flex-col items-start relative shrink-0 w-full leading-[0]">
+                    <p class="text-base-regular text-text-dark-secondary leading-[24px]">ID страницы</p>
+                    <p class="text-base-medium text-text-dark-primary leading-[24px]">12831238</p>
+                  </div>
+
+                  <!-- Название -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Название</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Номер -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Номер</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Язык -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Язык</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Skin -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Skin</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Text Section / Секция текста -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Текст</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- Код (textarea) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Код</label>
+                    <div class="relative w-full">
+                      <textarea
+                        class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                        placeholder=""
+                      ></textarea>
+                      <!-- Resize Handle Icon -->
+                      <div class="absolute bottom-1.5 right-2.5 pointer-events-none">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M15 15L21 21M15 21H21V15" stroke="rgba(168, 162, 159, 1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript / Скрипты -->
+  <script>
+    // Load Components / Загрузка компонентов
+    async function loadComponent(containerId, componentPath) {
+      try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+      }
+    }
+
+    // Initialize Components / Инициализация компонентов
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('sidebar-container', '../components/sidebar-partnership.html');
+    });
+  </script>
+</body>
+</html>

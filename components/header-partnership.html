@@ -1,0 +1,210 @@
+<!-- Header Component for Partnership / Заголовок для партнерского раздела -->
+<div class="bg-base-surface-2 w-full border-b border-base-border">
+  <div class="px-6 py-4 w-full">
+    <div
+      id="partnership-header"
+      class="flex items-center justify-between lg:justify-end w-full"
+    >
+      <!-- Logo / Логотип (только для мобильных) -->
+      <img
+        id="logo-partnership"
+        src="../public/images/small_logo.png"
+        alt="FE Платформа"
+        class="h-15 lg:hidden"
+      />
+
+      <!-- Account Buttons / Кнопки аккаунта -->
+      <div id="account-buttons-partnership" class="flex items-center gap-2 lg:justify-end">
+        <!-- Balance Button / Кнопка баланса -->
+        <button
+          class="bg-base-surface-2 border border-base-border rounded-6 px-4 py-0 h-15 flex items-center gap-2.5 hover:bg-base-fill-1 transition-colors"
+        >
+          <img src="../public/icons/coins.svg" alt="Баланс" class="w-6 h-6" />
+          <span class="text-lg-semibold text-text-dark-primary">1 123 ₽</span>
+        </button>
+
+        <!-- Mobile Menu Button / Кнопка мобильного меню -->
+        <button
+          id="mobile-menu-button-partnership"
+          class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200 lg:hidden"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M3 12H21M3 6H21M3 18H21"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Menu Items / Элементы мобильного меню -->
+<div
+  id="mobile-menu-items-partnership"
+  class="fixed inset-0 bg-base-surface-1 z-50 hidden flex flex-col h-full"
+>
+  <!-- Menu Header -->
+  <div
+    class="flex items-center justify-between p-4 border-b border-base-border"
+  >
+    <img
+      src="../public/images/small_logo.png"
+      alt="FE Платформа"
+      class="h-15"
+    />
+    <button
+      id="close-menu-button-partnership"
+      class="bg-base-surface-2 hover:bg-base-fill-1 border border-base-border rounded-6 p-2 transition-colors duration-200"
+    >
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M18 6L6 18M6 6l12 12"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Menu Content -->
+  <div class="flex-1 overflow-auto p-4">
+    <!-- Main Section -->
+    <div class="flex flex-col gap-1 mb-4">
+      <a
+        href="./site-settings.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Настройка сайта</span
+        >
+      </a>
+      <a
+        href="./pages.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Страницы</span
+        >
+      </a>
+      <a
+        href="./news.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Новости</span
+        >
+      </a>
+      <a
+        href="./domain-prices.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Цены на домены</span
+        >
+      </a>
+      <a
+        href="./hosting-prices.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Цены на хостинг</span
+        >
+      </a>
+      <a
+        href="./server-prices.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Цены на серверы</span
+        >
+      </a>
+      <a
+        href="./email-templates.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Шаблоны писем</span
+        >
+      </a>
+      <a
+        href="./promo-codes.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Промокоды</span
+        >
+      </a>
+    </div>
+
+    <!-- Analytics Section -->
+    <div class="flex flex-col gap-1">
+      <h3 class="text-sm font-medium text-text-dark-secondary px-3">
+        Аналитика
+      </h3>
+      <a
+        href="./client-list.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Список клиентов</span
+        >
+      </a>
+      <a
+        href="./partner-list.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Список парнтнеров</span
+        >
+      </a>
+      <a
+        href="./statistics.html"
+        class="flex items-center gap-3 p-3 rounded-lg hover:bg-base-fill-1 transition-colors"
+      >
+        <span class="text-base font-medium text-text-dark-secondary"
+          >Статистика</span
+        >
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mobile Menu Toggle for Partnership / Переключение мобильного меню для партнерства
+  document.addEventListener('DOMContentLoaded', function() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button-partnership');
+    const closeMenuButton = document.getElementById('close-menu-button-partnership');
+    const mobileMenu = document.getElementById('mobile-menu-items-partnership');
+
+    if (mobileMenuButton) {
+      mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.remove('hidden');
+      });
+    }
+
+    if (closeMenuButton) {
+      closeMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.add('hidden');
+      });
+    }
+  });
+</script>

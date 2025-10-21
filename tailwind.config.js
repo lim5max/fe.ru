@@ -29,6 +29,10 @@ module.exports = {
         "state-danger-hover": "#fb657c",
         "state-danger-active": "#cb1a41",
         "state-danger-selected": "#fec3ca",
+        // Badge status colors
+        "state-success-active": "#0C887E",
+        "state-highlight-active": "#8318E7",
+        "state-error-active": "#DC2626",
         // Alpha colors
         alpha: {
           dark: {

@@ -7,156 +7,15 @@
     <link rel="stylesheet" href="../styles.css" />
     <script src="../components/fe-header.js" defer></script>
   </head>
-  <body class="bg-base-surface-1">
-    <!-- Layout Container -->
-    <div class="flex min-h-screen">
-      <!-- Sidebar / Боковая панель -->
-      <div
-        class="bg-base-surface-2 h-screen fixed left-0 top-0 z-10 shrink-0 w-64 border-r border-base-border hidden lg:block"
-        data-name="Sidebar"
-      >
-        <div class="h-full overflow-hidden relative w-64">
-          <!-- Logo Section / Секция логотипа -->
-          <div class="px-6 py-4 border-b border-base-border">
-            <div class="py-3.5">
-              <img
-                src="../public/logo.svg"
-                alt="FE ПЛАТФОРМА"
-                class="h-4 w-auto"
-              />
-            </div>
-          </div>
+  <body class="bg-base-surface-1 font-sans">
 
-          <!-- Navigation Menu / Навигационное меню -->
-          <div class="px-4 py-4 flex-1">
-            <div class="flex flex-col gap-4">
-              <!-- Services Section / Секция услуг -->
-              <div class="flex flex-col gap-1">
-                <div class="px-2 py-1">
-                  <p class="text-sm-medium text-text-dark-tertiary">Услуги</p>
-                </div>
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
 
-                <!-- Domains Menu Item / Пункт меню Домены -->
-                <a
-                  href="../Domains/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer w-full"
-                >
-                  <img
-                    src="../public/icons/globe.svg"
-                    alt="Домены"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >Домены</span
-                  >
-                </a>
-
-                <!-- Hosting Menu Item / Пункт меню Хостинг -->
-                <a
-                  href="../Hosting/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/hosting.svg"
-                    alt="Хостинг"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >Хостинг</span
-                  >
-                </a>
-
-                <!-- VPS/VDS Menu Item / Пункт меню VPS/VDS -->
-                <a
-                  href="../Servers/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/vps-vds.svg"
-                    alt="VPS/VDS"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >VPS/VDS</span
-                  >
-                </a>
-
-                <!-- Servers Menu Item / Пункт меню Серверы -->
-                <a
-                  href="../Servers/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/cloud-server.svg"
-                    alt="Серверы"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >Серверы</span
-                  >
-                </a>
-
-                <!-- Other Services Menu Item / Пункт меню Другие услуги -->
-                <a
-                  href="../Services/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/more.svg"
-                    alt="Другие услуги"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >Другие услуги</span
-                  >
-                </a>
-              </div>
-
-              <!-- Additional Section / Дополнительная секция -->
-              <div class="flex flex-col gap-1">
-                <div class="px-2 py-1">
-                  <p class="text-sm-medium text-text-dark-tertiary">
-                    Дополнительно
-                  </p>
-                </div>
-
-                <!-- Partnership Menu Item / Пункт меню Партнерство -->
-                <a
-                  href="#"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 hover:bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/coins.svg"
-                    alt="Партнерство"
-                    class="w-6 h-6 opacity-60"
-                  />
-                  <span class="text-base-medium text-text-dark-secondary"
-                    >Партнерство</span
-                  >
-                </a>
-
-                <!-- Support Menu Item / Пункт меню Поддержка -->
-                <a
-                  href="../Support/index.html"
-                  class="flex items-center gap-2.5 px-2 py-2.5 rounded-6 bg-base-fill-1 cursor-pointer"
-                >
-                  <img
-                    src="../public/icons/customer-support.svg"
-                    alt="Поддержка"
-                    class="w-6 h-6"
-                  />
-                  <span class="text-base-medium text-text-dark-primary"
-                    >Поддержка</span
-                  >
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Content / Основной контент -->
-      <div class="flex-1 flex flex-col lg:ml-64">
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
         <!-- Header / Шапка сайта -->
         <div class="bg-base-surface-2 w-full border-b border-base-border">
           <div class="px-6 py-4 w-full">
@@ -734,6 +593,25 @@
         // Redirect to support page after successful submission
         alert("Ваш вопрос успешно отправлен!");
         window.location.href = "index.html";
+      });
+    </script>
+
+    <!-- Load Sidebar Component / Загрузка компонента Sidebar -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener('DOMContentLoaded', async function() {
+        await loadComponent('sidebar-container', '../components/sidebar.html');
       });
     </script>
   </body>

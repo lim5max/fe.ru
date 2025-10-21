@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Партнерство - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <script src="../components/fe-header.js" defer></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header></fe-header>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-15 w-full lg:pl-[300px]"
+        >
+          <div class="max-w-[880px] mx-auto flex flex-col gap-10 w-full pb-17">
+            <!-- Page Header / Заголовок страницы -->
+            <div class="flex gap-2 items-start w-full">
+              <h1 class="text-4xl-semibold text-text-dark-primary">
+                Партнерство
+              </h1>
+            </div>
+
+            <!-- Content Sections / Контентные секции -->
+            <div class="flex flex-col gap-9 w-full">
+              <!-- Создание партнерского сайта -->
+              <div class="flex flex-col gap-7 w-full">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Создание партнерского сайта
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  При вступлении в партнерскую программу партнеру создается
+                  отдельный сайт. После активации партнерский сайт сразу же
+                  начнет работу по временному адресу и сможет принимать клиентов
+                  для регистрации.
+                </p>
+              </div>
+
+              <!-- Начало работы -->
+              <div class="flex flex-col gap-7 w-full">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Начало работы
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  Для начала работы достаточно только активировать партнерскую
+                  программу и предлагать ссылку на ваш сайт потенциальным
+                  клиентам.
+                </p>
+              </div>
+
+              <!-- Важные ограничения -->
+              <div class="flex flex-col gap-7 w-full">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Важные ограничения
+                </p>
+                <div
+                  class="text-base-regular text-text-dark-secondary leading-6"
+                >
+                  <ul class="list-disc ml-6">
+                    <li>Все виды спама запрещены</li>
+                    <li>
+                      Запрещается рекламировать сайт незаконными способами
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Настройка и персонализация -->
+              <div class="flex items-center justify-center pt-1.5 w-full">
+                <h2 class="text-2xl-medium text-text-dark-primary flex-1">
+                  Настройка и персонализация
+                </h2>
+              </div>
+
+              <!-- Домен и дизайн -->
+              <div class="flex flex-col gap-7">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Домен и дизайн
+                </p>
+                <div
+                  class="text-base-regular text-text-dark-secondary leading-6"
+                >
+                  <p class="mb-0">Партнер может:</p>
+                  <ul class="list-disc ml-6">
+                    <li>Подключить свой домен к партнерскому сайту</li>
+                    <li>
+                      Полностью изменить дизайн под себя:
+                      <ul class="list-disc ml-6">
+                        <li>Дизайн самого сайта</li>
+                        <li>Дизайн биллинговой части (личного кабинета)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Управление клиентами -->
+              <div class="flex flex-col gap-7">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Управление клиентами
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  Для каждого клиента партнера создается личный кабинет, где он
+                  может управлять всеми услугами.
+                </p>
+              </div>
+
+              <!-- Отслеживание финансов -->
+              <div class="flex flex-col gap-7">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Отслеживание финансов
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  Партнер через "историю платежей" может отслеживать все
+                  финансовые транзакции своих клиентов.
+                </p>
+              </div>
+
+              <!-- Просмотр клиентов -->
+              <div class="flex flex-col gap-7">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Просмотр клиентов
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  У партнера есть возможность просматривать список клиентов.
+                </p>
+              </div>
+
+              <!-- Тарифные планы -->
+              <div class="flex flex-col gap-7 w-full">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Тарифные планы
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  Названия тарифов для клиентов партнера могут отличаться. Мы
+                  предлагаем на выбор партнеру несколько тарифных линеек по
+                  хостингу.<br />
+                  Для настройки тарифов: обратитесь в службу поддержки.
+                </p>
+              </div>
+
+              <!-- Альтернативный способ привлечения клиентов -->
+              <div class="flex flex-col gap-7 w-full">
+                <p class="text-xl-medium text-text-dark-primary">
+                  Альтернативный способ привлечения клиентов
+                </p>
+                <p class="text-base-regular text-text-dark-secondary leading-6">
+                  Вы также можете привлекать клиентов без активации партнерской
+                  программы по ссылке:
+                </p>
+              </div>
+            </div>
+
+            <!-- CTA Button / Кнопка призыва к действию -->
+            <button
+              class="bg-state-brand-active hover:bg-state-brand-hover active:bg-state-brand-active transition-colors border border-alpha-dark-200 rounded-6 px-10 h-16 flex items-center gap-5 justify-center w-full md:w-auto"
+            >
+              <img
+                src="../public/icons/wallet-03.svg"
+                alt="Стать партнером"
+                class="w-8 h-8 brightness-0 invert"
+              />
+              <span class="text-xl-semibold text-text-light-primary"
+                >Стать партнером</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent("sidebar-container", "../components/sidebar.html");
+      });
+    </script>
+  </body>
+</html>
