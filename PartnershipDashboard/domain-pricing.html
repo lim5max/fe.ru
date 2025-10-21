@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Управление стоимостью доменов - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div
+            class="flex flex-col gap-6 grow items-center justify-start w-full"
+          >
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div
+              class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full"
+            >
+              <h1 class="text-2xl-semibold text-text-dark-primary">
+                Управление стоимостью доменов
+              </h1>
+
+              <!-- Tariff Settings Section / Секция настроек тарифа -->
+              <div
+                class="w-full bg-white border border-base-border rounded-6 p-6"
+              >
+                <!-- Tariff Label / Надпись тарифа -->
+                <div class="flex items-center gap-2 mb-4">
+                  <span class="text-base-medium text-text-dark-secondary"
+                    >Тариф:</span
+                  >
+                  <span class="text-base-medium text-state-brand-active"
+                    >стандартный</span
+                  >
+                </div>
+
+                <!-- Input Fields / Поля ввода -->
+                <div class="flex flex-col gap-4 mb-6">
+                  <!-- Регистрации дороже себестоимости -->
+                  <div class="flex items-center gap-6">
+                    <label class="text-base-regular text-text-dark-secondary"
+                      >Регистрации дороже себестоимости на</label
+                    >
+                    <div class="relative w-24">
+                      <input
+                        type="number"
+                        class="w-full px-3 h-11 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors pr-8"
+                        placeholder="0"
+                        value=""
+                      />
+                      <span
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-base-medium text-text-dark-secondary"
+                        >%</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Продления дороже себестоимости -->
+                  <div class="flex items-center gap-6">
+                    <label class="text-base-regular text-text-dark-secondary"
+                      >Продления дороже себестоимости на</label
+                    >
+                    <div class="relative w-24">
+                      <input
+                        type="number"
+                        class="w-full px-3 h-11 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors pr-8"
+                        placeholder="0"
+                        value=""
+                      />
+                      <span
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-base-medium text-text-dark-secondary"
+                        >%</span
+                      >
+                    </div>
+                  </div>
+
+                  <!-- Сколько отдавать партнеру -->
+                  <div class="flex items-center gap-6">
+                    <label class="text-base-regular text-text-dark-secondary"
+                      >Сколько отдавать партнеру от прибыли</label
+                    >
+                    <div class="relative w-24">
+                      <input
+                        type="number"
+                        class="w-full px-3 h-11 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors pr-8"
+                        placeholder="0"
+                        value=""
+                      />
+                      <span
+                        class="absolute right-3 top-1/2 -translate-y-1/2 text-base-medium text-text-dark-secondary"
+                        >%</span
+                      >
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Save Button / Кнопка сохранения -->
+                <button
+                  class="bg-base-surface-2 border border-base-border rounded-6 px-7 h-12 hover:bg-base-fill-1 transition-colors"
+                >
+                  <span class="text-sm-semibold text-text-dark-secondary"
+                    >Сохранить</span
+                  >
+                </button>
+              </div>
+
+              <!-- Search Bar / Строка поиска -->
+              <div class="w-full max-w-md">
+                <div class="relative">
+                  <div
+                    class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                  >
+                    <img
+                      src="../public/icons/search.svg"
+                      alt="Поиск"
+                      class="h-6 w-6"
+                    />
+                  </div>
+                  <input
+                    type="text"
+                    id="domain-pricing-search"
+                    placeholder="Поиск"
+                    class="input w-full pl-15"
+                  />
+                </div>
+              </div>
+
+              <!-- Pricing Table / Таблица цен -->
+              <!-- Desktop Table / Десктопная таблица -->
+              <div
+                class="w-full border border-base-border rounded-6 overflow-x-auto hidden md:block"
+              >
+                <table class="w-full domain-pricing-table">
+                  <!-- Table Header / Заголовок таблицы -->
+                  <thead>
+                    <tr class="bg-base-surface-2 border-b border-base-border">
+                      <th
+                        class="text-left px-7 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[100px]"
+                      >
+                        Зона
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Состояние
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Себестоимость регистрации, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Стоимость регистрации, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Себестоимость продления, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Стоимость продления, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[100px]"
+                      >
+                        Валюта
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Валюта на сайте
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Реферралу, ₽
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- Table Body / Тело таблицы -->
+                  <tbody id="pricing-table-body">
+                    <!-- Rows generated dynamically / Строки генерируются динамически -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Mobile Table / Мобильная таблица -->
+              <div
+                id="pricing-table-mobile"
+                class="block md:hidden w-full border border-base-border rounded-6 overflow-hidden"
+              >
+                <!-- Mobile table content will be inserted here by JavaScript -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Domain Pricing Data / Данные цен на домены
+      const pricingData = [
+        {
+          zone: "ru",
+          enabled: true,
+          costRegistration: "88",
+          priceRegistration: "108,9",
+          costRenewal: "199",
+          priceRenewal: "499",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "photography",
+          enabled: true,
+          costRegistration: "11",
+          priceRegistration: "649",
+          costRenewal: "590",
+          priceRenewal: "499",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "рус",
+          enabled: true,
+          costRegistration: "324",
+          priceRegistration: "108,9",
+          costRenewal: "199",
+          priceRenewal: "590",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "net",
+          enabled: true,
+          costRegistration: "22",
+          priceRegistration: "2748,9",
+          costRenewal: "2499",
+          priceRenewal: "2499",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "org",
+          enabled: true,
+          costRegistration: "43",
+          priceRegistration: "108,9",
+          costRenewal: "3499",
+          priceRenewal: "3499",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "biz",
+          enabled: true,
+          costRegistration: "43",
+          priceRegistration: "2198,9",
+          costRenewal: "199",
+          priceRenewal: "3499",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "com",
+          enabled: true,
+          costRegistration: "56",
+          priceRegistration: "890",
+          costRenewal: "890",
+          priceRenewal: "1200",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "info",
+          enabled: false,
+          costRegistration: "78",
+          priceRegistration: "990",
+          costRenewal: "990",
+          priceRenewal: "1100",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "pro",
+          enabled: true,
+          costRegistration: "120",
+          priceRegistration: "1500",
+          costRenewal: "1400",
+          priceRenewal: "1800",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+        {
+          zone: "москва",
+          enabled: true,
+          costRegistration: "95",
+          priceRegistration: "450",
+          costRenewal: "450",
+          priceRenewal: "550",
+          currency: "RUB",
+          siteCurrency: "RUB",
+          referral: "RUB",
+        },
+      ];
+
+      let currentPricingData = pricingData;
+
+      // Render Table / Рендер таблицы
+      function renderPricingTable(data = currentPricingData) {
+        const tbody = document.getElementById("pricing-table-body");
+        tbody.innerHTML = data
+          .map(
+            (item, index) => `
+        <tr class="bg-white border-b border-base-border hover:bg-base-surface-2 transition-colors">
+          <td class="px-7 py-4 text-sm-medium text-text-dark-secondary">
+            ${item.zone}
+          </td>
+          <td class="px-3 py-4">
+            <div class="flex items-center justify-start">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="toggle-${index}" class="sr-only peer" ${
+              item.enabled ? "checked" : ""
+            }>
+                <div class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+              </label>
+            </div>
+          </td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.costRegistration
+          }</td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.priceRegistration
+          }</td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.costRenewal
+          }</td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.priceRenewal
+          }</td>
+          <td class="px-3 py-4">
+            <div class="dropdown-container relative">
+              <div class="currency-dropdown-trigger bg-white box-border flex  h-13 items-center justify-between min-h-13 pl-7 pr-7 py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1">
+                <span class="text-sm-medium text-text-dark-secondary">${
+                  item.currency
+                }</span>
+                <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-5 h-5" />
+              </div>
+              <div class="currency-dropdown-menu dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                <div class="py-1">
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB">RUB</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD">USD</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR">EUR</button>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="px-3 py-4">
+            <div class="dropdown-container relative">
+              <div class="site-currency-dropdown-trigger bg-white box-border flex  h-13 items-center justify-between min-h-13 pl-7 pr-7 py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1">
+                <span class="text-sm-medium text-text-dark-secondary">${
+                  item.siteCurrency
+                }</span>
+                <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-5 h-5" />
+              </div>
+              <div class="site-currency-dropdown-menu dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                <div class="py-1">
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB">RUB</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD">USD</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR">EUR</button>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="px-3 py-4">
+            <div class="dropdown-container relative">
+              <div class="referral-dropdown-trigger bg-white box-border flex  h-13 items-center justify-between min-h-13 pl-7 pr-7 py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1">
+                <span class="text-sm-medium text-text-dark-secondary">${
+                  item.referral
+                }</span>
+                <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-5 h-5" />
+              </div>
+              <div class="referral-dropdown-menu dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                <div class="py-1">
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB">RUB</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD">USD</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR">EUR</button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      `
+          )
+          .join("");
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Render Mobile Table / Рендер мобильной таблицы
+      function renderMobileTable(data = currentPricingData) {
+        const container = document.getElementById("pricing-table-mobile");
+        let html = "";
+
+        data.forEach((item, index) => {
+          html += `
+          <div class="bg-white border-b border-base-border last:border-b-0 p-4">
+            <!-- Zone Header / Заголовок зоны -->
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base font-semibold text-text-dark-primary">${
+                item.zone
+              }</h3>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="toggle-mobile-${index}" class="sr-only peer toggle-mobile" data-index="${index}" ${
+            item.enabled ? "checked" : ""
+          }>
+                <div class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+              </label>
+            </div>
+
+            <!-- Pricing Info / Информация о ценах -->
+            <div class="flex flex-col gap-2">
+              <!-- Регистрация -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Стоимость регистрации:</span>
+                <span class="text-sm-medium text-text-dark-primary">${
+                  item.priceRegistration
+                } ₽</span>
+              </div>
+              <!-- Продление -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Стоимость продления:</span>
+                <span class="text-sm-medium text-text-dark-primary">${
+                  item.priceRenewal
+                } ₽</span>
+              </div>
+              <!-- Валюта -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Валюта:</span>
+                <div class="dropdown-container relative">
+                  <div class="currency-dropdown-trigger-mobile bg-white box-border flex gap-[6px] h-[32px] items-center justify-start min-h-[32px] pl-[10px] pr-[8px] py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1" data-index="${index}">
+                    <span class="text-sm-medium text-text-dark-secondary">${
+                      item.currency
+                    }</span>
+                    <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-3 h-3" />
+                  </div>
+                  <div class="currency-dropdown-menu-mobile dropdown-menu absolute top-full right-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                    <div class="py-1">
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB" data-index="${index}" data-field="currency">RUB</button>
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD" data-index="${index}" data-field="currency">USD</button>
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR" data-index="${index}" data-field="currency">EUR</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+        renderPricingTable();
+        renderMobileTable();
+      });
+
+      // Search functionality / Функциональность поиска
+      const searchInput = document.getElementById("domain-pricing-search");
+      if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+          const searchTerm = e.target.value.toLowerCase();
+          if (searchTerm === "") {
+            currentPricingData = pricingData;
+          } else {
+            currentPricingData = pricingData.filter((item) =>
+              item.zone.toLowerCase().includes(searchTerm)
+            );
+          }
+          renderPricingTable(currentPricingData);
+          renderMobileTable(currentPricingData);
+        });
+      }
+
+      // Handle toggle switches / Обработка свитчеров
+      document.addEventListener("change", (e) => {
+        if (
+          e.target.matches('[id^="toggle-"]') &&
+          !e.target.classList.contains("toggle-mobile")
+        ) {
+          const toggleId = e.target.id;
+          const index = toggleId.replace("toggle-", "");
+          const isChecked = e.target.checked;
+
+          currentPricingData[index].enabled = isChecked;
+          console.log(
+            `Toggle for ${currentPricingData[index].zone}: ${
+              isChecked ? "ON" : "OFF"
+            }`
+          );
+        }
+
+        // Handle mobile toggles
+        if (e.target.classList.contains("toggle-mobile")) {
+          const index = e.target.dataset.index;
+          const isChecked = e.target.checked;
+
+          currentPricingData[index].enabled = isChecked;
+          console.log(
+            `Mobile toggle for ${currentPricingData[index].zone}: ${
+              isChecked ? "ON" : "OFF"
+            }`
+          );
+        }
+      });
+
+      // Handle dropdown clicks / Обработка выпадающих списков
+      document.addEventListener("click", (e) => {
+        // Currency dropdown
+        if (e.target.closest(".currency-dropdown-trigger")) {
+          const trigger = e.target.closest(".currency-dropdown-trigger");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Site currency dropdown
+        if (e.target.closest(".site-currency-dropdown-trigger")) {
+          const trigger = e.target.closest(".site-currency-dropdown-trigger");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Referral dropdown
+        if (e.target.closest(".referral-dropdown-trigger")) {
+          const trigger = e.target.closest(".referral-dropdown-trigger");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Dropdown item selection
+        if (e.target.classList.contains("dropdown-item")) {
+          const value = e.target.dataset.value;
+          const trigger = e.target
+            .closest(".dropdown-container")
+            .querySelector('[class$="-trigger"]');
+          const span = trigger.querySelector("span");
+          span.textContent = value;
+
+          // Hide dropdown
+          e.target.closest(".dropdown-menu").classList.add("hidden");
+
+          console.log(`Selected currency: ${value}`);
+        }
+
+        // Mobile currency dropdown
+        if (e.target.closest(".currency-dropdown-trigger-mobile")) {
+          const trigger = e.target.closest(".currency-dropdown-trigger-mobile");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Mobile dropdown item selection
+        if (e.target.classList.contains("dropdown-item-mobile")) {
+          const value = e.target.dataset.value;
+          const index = e.target.dataset.index;
+          const field = e.target.dataset.field;
+          const trigger = e.target
+            .closest(".dropdown-container")
+            .querySelector('[class$="-trigger-mobile"]');
+          const span = trigger.querySelector("span");
+          span.textContent = value;
+
+          // Update data
+          if (field === "currency") {
+            currentPricingData[index].currency = value;
+          }
+
+          // Hide dropdown
+          e.target.closest(".dropdown-menu").classList.add("hidden");
+
+          console.log(
+            `Mobile selected currency: ${value} for ${currentPricingData[index].zone}`
+          );
+        }
+
+        // Close dropdowns when clicking outside
+        if (!e.target.closest(".dropdown-container")) {
+          document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+            menu.classList.add("hidden");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

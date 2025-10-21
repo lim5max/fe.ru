@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Статистика - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-11 w-full shadow-[0.5px_1.5px_7px_0px_rgba(26,26,26,0.08)]"
+        >
+          <div class="flex flex-col gap-6 items-center justify-start w-full">
+            <!-- Page Container / Контейнер страницы -->
+            <div class="flex flex-col gap-6 items-start w-full max-w-[544px]">
+              <!-- Page Title / Заголовок страницы -->
+              <div class="flex flex-col gap-3 items-start w-full">
+                <h1 class="text-2xl-semibold text-black">Статистика</h1>
+              </div>
+
+              <!-- Tabs Toggle / Переключатель вкладок -->
+              <div
+                class="bg-base-fill-1 flex gap-0.5 items-center overflow-hidden p-0.5 rounded-6 w-full"
+              >
+                <button
+                  class="flex-1 bg-base-surface-1 border border-base-border rounded-5 px-3 py-0 h-14 flex items-center justify-center cursor-pointer text-sm-semibold text-text-dark-primary hover:bg-base-fill-1 transition-colors tab-button active"
+                  data-period="all"
+                >
+                  все время
+                </button>
+                <button
+                  class="flex-1 rounded-5 px-3 py-0 h-14 flex items-center justify-center cursor-pointer text-sm-medium text-text-dark-tertiary hover:bg-base-fill-2 transition-colors tab-button"
+                  data-period="today"
+                >
+                  сегодня
+                </button>
+                <button
+                  class="flex-1 rounded-5 px-3 py-0 h-14 flex items-center justify-center cursor-pointer text-sm-medium text-text-dark-tertiary hover:bg-base-fill-2 transition-colors tab-button"
+                  data-period="month"
+                >
+                  текущий месяц
+                </button>
+                <button
+                  class="flex-1 rounded-5 px-3 py-0 h-14 flex items-center justify-center cursor-pointer text-sm-medium text-text-dark-tertiary hover:bg-base-fill-2 transition-colors tab-button"
+                  data-period="lastMonth"
+                >
+                  прошлый месяц
+                </button>
+              </div>
+
+              <!-- Statistics Cards / Карточки статистики -->
+              <div
+                id="stats-container"
+                class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Данные статистики / Statistics Data
+      const statisticsData = {
+        all: [
+          { label: "Хостинг", value: "12 ₽" },
+          { label: "Серверы", value: "4 214 ₽" },
+          { label: "Домены", value: "124 ₽" },
+        ],
+        today: [
+          { label: "Хостинг", value: "0 ₽" },
+          { label: "Серверы", value: "312 ₽" },
+          { label: "Домены", value: "15 ₽" },
+        ],
+        month: [
+          { label: "Хостинг", value: "8 ₽" },
+          { label: "Серверы", value: "2 124 ₽" },
+          { label: "Домены", value: "89 ₽" },
+        ],
+        lastMonth: [
+          { label: "Хостинг", value: "4 ₽" },
+          { label: "Серверы", value: "2 090 ₽" },
+          { label: "Домены", value: "35 ₽" },
+        ],
+      };
+
+      // Current selected period / Текущий выбранный период
+      let currentPeriod = "all";
+
+      // Render Statistics Cards / Рендеринг карточек статистики
+      function renderStatistics(period) {
+        const container = document.getElementById("stats-container");
+        if (!container) return;
+
+        const data = statisticsData[period] || statisticsData.all;
+
+        container.innerHTML = data
+          .map(
+            (stat) => `
+          <div class="bg-base-surface-2 border border-base-border rounded-6 h-24 flex flex-col gap-2.5 items-start justify-center px-6 pb-5 pt-4">
+            <p class="text-base-medium text-text-dark-secondary">
+              ${stat.label}
+            </p>
+            <p class="text-2xl-semibold text-text-dark-primary">
+              ${stat.value}
+            </p>
+          </div>
+        `
+          )
+          .join("");
+      }
+
+      // Initialize Tabs / Инициализация вкладок
+      function initTabs() {
+        const tabButtons = document.querySelectorAll(".tab-button");
+
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active class from all buttons
+            tabButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "bg-base-surface-1",
+                "border",
+                "border-base-border",
+                "text-sm-semibold",
+                "text-text-dark-primary"
+              );
+              btn.classList.add("text-sm-medium", "text-text-dark-tertiary");
+            });
+
+            // Add active class to clicked button
+            this.classList.add(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-sm-semibold",
+              "text-text-dark-primary"
+            );
+            this.classList.remove("text-sm-medium", "text-text-dark-tertiary");
+
+            // Update statistics
+            currentPeriod = this.dataset.period;
+            renderStatistics(currentPeriod);
+          });
+        });
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize / Инициализация
+      document.addEventListener("DOMContentLoaded", async function () {
+        // Load sidebar
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+
+        // Render initial statistics
+        renderStatistics(currentPeriod);
+
+        // Initialize tabs
+        initTabs();
+      });
+    </script>
+  </body>
+</html>

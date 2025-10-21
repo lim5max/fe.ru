@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Страницы партнера - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div
+            class="flex flex-col gap-6 grow items-center justify-start w-full"
+          >
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div
+              class="content-stretch flex flex-col gap-8 items-start relative shrink-0 w-full max-w-[880px]"
+            >
+              <!-- Title and Description / Заголовок и описание -->
+              <div
+                class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full"
+              >
+                <h1 class="text-2xl-semibold text-text-dark-primary">
+                  Страницы партнера
+                </h1>
+                <div
+                  class="text-base-regular text-text-dark-secondary leading-[24px]"
+                >
+                  <p class="mb-0">
+                    Для адресации страницы используйте следующую ссылку:
+                  </p>
+                  <p class="mb-0">
+                    https://ВАШ_ПАРТНЕРСКИЙ_САЙТ/page.php?pageid=NUM
+                  </p>
+                  <p>где NUM - номер страницы.</p>
+                </div>
+              </div>
+
+              <!-- Table Section / Секция таблицы -->
+              <div
+                class="w-full border border-base-border rounded-6 overflow-hidden"
+              >
+                <table class="w-full pages-table">
+                  <!-- Table Header / Заголовок таблицы -->
+                  <thead>
+                    <tr class="bg-base-surface-2 border-b border-base-border">
+                      <th
+                        class="text-left px-7 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[220px]"
+                      >
+                        Страница
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[80px]"
+                      >
+                        Язык
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[370px]"
+                      >
+                        Действия
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[210px]"
+                      ></th>
+                    </tr>
+                  </thead>
+                  <!-- Table Body / Тело таблицы -->
+                  <tbody id="pages-table-body">
+                    <!-- Rows generated dynamically / Строки генерируются динамически -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Add Page Button / Кнопка добавления страницы -->
+              <div class="flex items-center justify-center w-full">
+                <button
+                  class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-6 px-4 h-14 flex items-center gap-2 hover:bg-state-brand-hover transition-colors"
+                >
+                  <img
+                    src="../public/icons/plus-sign-white.svg"
+                    class="w-7 h-7"
+                    alt=""
+                  />
+                  <span class="text-sm-semibold text-text-light-primary"
+                    >Добавить страницу</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Pages Data / Данные страниц
+      const pagesData = [
+        { id: 4, name: "whois", lang: "en" },
+        { id: 4, name: "whois", lang: "ru" },
+        { id: 41, name: "worldvps", lang: "ru" },
+        { id: 7, name: "about", lang: "ru" },
+        { id: 9, name: "uslugi", lang: "ru" },
+        { id: 10, name: "partners", lang: "en" },
+      ];
+
+      // Render Table / Рендер таблицы
+      function renderPagesTable() {
+        const tbody = document.getElementById("pages-table-body");
+        tbody.innerHTML = pagesData
+          .map(
+            (page) => `
+          <tr class="bg-white border-b border-base-border hover:bg-base-surface-2 transition-colors">
+            <td class="px-7 py-4 text-sm-medium text-text-dark-secondary">
+              (№${page.id})${page.name}
+            </td>
+            <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">
+              ${page.lang}
+            </td>
+            <td class="px-3 py-4">
+              <div class="flex items-center gap-2.5">
+                <button class="bg-base-surface-2 border border-base-border rounded-6 px-7 h-12 hover:bg-base-fill-1 transition-colors">
+                  <span class="text-sm-semibold text-text-dark-primary">Изменить</span>
+                </button>
+                <button class="bg-base-surface-2 border border-base-border rounded-6 px-7 h-12 hover:bg-base-fill-1 transition-colors">
+                  <span class="text-sm-semibold text-text-dark-primary">Обновить</span>
+                </button>
+              </div>
+            </td>
+            <td class="px-3 py-5">
+              <button class="bg-state-danger-active rounded-6 px-7 h-12 hover:bg-state-danger-hover transition-colors">
+                <span class="text-sm-semibold text-text-light-primary">Удалить</span>
+              </button>
+            </td>
+          </tr>
+        `
+          )
+          .join("");
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+        renderPagesTable();
+      });
+    </script>
+  </body>
+</html>

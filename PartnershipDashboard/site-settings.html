@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Настройки партнерского сайта - FE Платформа</title>
+  <link href="../styles.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <!-- Header Web Component -->
+  <script src="../components/fe-header-partnership.js"></script>
+</head>
+<body class="bg-base-surface-1 font-sans">
+
+  <!-- Main Container / Главный контейнер -->
+  <div class="min-h-screen flex">
+    <!-- Sidebar / Боковая панель -->
+    <div id="sidebar-container" class="hidden lg:block"></div>
+
+    <!-- Main Content Area / Основная область контента -->
+    <div class="flex flex-col grow w-full">
+      <!-- Header / Заголовок -->
+      <fe-header-partnership></fe-header-partnership>
+
+      <!-- Page Content / Содержимое страницы -->
+      <div class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]">
+        <div class="flex flex-col gap-6 grow items-center justify-start w-full">
+
+          <!-- Page Header Section / Секция заголовка страницы -->
+          <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full max-w-[880px]">
+            <h1 class="text-2xl-semibold text-text-dark-primary">Настройки партнерcкого сайта</h1>
+
+            <!-- Общая информация Section / Секция Общая информация -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Общая информация</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- ID аккаунта (read-only) -->
+                  <div class="content-stretch flex flex-col items-start relative shrink-0 w-full leading-[0]">
+                    <p class="text-base-regular text-text-dark-secondary leading-[24px]">ID аккаунта</p>
+                    <p class="text-base-medium text-text-dark-primary leading-[24px]">12831238</p>
+                  </div>
+
+                  <!-- Название сайта -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Название сайта</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Имя основного домена -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Имя основного домена</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Имя дополнительного домена -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Имя дополнительного домена</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Язык по-умолчанию -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Язык по-умолчанию</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Контакты и ссылки Section / Секция Контакты и ссылки -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Контакты и ссылки</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- Контактный e-mail -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Контактный e-mail</label>
+                    <input
+                      type="email"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Имя e-mail -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Имя e-mail</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Дополнительный e-mail -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Дополнительный e-mail</label>
+                    <input
+                      type="email"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Ссылка на Личный кабинет -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Ссылка на Личный кабинет</label>
+                    <input
+                      type="url"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Referal url -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Referal url</label>
+                    <input
+                      type="url"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Серверная конфигурация Section / Секция Серверная конфигурация -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Серверная конфигурация</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- DNS (textarea) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">DNS</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- Префикс логина -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Префикс логина</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Постфикс сервера -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Постфикс сервера</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Группа хостинга (select) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Группа хостинга</label>
+                    <div class="custom-dropdown relative w-full">
+                      <div
+                        id="hosting-group-trigger"
+                        class="custom-dropdown-trigger w-full px-4 h-15 bg-white border border-base-border rounded-6 text-base-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                      >
+                        <span id="hosting-group-selected-text">По умолчанию</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 9L12 15L18 9" stroke="rgba(26, 26, 26, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+
+                      <div id="hosting-group-menu" class="custom-dropdown-menu hidden">
+                        <div class="py-1">
+                          <div class="custom-dropdown-item selected text-base-medium text-text-dark-secondary px-4 py-2" data-value="default">
+                            По умолчанию
+                          </div>
+                          <div class="custom-dropdown-item text-base-medium text-text-dark-secondary px-4 py-2" data-value="group1">
+                            Группа 1
+                          </div>
+                          <div class="custom-dropdown-item text-base-medium text-text-dark-secondary px-4 py-2" data-value="group2">
+                            Группа 2
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- ID free-сервера -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">ID free-сервера</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Тариф для субпартнера (select) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Тариф для субпартнера</label>
+                    <div class="custom-dropdown relative w-full">
+                      <div
+                        id="tariff-trigger"
+                        class="custom-dropdown-trigger w-full px-4 h-15 bg-white border border-base-border rounded-6 text-base-medium text-text-dark-secondary hover:bg-base-fill-1 transition-colors flex items-center justify-between cursor-pointer"
+                      >
+                        <span id="tariff-selected-text">По умолчанию</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M6 9L12 15L18 9" stroke="rgba(26, 26, 26, 0.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                      </div>
+
+                      <div id="tariff-menu" class="custom-dropdown-menu hidden">
+                        <div class="py-1">
+                          <div class="custom-dropdown-item selected text-base-medium text-text-dark-secondary px-4 py-2" data-value="default">
+                            По умолчанию
+                          </div>
+                          <div class="custom-dropdown-item text-base-medium text-text-dark-secondary px-4 py-2" data-value="tariff1">
+                            Тариф 1
+                          </div>
+                          <div class="custom-dropdown-item text-base-medium text-text-dark-secondary px-4 py-2" data-value="tariff2">
+                            Тариф 2
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Внешний вид и шаблоны Section / Секция Внешний вид и шаблоны -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Внешний вид и шаблоны</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- Тип дизайна -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Тип дизайна</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- ID партнера (lparid) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">ID партнера (lparid):</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Цветовая схема (color) -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start justify-center relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Цветовая схема (color):</label>
+                    <input
+                      type="text"
+                      class="w-full px-4 h-15 border border-base-border rounded-6 text-base-medium text-text-dark-secondary focus:outline-none focus:border-state-brand-active transition-colors"
+                      placeholder=""
+                    />
+                  </div>
+
+                  <!-- Готовые шаблоны для партнерского сайта -->
+                  <div class="content-stretch flex flex-col gap-3 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Готовые шаблоны для партнерского сайта</label>
+                    <div class="flex flex-col gap-2.5 w-full">
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №1</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №2</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №3</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №4</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №5</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №6</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №7</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №8</a>
+                      <a href="#" class="text-base-medium text-state-brand-active leading-[24px] hover:underline">Установить шаблон №9</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Стили и меню Section / Секция Стили и меню -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Стили и меню</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- Style -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Style</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- Menu: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Menu:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- Меню партнера: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Меню партнера:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- Menu lte: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Menu lte:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- Между строчками меню: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">Между строчками меню:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Пользовательские блоки Section / Секция Пользовательские блоки -->
+            <div class="content-stretch flex flex-col gap-2 items-start relative shrink-0 w-full pt-4">
+              <!-- Divider -->
+              <div class="w-full h-px border-t border-base-border"></div>
+
+              <!-- Content Row / Строка контента -->
+              <div class="content-stretch flex flex-col lg:flex-row items-start justify-between relative shrink-0 w-full gap-4 lg:gap-0 pt-4">
+                <!-- Label / Заголовок -->
+                <div class="flex flex-col justify-center relative shrink-0 w-full lg:w-auto">
+                  <h2 class="text-base-semibold text-text-dark-primary">Пользовательские блоки:</h2>
+                </div>
+
+                <!-- Form Fields / Поля формы -->
+                <div class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full lg:w-[456px]">
+                  <!-- {head2}: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">{head2}:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- {foot2}: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">{foot2}:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- {head3}: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">{head3}:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+
+                  <!-- {foot3}: -->
+                  <div class="content-stretch flex flex-col gap-2.5 items-start relative shrink-0 w-full">
+                    <label class="text-base-regular text-text-dark-secondary w-full leading-[24px]">{foot3}:</label>
+                    <textarea
+                      class="bg-base-surface-1 border border-base-border rounded-6 w-full h-[72px] px-4 pt-2.5 pb-0 pr-3 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-base-medium text-text-dark-secondary"
+                      placeholder=""
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript / Скрипты -->
+  <script>
+    // Load Components / Загрузка компонентов
+    async function loadComponent(containerId, componentPath) {
+      try {
+        const response = await fetch(componentPath);
+        const html = await response.text();
+        document.getElementById(containerId).innerHTML = html;
+      } catch (error) {
+        console.error(`Error loading component ${componentPath}:`, error);
+      }
+    }
+
+    // Initialize Components / Инициализация компонентов
+    document.addEventListener('DOMContentLoaded', async function() {
+      await loadComponent('sidebar-container', '../components/sidebar-partnership.html');
+
+      // Initialize custom dropdowns / Инициализация кастомных выпадающих списков
+      initCustomDropdown('hosting-group-trigger', 'hosting-group-menu', 'hosting-group-selected-text');
+      initCustomDropdown('tariff-trigger', 'tariff-menu', 'tariff-selected-text');
+    });
+
+    // Custom dropdown initialization function / Функция инициализации кастомного выпадающего списка
+    function initCustomDropdown(triggerId, menuId, selectedTextId) {
+      const trigger = document.getElementById(triggerId);
+      const menu = document.getElementById(menuId);
+      const selectedText = document.getElementById(selectedTextId);
+
+      if (!trigger || !menu || !selectedText) return;
+
+      // Toggle dropdown on trigger click / Переключение выпадающего списка при клике
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        // Close all other dropdowns first / Сначала закрыть все другие выпадающие списки
+        document.querySelectorAll('.custom-dropdown-menu').forEach(m => {
+          if (m !== menu) m.classList.add('hidden');
+        });
+        menu.classList.toggle('hidden');
+      });
+
+      // Handle dropdown item selection / Обработка выбора элемента
+      menu.querySelectorAll('.custom-dropdown-item').forEach((item) => {
+        item.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectedText.textContent = item.textContent.trim();
+          menu.classList.add('hidden');
+
+          // Update selected state / Обновление состояния выбранного элемента
+          menu.querySelectorAll('.custom-dropdown-item').forEach((i) => {
+            i.classList.remove('selected');
+          });
+          item.classList.add('selected');
+        });
+      });
+
+      // Close dropdown when clicking outside / Закрытие при клике вне элемента
+      document.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    }
+  </script>
+</body>
+</html>

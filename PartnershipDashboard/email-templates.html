@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Шаблоны писем - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+    <!-- Modal Web Component -->
+    <script src="../components/fe-center-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div
+            class="flex flex-col gap-6 grow items-center justify-start w-full"
+          >
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div
+              class="content-stretch flex flex-col gap-6 items-start relative shrink-0 w-full max-w-[880px]"
+            >
+              <!-- Title / Заголовок -->
+              <div class="flex flex-col gap-3 items-start w-full">
+                <h1 class="text-2xl-semibold text-text-dark-primary">
+                  Шаблоны писем
+                </h1>
+              </div>
+
+              <!-- Table Section / Секция таблицы -->
+              <div
+                class="w-full border border-base-border rounded-6 overflow-x-auto"
+              >
+                <table class="w-full email-templates-table min-w-[800px]">
+                  <!-- Table Header / Заголовок таблицы -->
+                  <thead>
+                    <tr class="bg-base-surface-2 border-b border-base-border">
+                      <th
+                        class="text-left px-7 pt-4 pb-7 text-base-medium text-text-dark-secondary w-[120px]"
+                      >
+                        ID
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary"
+                      >
+                        Шаблон
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[280px]"
+                      >
+                        Действия
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- Table Body / Тело таблицы -->
+                  <tbody id="email-templates-table-body">
+                    <!-- Rows generated dynamically / Строки генерируются динамически -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Add Email Template Button / Кнопка добавления шаблона -->
+              <div class="flex items-center justify-center w-full">
+                <button
+                  class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-6 px-3 md:px-4 h-12 md:h-14 flex items-center gap-1.5 md:gap-2 hover:bg-state-brand-hover transition-colors"
+                >
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 28 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6 md:w-7 md:h-7"
+                  >
+                    <path
+                      d="M14 4.66666V23.3333M4.66666 14H23.3333"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span class="text-sm-semibold text-text-light-primary"
+                    >Добавить письмо</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit Email Template Modal / Модалка редактирования письма -->
+    <fe-center-modal
+      id="editEmailModal"
+      modal-title="Редактировать текст"
+      max-width="560px"
+    >
+      <div slot="content">
+        <div class="flex flex-col gap-3 w-full">
+          <!-- Email Type / Тип письма -->
+          <div class="flex flex-col gap-0 w-full">
+            <p class="text-lg-regular text-text-dark-secondary">Тип письма</p>
+            <p class="text-lg-medium text-text-dark-primary" id="emailType">
+              -
+            </p>
+          </div>
+
+          <!-- Email Text / Текст письма -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary"
+              >Текст письма</label
+            >
+            <textarea
+              id="emailText"
+              class="bg-base-surface-1 border border-base-border rounded-7 w-full min-h-[292px] px-5 pt-3 pb-0 pr-4 resize-none focus:outline-none focus:border-state-brand-active transition-colors text-lg-medium text-text-dark-secondary"
+              placeholder="Введите текст письма..."
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div slot="footer">
+        <button
+          id="saveEmailBtn"
+          class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-7 px-4 h-14 w-full flex items-center justify-center hover:bg-state-brand-hover transition-colors"
+        >
+          <span class="text-base-semibold text-text-light-primary"
+            >Сохранить</span
+          >
+        </button>
+      </div>
+    </fe-center-modal>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Email Templates Data / Данные шаблонов писем
+      const emailTemplatesData = [
+        {
+          id: "14142141",
+          name: "Письмо об активации бесплатного минимального хостинга",
+          text: "Здравствуйте!\n\nБесплатный минимальный хостинг активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать хостинг бесплатно в течение 30 дней.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+        {
+          id: "4124124",
+          name: "Письмо об активации бесплатного конструктора",
+          text: "Здравствуйте!\n\nБесплатный конструктор активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать конструктор в полном функционале в течение 30 дней.\nПо истечению 30 дней конструктор не отключится, но будет слегка урезан в возможностях. Для возвращения полного функционала перейдите на любой тарифный план хостинга.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+        {
+          id: "5325325",
+          name: "Письмо об активации бесплатного конструктора",
+          text: "Здравствуйте!\n\nБесплатный конструктор активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать конструктор в полном функционале в течение 30 дней.\nПо истечению 30 дней конструктор не отключится, но будет слегка урезан в возможностях. Для возвращения полного функционала перейдите на любой тарифный план хостинга.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+        {
+          id: "325325",
+          name: "Письмо об активации бесплатного минимального хостинга",
+          text: "Здравствуйте!\n\nБесплатный минимальный хостинг активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать хостинг бесплатно в течение 30 дней.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+        {
+          id: "23523535",
+          name: "Письмо об активации бесплатного конструктора",
+          text: "Здравствуйте!\n\nБесплатный конструктор активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать конструктор в полном функционале в течение 30 дней.\nПо истечению 30 дней конструктор не отключится, но будет слегка урезан в возможностях. Для возвращения полного функционала перейдите на любой тарифный план хостинга.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+        {
+          id: "3252332",
+          name: "Письмо об активации бесплатного минимального хостинга",
+          text: "Здравствуйте!\n\nБесплатный минимальный хостинг активирован.\n\nДата создания: $curdate\nДомен: $domain\n\nВоспользуйтесь возможностью использовать хостинг бесплатно в течение 30 дней.\n\nСпасибо.\n\n-- \nС Уважением, \nОтдел продаж $servicename\n$emailfrom",
+        },
+      ];
+
+      // Current editing template / Текущий редактируемый шаблон
+      let currentEditingTemplate = null;
+
+      // Render Table / Рендер таблицы
+      function renderEmailTemplatesTable() {
+        const tbody = document.getElementById("email-templates-table-body");
+        tbody.innerHTML = emailTemplatesData
+          .map(
+            (template) => `
+          <tr class="bg-white border-b border-base-border hover:bg-base-surface-2 transition-colors">
+            <td class="px-7 py-2 h-[52px] text-sm-medium text-text-dark-secondary">
+              ${template.id}
+            </td>
+            <td class="px-3 py-2 h-[52px] text-sm-medium text-text-dark-secondary">
+              ${template.name}
+            </td>
+            <td class="px-3 py-4">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <button class="edit-btn bg-base-surface-2 border border-base-border rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-base-fill-1 transition-colors whitespace-nowrap" data-template-id="${template.id}">
+                  <span class="text-sm-semibold text-text-dark-primary">Редактировать</span>
+                </button>
+                <button class="bg-state-danger-active rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-state-danger-hover transition-colors whitespace-nowrap">
+                  <span class="text-sm-semibold text-text-light-primary">Удалить</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `
+          )
+          .join("");
+
+        // Attach event listeners to edit buttons / Добавляем обработчики на кнопки редактирования
+        attachEditButtonListeners();
+      }
+
+      // Open Edit Modal / Открыть модалку редактирования
+      function openEditModal(templateId) {
+        const template = emailTemplatesData.find((t) => t.id === templateId);
+        if (!template) return;
+
+        currentEditingTemplate = template;
+
+        // Populate modal fields / Заполняем поля модалки
+        document.getElementById("emailType").textContent = template.name;
+        document.getElementById("emailText").value = template.text;
+
+        // Open modal / Открываем модалку
+        const modal = document.getElementById("editEmailModal");
+        modal.open();
+      }
+
+      // Attach Edit Button Listeners / Добавить обработчики на кнопки редактирования
+      function attachEditButtonListeners() {
+        const editButtons = document.querySelectorAll(".edit-btn");
+        editButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const templateId = this.dataset.templateId;
+            openEditModal(templateId);
+          });
+        });
+      }
+
+      // Save Email Template / Сохранить шаблон письма
+      function saveEmailTemplate() {
+        if (!currentEditingTemplate) return;
+
+        const newText = document.getElementById("emailText").value;
+
+        // Update template in array / Обновляем шаблон в массиве
+        const templateIndex = emailTemplatesData.findIndex(
+          (t) => t.id === currentEditingTemplate.id
+        );
+        if (templateIndex !== -1) {
+          emailTemplatesData[templateIndex].text = newText;
+        }
+
+        // Close modal / Закрываем модалку
+        const modal = document.getElementById("editEmailModal");
+        modal.close();
+
+        // Reset current editing template / Сбрасываем текущий редактируемый шаблон
+        currentEditingTemplate = null;
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+        renderEmailTemplatesTable();
+
+        // Add save button listener / Добавляем обработчик на кнопку сохранения
+        const saveBtn = document.getElementById("saveEmailBtn");
+        if (saveBtn) {
+          saveBtn.addEventListener("click", saveEmailTemplate);
+        }
+      });
+    </script>
+  </body>
+</html>

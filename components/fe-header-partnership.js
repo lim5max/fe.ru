@@ -48,10 +48,10 @@ class FeHeaderPartnership extends HTMLElement {
         <div class="flex-1 overflow-auto p-4">
           <!-- Main Section -->
           <div class="flex flex-col gap-1">
-            <a href="./site-settings.html" class="flex items-center gap-4 px-2 py-2.5 rounded-7 hover:bg-base-fill-1 transition-colors">
+            <a href="site-settings.html" class="flex items-center gap-4 px-2 py-2.5 rounded-7 hover:bg-base-fill-1 transition-colors">
               <span class="text-base-medium text-text-dark-secondary">Настройка сайта</span>
             </a>
-            <a href="./pages.html" class="flex items-center gap-4 px-2 py-2.5 rounded-7 hover:bg-base-fill-1 transition-colors">
+            <a href="pages.html" class="flex items-center gap-4 px-2 py-2.5 rounded-7 hover:bg-base-fill-1 transition-colors">
               <span class="text-base-medium text-text-dark-secondary">Страницы</span>
             </a>
             <a href="./news.html" class="flex items-center gap-4 px-2 py-2.5 rounded-7 hover:bg-base-fill-1 transition-colors">

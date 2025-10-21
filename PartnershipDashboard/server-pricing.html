@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Управление стоимостью серверов - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div
+            class="flex flex-col gap-6 grow items-center justify-start w-full"
+          >
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div
+              class="content-stretch flex flex-col gap-4 items-start relative shrink-0 w-full"
+            >
+              <h1 class="text-2xl-semibold text-text-dark-primary">
+                Управление стоимостью серверов
+              </h1>
+
+              <!-- Tariff Label / Надпись тарифа -->
+              <div class="flex items-center gap-2">
+                <span class="text-base-medium text-text-dark-secondary"
+                  >Тариф:</span
+                >
+                <span class="text-base-medium text-state-brand-active"
+                  >стандартный</span
+                >
+              </div>
+
+              <!-- Textfield / Текстовое поле -->
+              <div class="w-full">
+                <label class="text-base-medium text-text-dark-secondary mb-2 block"
+                  >Текстовый</label
+                >
+              </div>
+
+              <!-- Pricing Table / Таблица цен -->
+              <!-- Desktop Table / Десктопная таблица -->
+              <div
+                class="w-full border border-base-border rounded-6 overflow-x-auto hidden md:block"
+              >
+                <table class="w-full server-pricing-table">
+                  <!-- Table Header / Заголовок таблицы -->
+                  <thead>
+                    <tr class="bg-base-surface-2 border-b border-base-border">
+                      <th
+                        class="text-left px-7 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Имя тарифа
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Состояние
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[150px]"
+                      >
+                        Себестоимость, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Валюта на сайте
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Стоимость
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Реферралу, ₽
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-sm-medium text-text-dark-secondary min-w-[120px]"
+                      >
+                        Прибыль, ₽
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- Table Body / Тело таблицы -->
+                  <tbody id="server-pricing-table-body">
+                    <!-- Rows generated dynamically / Строки генерируются динамически -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Mobile Table / Мобильная таблица -->
+              <div
+                id="server-pricing-table-mobile"
+                class="block md:hidden w-full border border-base-border rounded-6 overflow-hidden"
+              >
+                <!-- Mobile table content will be inserted here by JavaScript -->
+              </div>
+
+              <!-- Add Tariff Button / Кнопка добавления тарифа -->
+              <div class="flex items-center justify-center w-full">
+                <button
+                  class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-6 px-4 h-14 flex items-center gap-1 hover:bg-state-brand-hover transition-colors"
+                >
+                  <img
+                    src="../public/icons/plus-sign-white.svg"
+                    class="w-7 h-7"
+                    alt=""
+                  />
+                  <span class="text-sm-semibold text-text-light-primary"
+                    >Добавить тариф</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Server Pricing Data / Данные цен на серверы
+      const serverPricingData = [
+        {
+          name: "VPS-1",
+          enabled: true,
+          cost: "88",
+          currency: "RUB",
+          price: "108,9",
+          referral: "108,9",
+          profit: "199",
+        },
+        {
+          name: "VPS-2",
+          enabled: true,
+          cost: "11",
+          currency: "RUB",
+          price: "649",
+          referral: "649",
+          profit: "590",
+        },
+        {
+          name: "VPS-3",
+          enabled: true,
+          cost: "324",
+          currency: "RUB",
+          price: "108,9",
+          referral: "108,9",
+          profit: "199",
+        },
+        {
+          name: "Dedicated-1",
+          enabled: true,
+          cost: "22",
+          currency: "RUB",
+          price: "2748,9",
+          referral: "2748,9",
+          profit: "2499",
+        },
+        {
+          name: "Dedicated-2",
+          enabled: true,
+          cost: "43",
+          currency: "RUB",
+          price: "108,9",
+          referral: "108,9",
+          profit: "3499",
+        },
+        {
+          name: "Cloud-1",
+          enabled: true,
+          cost: "43",
+          currency: "RUB",
+          price: "2198,9",
+          referral: "2198,9",
+          profit: "199",
+        },
+      ];
+
+      let currentServerPricingData = serverPricingData;
+
+      // Render Desktop Table / Рендер десктопной таблицы
+      function renderServerPricingTable(data = currentServerPricingData) {
+        const tbody = document.getElementById("server-pricing-table-body");
+        tbody.innerHTML = data
+          .map(
+            (item, index) => `
+        <tr class="bg-white border-b border-base-border hover:bg-base-surface-2 transition-colors">
+          <td class="px-7 py-4 text-sm-medium text-text-dark-secondary">
+            ${item.name}
+          </td>
+          <td class="px-3 py-4">
+            <div class="flex items-center justify-start">
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="toggle-${index}" class="sr-only peer" ${
+              item.enabled ? "checked" : ""
+            }>
+                <div class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+              </label>
+            </div>
+          </td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.cost
+          }</td>
+          <td class="px-3 py-4">
+            <div class="dropdown-container relative">
+              <div class="currency-dropdown-trigger bg-white box-border flex h-13 items-center justify-between min-h-13 pl-7 pr-7 py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1">
+                <span class="text-sm-medium text-text-dark-secondary">${
+                  item.currency
+                }</span>
+                <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-5 h-5" />
+              </div>
+              <div class="currency-dropdown-menu dropdown-menu absolute top-full left-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                <div class="py-1">
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB" data-index="${index}">RUB</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD" data-index="${index}">USD</button>
+                  <button class="dropdown-item w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR" data-index="${index}">EUR</button>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.price
+          }</td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.referral
+          }</td>
+          <td class="px-3 py-4 text-sm-medium text-text-dark-secondary">${
+            item.profit
+          }</td>
+        </tr>
+      `
+          )
+          .join("");
+      }
+
+      // Render Mobile Table / Рендер мобильной таблицы
+      function renderMobileServerTable(data = currentServerPricingData) {
+        const container = document.getElementById("server-pricing-table-mobile");
+        let html = "";
+
+        data.forEach((item, index) => {
+          html += `
+          <div class="bg-white border-b border-base-border last:border-b-0 p-4">
+            <!-- Tariff Header / Заголовок тарифа -->
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-base font-semibold text-text-dark-primary">${
+                item.name
+              }</h3>
+              <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="toggle-mobile-${index}" class="sr-only peer toggle-mobile" data-index="${index}" ${
+            item.enabled ? "checked" : ""
+          }>
+                <div class="toggle-switch w-15 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+              </label>
+            </div>
+
+            <!-- Pricing Info / Информация о ценах -->
+            <div class="flex flex-col gap-2">
+              <!-- Себестоимость -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Себестоимость:</span>
+                <span class="text-sm-medium text-text-dark-primary">${
+                  item.cost
+                } ₽</span>
+              </div>
+              <!-- Стоимость -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Стоимость:</span>
+                <span class="text-sm-medium text-text-dark-primary">${
+                  item.price
+                } ₽</span>
+              </div>
+              <!-- Прибыль -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Прибыль:</span>
+                <span class="text-sm-medium text-text-dark-primary">${
+                  item.profit
+                } ₽</span>
+              </div>
+              <!-- Валюта -->
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Валюта:</span>
+                <div class="dropdown-container relative">
+                  <div class="currency-dropdown-trigger-mobile bg-white box-border flex gap-[6px] h-[32px] items-center justify-start min-h-[32px] pl-[10px] pr-[8px] py-0 rounded-full border border-base-border cursor-pointer hover:bg-base-fill-1" data-index="${index}">
+                    <span class="text-sm-medium text-text-dark-secondary">${
+                      item.currency
+                    }</span>
+                    <img src="../public/icons/arrow-down.svg" alt="Выпадающий список" class="w-3 h-3" />
+                  </div>
+                  <div class="currency-dropdown-menu-mobile dropdown-menu absolute top-full right-0 mt-1 bg-white border border-base-border rounded-xl shadow-lg z-50 min-w-[100px] hidden">
+                    <div class="py-1">
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="RUB" data-index="${index}">RUB</button>
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="USD" data-index="${index}">USD</button>
+                      <button class="dropdown-item-mobile w-full text-left px-4 py-2 text-sm text-text-dark-secondary hover:bg-base-fill-1" data-value="EUR" data-index="${index}">EUR</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+        renderServerPricingTable();
+        renderMobileServerTable();
+      });
+
+      // Handle toggle switches / Обработка свитчеров
+      document.addEventListener("change", (e) => {
+        if (
+          e.target.matches('[id^="toggle-"]') &&
+          !e.target.classList.contains("toggle-mobile")
+        ) {
+          const toggleId = e.target.id;
+          const index = toggleId.replace("toggle-", "");
+          const isChecked = e.target.checked;
+
+          currentServerPricingData[index].enabled = isChecked;
+          console.log(
+            `Toggle for ${currentServerPricingData[index].name}: ${
+              isChecked ? "ON" : "OFF"
+            }`
+          );
+        }
+
+        // Handle mobile toggles
+        if (e.target.classList.contains("toggle-mobile")) {
+          const index = e.target.dataset.index;
+          const isChecked = e.target.checked;
+
+          currentServerPricingData[index].enabled = isChecked;
+          console.log(
+            `Mobile toggle for ${currentServerPricingData[index].name}: ${
+              isChecked ? "ON" : "OFF"
+            }`
+          );
+        }
+      });
+
+      // Handle dropdown clicks / Обработка выпадающих списков
+      document.addEventListener("click", (e) => {
+        // Currency dropdown
+        if (e.target.closest(".currency-dropdown-trigger")) {
+          const trigger = e.target.closest(".currency-dropdown-trigger");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Dropdown item selection
+        if (e.target.classList.contains("dropdown-item")) {
+          const value = e.target.dataset.value;
+          const index = e.target.dataset.index;
+          const trigger = e.target
+            .closest(".dropdown-container")
+            .querySelector('[class$="-trigger"]');
+          const span = trigger.querySelector("span");
+          span.textContent = value;
+
+          // Update data
+          currentServerPricingData[index].currency = value;
+
+          // Hide dropdown
+          e.target.closest(".dropdown-menu").classList.add("hidden");
+
+          console.log(`Selected currency: ${value}`);
+        }
+
+        // Mobile currency dropdown
+        if (e.target.closest(".currency-dropdown-trigger-mobile")) {
+          const trigger = e.target.closest(".currency-dropdown-trigger-mobile");
+          const menu = trigger.nextElementSibling;
+
+          // Close all other dropdowns
+          document.querySelectorAll(".dropdown-menu").forEach((m) => {
+            if (m !== menu) m.classList.add("hidden");
+          });
+
+          menu.classList.toggle("hidden");
+        }
+
+        // Mobile dropdown item selection
+        if (e.target.classList.contains("dropdown-item-mobile")) {
+          const value = e.target.dataset.value;
+          const index = e.target.dataset.index;
+          const trigger = e.target
+            .closest(".dropdown-container")
+            .querySelector('[class$="-trigger-mobile"]');
+          const span = trigger.querySelector("span");
+          span.textContent = value;
+
+          // Update data
+          currentServerPricingData[index].currency = value;
+
+          // Hide dropdown
+          e.target.closest(".dropdown-menu").classList.add("hidden");
+
+          console.log(
+            `Mobile selected currency: ${value} for ${currentServerPricingData[index].name}`
+          );
+        }
+
+        // Close dropdowns when clicking outside
+        if (!e.target.closest(".dropdown-container")) {
+          document.querySelectorAll(".dropdown-menu").forEach((menu) => {
+            menu.classList.add("hidden");
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

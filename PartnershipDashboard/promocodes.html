@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Промокоды - FE Платформа</title>
+    <link href="../styles.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Header Web Component -->
+    <script src="../components/fe-header-partnership.js"></script>
+    <!-- Modal Web Component -->
+    <script src="../components/fe-center-modal.js"></script>
+  </head>
+  <body class="bg-base-surface-1 font-sans">
+    <!-- Main Container / Главный контейнер -->
+    <div class="min-h-screen flex">
+      <!-- Sidebar / Боковая панель -->
+      <div id="sidebar-container" class="hidden lg:block"></div>
+
+      <!-- Main Content Area / Основная область контента -->
+      <div class="flex flex-col grow w-full">
+        <!-- Header / Заголовок -->
+        <fe-header-partnership></fe-header-partnership>
+
+        <!-- Page Content / Содержимое страницы -->
+        <div
+          class="bg-base-surface-1 flex flex-col gap-2.5 grow pt-14 px-6 lg:px-15 w-full lg:pl-[300px]"
+        >
+          <div
+            class="flex flex-col gap-6 grow items-center justify-start w-full"
+          >
+            <!-- Page Header Section / Секция заголовка страницы -->
+            <div
+              class="content-stretch flex flex-col gap-6 items-start relative shrink-0 w-full max-w-[640px]"
+            >
+              <!-- Title / Заголовок -->
+              <div class="flex flex-col gap-3 items-start w-full">
+                <h1 class="text-2xl-semibold text-text-dark-primary">
+                  Промокоды
+                </h1>
+              </div>
+
+              <!-- Table Section / Секция таблицы -->
+              <div
+                class="w-full border border-base-border rounded-6 overflow-x-auto"
+              >
+                <table class="w-full promocodes-table min-w-[700px]">
+                  <!-- Table Header / Заголовок таблицы -->
+                  <thead>
+                    <tr class="bg-base-surface-2 border-b border-base-border">
+                      <th
+                        class="text-left px-7 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[120px]"
+                      >
+                        Код
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary"
+                      >
+                        Действие
+                      </th>
+                      <th
+                        class="text-left px-3 pt-4 pb-3 text-base-medium text-text-dark-secondary w-[280px]"
+                      >
+                        Действия
+                      </th>
+                    </tr>
+                  </thead>
+                  <!-- Table Body / Тело таблицы -->
+                  <tbody id="promocodes-table-body">
+                    <!-- Rows generated dynamically / Строки генерируются динамически -->
+                  </tbody>
+                </table>
+              </div>
+
+              <!-- Add Promocode Button / Кнопка добавления промокода -->
+              <div class="flex items-center justify-center w-full">
+                <button
+                  id="addPromocodeBtn"
+                  class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-6 px-3 md:px-4 h-12 md:h-14 flex items-center gap-1.5 md:gap-2 hover:bg-state-brand-hover transition-colors"
+                >
+                  <svg
+                    width="28"
+                    height="28"
+                    viewBox="0 0 28 28"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="w-6 h-6 md:w-7 md:h-7"
+                  >
+                    <path
+                      d="M14 4.66666V23.3333M4.66666 14H23.3333"
+                      stroke="white"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span class="text-sm-semibold text-text-light-primary"
+                    >Добавить промокод</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Edit/Create Promocode Modal / Модалка редактирования/создания промокода -->
+    <fe-center-modal
+      id="promocodeModal"
+      modal-title="Создать промокод"
+      max-width="560px"
+    >
+      <div slot="content">
+        <div class="flex flex-col gap-3 w-full">
+          <!-- Type Toggle / Переключатель типа -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary">Тип</label>
+            <div
+              class="bg-base-fill-1 flex gap-0.5 items-center overflow-hidden p-0.5 rounded-6 w-full"
+            >
+              <button
+                class="type-toggle-btn flex-1 bg-base-surface-1 border border-base-border rounded-5 px-3 py-0 h-13 flex items-center justify-center cursor-pointer text-lg-semibold text-text-dark-primary hover:bg-base-fill-1 transition-colors active"
+                data-type="single"
+              >
+                Однократный
+              </button>
+              <button
+                class="type-toggle-btn flex-1 rounded-5 px-3 py-0 h-13 flex items-center justify-center cursor-pointer text-lg-medium text-text-dark-tertiary hover:bg-base-fill-2 transition-colors"
+                data-type="multi"
+              >
+                Многократный
+              </button>
+            </div>
+          </div>
+
+          <!-- Promocode Name / Название промокода -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary"
+              >Название</label
+            >
+            <input
+              id="promocodeName"
+              type="text"
+              class="bg-base-surface-1 border border-base-border rounded-7 w-full h-14 px-5 focus:outline-none focus:border-state-brand-active transition-colors text-lg-medium text-text-dark-secondary"
+              placeholder="Введите код промокода..."
+            />
+          </div>
+
+          <!-- Action Select / Выбор действия -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary"
+              >Действие</label
+            >
+            <select
+              id="promocodeAction"
+              class="bg-base-surface-1 border border-base-border rounded-7 w-full h-14 px-5 focus:outline-none focus:border-state-brand-active transition-colors text-lg-medium text-text-dark-secondary"
+            >
+              <option value="change_tariff">Сменить тариф клиенту</option>
+              <option value="discount">Скидка на услугу</option>
+              <option value="free_period">Бесплатный период</option>
+            </select>
+          </div>
+
+          <!-- Tariff Input / Поле тарифа -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary"
+              >Тариф</label
+            >
+            <input
+              id="promocodeTariff"
+              type="text"
+              class="bg-base-surface-1 border border-base-border rounded-7 w-full h-14 px-5 focus:outline-none focus:border-state-brand-active transition-colors text-lg-medium text-text-dark-secondary"
+              placeholder="По умолчанию"
+            />
+          </div>
+
+          <!-- Link Input / Поле ссылки -->
+          <div class="flex flex-col gap-3 w-full">
+            <label class="text-lg-regular text-text-dark-secondary"
+              >Ссылка</label
+            >
+            <input
+              id="promocodeLink"
+              type="text"
+              class="bg-base-surface-1 border border-base-border rounded-7 w-full h-14 px-5 focus:outline-none focus:border-state-brand-active transition-colors text-lg-medium text-text-dark-secondary"
+              placeholder="http://..."
+            />
+          </div>
+        </div>
+      </div>
+      <div slot="footer">
+        <button
+          id="savePromocodeBtn"
+          class="bg-state-brand-active border border-colors-alpha-dark-200 rounded-7 px-4 h-14 w-full flex items-center justify-center hover:bg-state-brand-hover transition-colors"
+        >
+          <span class="text-base-semibold text-text-light-primary"
+            >Сохранить</span
+          >
+        </button>
+      </div>
+    </fe-center-modal>
+
+    <!-- JavaScript / Скрипты -->
+    <script>
+      // Promocodes Data / Данные промокодов
+      const promocodesData = [
+        {
+          id: 1,
+          code: "3у3уфыв",
+          action: "Сменить тарифный план на 1",
+          type: "single",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo1",
+        },
+        {
+          id: 2,
+          code: "fsddsffd",
+          action: "Сменить тарифный план на 1",
+          type: "single",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo2",
+        },
+        {
+          id: 3,
+          code: "adfdsfsdf",
+          action: "Сменить тарифный план на 1",
+          type: "multi",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo3",
+        },
+        {
+          id: 4,
+          code: "a1e13rd",
+          action: "Сменить тарифный план на 1",
+          type: "single",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo4",
+        },
+        {
+          id: 5,
+          code: "sdfdsffsdf",
+          action: "Сменить тарифный план на 1",
+          type: "single",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo5",
+        },
+        {
+          id: 6,
+          code: "sdfsdfdf",
+          action: "Сменить тарифный план на 1",
+          type: "multi",
+          actionType: "change_tariff",
+          tariff: "1",
+          link: "http://example.com/promo6",
+        },
+      ];
+
+      // Current editing promocode / Текущий редактируемый промокод
+      let currentEditingPromocode = null;
+      let isEditMode = false;
+
+      // Render Table / Рендер таблицы
+      function renderPromocodesTable() {
+        const tbody = document.getElementById("promocodes-table-body");
+        tbody.innerHTML = promocodesData
+          .map(
+            (promo) => `
+          <tr class="bg-white border-b border-base-border hover:bg-base-surface-2 transition-colors">
+            <td class="px-7 py-2 h-[52px] text-sm-medium text-text-dark-secondary">
+              ${promo.code}
+            </td>
+            <td class="px-3 py-2 h-[52px] text-sm-medium text-text-dark-secondary">
+              ${promo.action}
+            </td>
+            <td class="px-3 py-4">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <button class="edit-btn bg-base-surface-2 border border-base-border rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-base-fill-1 transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
+                  <span class="text-sm-semibold text-text-dark-primary">Редактировать</span>
+                </button>
+                <button class="delete-btn bg-state-danger-active rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-state-danger-hover transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
+                  <span class="text-sm-semibold text-text-light-primary">Удалить</span>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `
+          )
+          .join("");
+
+        // Attach event listeners / Добавляем обработчики
+        attachTableButtonListeners();
+      }
+
+      // Open Modal for Creating / Открыть модалку для создания
+      function openCreateModal() {
+        isEditMode = false;
+        currentEditingPromocode = null;
+
+        const modal = document.getElementById("promocodeModal");
+        modal.setAttribute("modal-title", "Создать промокод");
+
+        // Clear form / Очищаем форму
+        document.getElementById("promocodeName").value = "";
+        document.getElementById("promocodeAction").value = "change_tariff";
+        document.getElementById("promocodeTariff").value = "";
+        document.getElementById("promocodeLink").value = "";
+
+        // Reset type toggle / Сбрасываем переключатель типа
+        const toggleButtons = document.querySelectorAll(".type-toggle-btn");
+        toggleButtons.forEach((btn) => {
+          if (btn.dataset.type === "single") {
+            btn.classList.add(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-lg-semibold",
+              "text-text-dark-primary"
+            );
+            btn.classList.remove("text-lg-medium", "text-text-dark-tertiary");
+          } else {
+            btn.classList.remove(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-lg-semibold",
+              "text-text-dark-primary"
+            );
+            btn.classList.add("text-lg-medium", "text-text-dark-tertiary");
+          }
+        });
+
+        modal.open();
+      }
+
+      // Open Modal for Editing / Открыть модалку для редактирования
+      function openEditModal(promoId) {
+        const promo = promocodesData.find((p) => p.id === promoId);
+        if (!promo) return;
+
+        isEditMode = true;
+        currentEditingPromocode = promo;
+
+        const modal = document.getElementById("promocodeModal");
+        modal.setAttribute("modal-title", "Редактировать промокод");
+
+        // Populate form / Заполняем форму
+        document.getElementById("promocodeName").value = promo.code;
+        document.getElementById("promocodeAction").value = promo.actionType;
+        document.getElementById("promocodeTariff").value = promo.tariff;
+        document.getElementById("promocodeLink").value = promo.link;
+
+        // Set type toggle / Устанавливаем переключатель типа
+        const toggleButtons = document.querySelectorAll(".type-toggle-btn");
+        toggleButtons.forEach((btn) => {
+          if (btn.dataset.type === promo.type) {
+            btn.classList.add(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-lg-semibold",
+              "text-text-dark-primary"
+            );
+            btn.classList.remove("text-lg-medium", "text-text-dark-tertiary");
+          } else {
+            btn.classList.remove(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-lg-semibold",
+              "text-text-dark-primary"
+            );
+            btn.classList.add("text-lg-medium", "text-text-dark-tertiary");
+          }
+        });
+
+        modal.open();
+      }
+
+      // Delete Promocode / Удалить промокод
+      function deletePromocode(promoId) {
+        const index = promocodesData.findIndex((p) => p.id === promoId);
+        if (index !== -1) {
+          promocodesData.splice(index, 1);
+          renderPromocodesTable();
+        }
+      }
+
+      // Save Promocode / Сохранить промокод
+      function savePromocode() {
+        const code = document.getElementById("promocodeName").value.trim();
+        const actionType = document.getElementById("promocodeAction").value;
+        const tariff = document.getElementById("promocodeTariff").value.trim();
+        const link = document.getElementById("promocodeLink").value.trim();
+
+        // Get selected type / Получаем выбранный тип
+        const activeToggle = document.querySelector(".type-toggle-btn.active");
+        const type = activeToggle ? activeToggle.dataset.type : "single";
+
+        // Get action text / Получаем текст действия
+        const actionSelect = document.getElementById("promocodeAction");
+        const actionText =
+          actionSelect.options[actionSelect.selectedIndex].text;
+
+        if (!code) {
+          alert("Пожалуйста, введите код промокода");
+          return;
+        }
+
+        if (isEditMode && currentEditingPromocode) {
+          // Update existing promocode / Обновляем существующий промокод
+          const index = promocodesData.findIndex(
+            (p) => p.id === currentEditingPromocode.id
+          );
+          if (index !== -1) {
+            promocodesData[index] = {
+              ...promocodesData[index],
+              code,
+              action: `${actionText}${tariff ? " на " + tariff : ""}`,
+              type,
+              actionType,
+              tariff,
+              link,
+            };
+          }
+        } else {
+          // Create new promocode / Создаем новый промокод
+          const newId =
+            promocodesData.length > 0
+              ? Math.max(...promocodesData.map((p) => p.id)) + 1
+              : 1;
+          promocodesData.push({
+            id: newId,
+            code,
+            action: `${actionText}${tariff ? " на " + tariff : ""}`,
+            type,
+            actionType,
+            tariff,
+            link,
+          });
+        }
+
+        // Close modal and refresh table / Закрываем модалку и обновляем таблицу
+        const modal = document.getElementById("promocodeModal");
+        modal.close();
+        renderPromocodesTable();
+
+        // Reset state / Сбрасываем состояние
+        currentEditingPromocode = null;
+        isEditMode = false;
+      }
+
+      // Attach Table Button Listeners / Добавить обработчики на кнопки таблицы
+      function attachTableButtonListeners() {
+        // Edit buttons / Кнопки редактирования
+        const editButtons = document.querySelectorAll(".edit-btn");
+        editButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const promoId = parseInt(this.dataset.promoId);
+            openEditModal(promoId);
+          });
+        });
+
+        // Delete buttons / Кнопки удаления
+        const deleteButtons = document.querySelectorAll(".delete-btn");
+        deleteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const promoId = parseInt(this.dataset.promoId);
+            if (confirm("Вы уверены, что хотите удалить этот промокод?")) {
+              deletePromocode(promoId);
+            }
+          });
+        });
+      }
+
+      // Initialize Type Toggle / Инициализация переключателя типа
+      function initTypeToggle() {
+        const toggleButtons = document.querySelectorAll(".type-toggle-btn");
+        toggleButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Remove active from all / Убираем active со всех
+            toggleButtons.forEach((btn) => {
+              btn.classList.remove(
+                "active",
+                "bg-base-surface-1",
+                "border",
+                "border-base-border",
+                "text-lg-semibold",
+                "text-text-dark-primary"
+              );
+              btn.classList.add("text-lg-medium", "text-text-dark-tertiary");
+            });
+
+            // Add active to clicked / Добавляем active на нажатую
+            this.classList.add(
+              "active",
+              "bg-base-surface-1",
+              "border",
+              "border-base-border",
+              "text-lg-semibold",
+              "text-text-dark-primary"
+            );
+            this.classList.remove("text-lg-medium", "text-text-dark-tertiary");
+          });
+        });
+      }
+
+      // Load Components / Загрузка компонентов
+      async function loadComponent(containerId, componentPath) {
+        try {
+          const response = await fetch(componentPath);
+          const html = await response.text();
+          document.getElementById(containerId).innerHTML = html;
+        } catch (error) {
+          console.error(`Error loading component ${componentPath}:`, error);
+        }
+      }
+
+      // Initialize Components / Инициализация компонентов
+      document.addEventListener("DOMContentLoaded", async function () {
+        await loadComponent(
+          "sidebar-container",
+          "../components/sidebar-partnership.html"
+        );
+        renderPromocodesTable();
+        initTypeToggle();
+
+        // Add button listener / Добавляем обработчик на кнопку добавления
+        const addBtn = document.getElementById("addPromocodeBtn");
+        if (addBtn) {
+          addBtn.addEventListener("click", openCreateModal);
+        }
+
+        // Save button listener / Обработчик на кнопку сохранения
+        const saveBtn = document.getElementById("savePromocodeBtn");
+        if (saveBtn) {
+          saveBtn.addEventListener("click", savePromocode);
+        }
+      });
+    </script>
+  </body>
+</html>
