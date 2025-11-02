@@ -37,6 +37,7 @@ class FeCenterModal extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        /* Используем CSS переменные из :root в input.css */
         :host {
           --modal-max-width: ${maxWidth};
         }
@@ -49,7 +50,7 @@ class FeCenterModal extends HTMLElement {
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(26, 26, 26, 0.18);
+          background-color: var(--color-alpha-dark-200);
           z-index: 1000;
           opacity: 0;
           transition: opacity 0.3s ease;
@@ -64,7 +65,7 @@ class FeCenterModal extends HTMLElement {
 
         /* Modal Container / Контейнер модалки */
         .modal-container {
-          background: #ffffff;
+          background: var(--color-base-surface-1);
           border-radius: 24px;
           box-shadow: 0px 1.5px 0px 0.5px rgba(26, 26, 26, 0.08),
                       0px 8px 16px -8px rgba(26, 26, 26, 0.08);
@@ -90,8 +91,8 @@ class FeCenterModal extends HTMLElement {
           right: 12px;
           width: 36px;
           height: 36px;
-          background: #fafaf9;
-          border: 1px solid #e7e5e4;
+          background: var(--color-base-surface-2);
+          border: 1px solid var(--color-base-border);
           border-radius: 14px;
           display: flex;
           align-items: center;
@@ -102,7 +103,7 @@ class FeCenterModal extends HTMLElement {
         }
 
         .modal-close-btn:hover {
-          background: #f5f5f4;
+          background: var(--color-base-fill-1);
         }
 
         .modal-close-btn svg {
@@ -117,11 +118,11 @@ class FeCenterModal extends HTMLElement {
         }
 
         .modal-title {
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 600;
           font-size: 24px;
           line-height: 38px;
-          color: #050505;
+          color: var(--color-text-dark-primary);
           margin: 0;
         }
 
@@ -153,12 +154,12 @@ class FeCenterModal extends HTMLElement {
         }
 
         .modal-content::-webkit-scrollbar-thumb {
-          background: #d6d3d1;
+          background: var(--color-base-fill-3);
           border-radius: 3px;
         }
 
         .modal-content::-webkit-scrollbar-thumb:hover {
-          background: #a8a29f;
+          background: var(--color-base-fill-4);
         }
 
         /* Mobile responsiveness */

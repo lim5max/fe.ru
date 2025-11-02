@@ -616,6 +616,58 @@
         }
       }).render(document.getElementById('services-table'));
 
+      // Function to update table body without re-rendering header
+      function updateTableBody(data) {
+        const tbody = document.querySelector('#services-table .gridjs-tbody');
+        if (!tbody) return;
+
+        tbody.classList.add('transitioning');
+
+        setTimeout(() => {
+          let rowsHTML = '';
+          data.forEach((row, index) => {
+            // Handle autorenew cell
+            let autorenewHTML;
+            if (row.autorenew === null || row.autorenew === undefined) {
+              autorenewHTML = '<div style="width: 178px; min-width: 178px; max-width: 178px;"></div>';
+            } else {
+              const toggleId = `toggle-${row.name}`;
+              const isChecked = row.autorenew === true;
+              autorenewHTML = `
+                <div class="flex items-center justify-center" style="width: 178px; min-width: 178px; max-width: 178px;">
+                  <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="${toggleId}" class="sr-only peer" ${isChecked ? 'checked' : ''}>
+                    <div class="toggle-switch w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-state-brand-active rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[1px] after:left-[1px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-state-brand-active"></div>
+                  </label>
+                </div>
+              `;
+            }
+
+            rowsHTML += `
+              <tr class="gridjs-tr">
+                <td class="gridjs-td gridjs-td-figma"><div style="width: 381px; min-width: 381px; max-width: 381px;">${row.type}</div></td>
+                <td class="gridjs-td gridjs-td-figma"><div style="width: 381px; min-width: 381px; max-width: 381px;">${row.name}</div></td>
+                <td class="gridjs-td gridjs-td-figma"><div style="width: 180px; min-width: 180px; max-width: 180px;">${row.expiry}</div></td>
+                <td class="gridjs-td gridjs-td-figma">${autorenewHTML}</td>
+                <td class="gridjs-td gridjs-td-figma">
+                  <div style="width: 48px; min-width: 48px; max-width: 48px;" class="flex items-center justify-center">
+                    <button class="p-1 hover:bg-base-fill-1 rounded">
+                      <img src="../public/icons/more-vertical.svg" alt="Действия" class="w-6 h-6" />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            `;
+          });
+
+          tbody.innerHTML = rowsHTML;
+
+          setTimeout(() => {
+            tbody.classList.remove('transitioning');
+          }, 50);
+        }, 120);
+      }
+
       // Set total records and update pagination
       totalRecords = servicesData.length;
       updatePaginationDisplay(totalRecords, rowsPerPage);
@@ -640,12 +692,10 @@
           currentPage = parseInt(pageButton.dataset.page);
           const start = (currentPage - 1) * rowsPerPage;
           const end = start + rowsPerPage;
-          const pageData = currentData.slice(start, end).map(row => [
-            row.type, row.name, row.expiry, row.autorenew
-          ]);
-          grid.updateConfig({ data: pageData }).forceRender();
+          const pageData = currentData.slice(start, end);
 
           updatePaginationDisplay(totalRecords, rowsPerPage);
+          updateTableBody(pageData);
           console.log(`Navigate to page ${currentPage}`);
         }
 
@@ -654,12 +704,10 @@
             currentPage--;
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const pageData = currentData.slice(start, end).map(row => [
-              row.type, row.name, row.expiry, row.autorenew
-            ]);
-            grid.updateConfig({ data: pageData }).forceRender();
+            const pageData = currentData.slice(start, end);
 
             updatePaginationDisplay(totalRecords, rowsPerPage);
+            updateTableBody(pageData);
           }
           console.log('Navigate to previous page');
         }
@@ -670,12 +718,10 @@
             currentPage++;
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const pageData = currentData.slice(start, end).map(row => [
-              row.type, row.name, row.expiry, row.autorenew
-            ]);
-            grid.updateConfig({ data: pageData }).forceRender();
+            const pageData = currentData.slice(start, end);
 
             updatePaginationDisplay(totalRecords, rowsPerPage);
+            updateTableBody(pageData);
           }
           console.log('Navigate to next page');
         }
@@ -701,13 +747,11 @@
           currentPage = 1; // Reset to first page
 
           // Update table with new page size
-          const pageData = currentData.slice(0, rowsPerPage).map(row => [
-            row.type, row.name, row.expiry, row.autorenew
-          ]);
-          grid.updateConfig({ data: pageData }).forceRender();
+          const pageData = currentData.slice(0, rowsPerPage);
 
           // Update pagination display
           updatePaginationDisplay(totalRecords, rowsPerPage);
+          updateTableBody(pageData);
 
           console.log(`Changed rows per page to ${newLimit}`);
         }

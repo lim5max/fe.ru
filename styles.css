@@ -749,8 +749,76 @@ select {
   outline: 1px auto -webkit-focus-ring-color;
 }
 
+:root {
+  /* Base Colors / Базовые цвета */
+  --color-base-surface-1: #ffffff;
+  --color-base-surface-2: #fafaf9;
+  --color-base-fill-1: #f5f5f4;
+  --color-base-fill-2: #e7e5e4;
+  --color-base-fill-3: #d6d3d1;
+  --color-base-fill-4: #a8a29f;
+  --color-base-fill-5: #56524e;
+  --color-base-border: #e7e5e4;
+  --color-base-disabled: #1a1a1a2e;
+  /* Text Colors / Цвета текста */
+  --color-text-dark-primary: #1a1a1a;
+  --color-text-dark-secondary: #1a1a1ab2;
+  --color-text-dark-tertiary: #1a1a1a5c;
+  --color-text-light-primary: #ffffff;
+  /* State Brand Colors / Цвета брендового состояния */
+  --color-state-brand-hover: #f67416;
+  --color-state-brand-active: #e4570c;
+  --color-state-brand-selected: #fb923c;
+  /* State Danger Colors / Цвета состояния опасности */
+  --color-state-danger-hover: #fb657c;
+  --color-state-danger-active: #cb1a41;
+  --color-state-danger-selected: #fec3ca;
+  /* Badge Status Colors / Цвета статусов бейджей */
+  --color-state-success-active: #0C887E;
+  --color-state-highlight-active: #8318E7;
+  --color-state-error-active: #DC2626;
+  /* Alpha Colors / Альфа-цвета */
+  --color-alpha-dark-50: #1a1a1a14;
+  --color-alpha-dark-100: #1a1a1a1f;
+  --color-alpha-dark-200: #1a1a1a2e;
+  --color-alpha-dark-300: #1a1a1a42;
+  --color-alpha-light-200: #ffffff2e;
+  /* Spacing / Отступы */
+  --spacing-0: 0px;
+  --spacing-3: 4px;
+  --spacing-5: 8px;
+  --spacing-7: 12px;
+  --spacing-8: 16px;
+  --spacing-9: 20px;
+  --spacing-10: 24px;
+  --spacing-11: 28px;
+  --spacing-12: 32px;
+  --spacing-13: 36px;
+  --spacing-14: 40px;
+  --spacing-15: 44px;
+  --spacing-16: 48px;
+  --spacing-17: 56px;
+  --spacing-18: 64px;
+  --spacing-20: 80px;
+  --spacing-21: 96px;
+  /* Border Radius / Радиусы границ */
+  --radius-3: 4px;
+  --radius-5: 8px;
+  --radius-6: 18px;
+  --radius-7: 12px;
+  --radius-8: 16px;
+  --radius-9: 20px;
+  --radius-10: 24px;
+  --radius-15: 44px;
+  --radius-18: 64px;
+  --radius-20: 80px;
+  --radius-21: 96px;
+  /* Font Family / Семейство шрифтов */
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+}
+
 html {
-  font-family: "Inter Variable", "Inter", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 body {
@@ -1497,6 +1565,10 @@ input[type="text"]:focus,
   min-height: 1.5rem;
 }
 
+.min-h-\[292px\] {
+  min-height: 292px;
+}
+
 .min-h-\[32px\] {
   min-height: 32px;
 }
@@ -1866,6 +1938,10 @@ input[type="text"]:focus,
 
 .justify-between {
   justify-content: space-between;
+}
+
+.gap-0 {
+  gap: 0px;
 }
 
 .gap-0\.5 {
@@ -2600,8 +2676,16 @@ input[type="text"]:focus,
   padding-top: 64px;
 }
 
+.pt-2 {
+  padding-top: 0.5rem;
+}
+
 .pt-2\.5 {
   padding-top: 0.625rem;
+}
+
+.pt-3 {
+  padding-top: 4px;
 }
 
 .pt-4 {
@@ -3144,6 +3228,12 @@ input[type="text"]:focus,
   height: auto !important;
 }
 
+.gridjs-tr {
+  height: 52px;
+  max-height: 52px;
+  min-height: 52px;
+}
+
 /* Remove all vertical borders between columns */
 
 .gridjs-th-figma,
@@ -3244,6 +3334,10 @@ input[type="text"]:focus,
 
 /* Fix table container to remove shadows and extra spacing */
 
+.gridjs-tbody {
+  box-shadow: none !important;
+}
+
 /* Remove all shadows from table */
 
 .gridjs-table-figma,
@@ -3257,6 +3351,10 @@ input[type="text"]:focus,
 }
 
 /* Remove extra border at bottom */
+
+.gridjs-tbody .gridjs-tr:last-child {
+  border-bottom: none !important;
+}
 
 .gridjs-tbody .gridjs-tr:last-child .gridjs-td-figma {
   border-bottom: none !important;
@@ -3492,13 +3590,29 @@ input[type="range"]::-moz-range-progress {
   color: #e4570c;
 }
 
+/* Table smooth transition / Плавный переход таблицы */
+
+.gridjs-tbody {
+  position: relative;
+}
+
+.gridjs-tbody.transitioning {
+  opacity: 0;
+}
+
+.gridjs-tbody {
+  transition: opacity 0.12s ease-in-out;
+}
+
 .\[appearance\:textfield\] {
   -webkit-appearance: textfield;
      -moz-appearance: textfield;
           appearance: textfield;
 }
 
-/* Base styles */
+/* CSS Variables from Tailwind Config / CSS переменные из конфига Tailwind */
+
+/* Эти переменные доступны везде, включая Shadow DOM веб-компонентов */
 
 /* Component styles */
 

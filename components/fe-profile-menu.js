@@ -37,6 +37,7 @@ class FeProfileMenu extends HTMLElement {
 
     this.shadowRoot.innerHTML = `
       <style>
+        /* Используем CSS переменные из :root в input.css */
         :host {
           display: block;
           position: sticky;
@@ -45,8 +46,8 @@ class FeProfileMenu extends HTMLElement {
 
         /* Container / Контейнер */
         .menu-container {
-          background: #fafaf9;
-          border: 1px solid #e7e5e4;
+          background: var(--color-base-surface-2);
+          border: 1px solid var(--color-base-border);
           border-radius: 24px;
           padding: 12px 16px 16px;
           display: flex;
@@ -75,21 +76,21 @@ class FeProfileMenu extends HTMLElement {
         }
 
         .menu-item:hover {
-          background: #f5f5f4;
+          background: var(--color-base-fill-1);
         }
 
         /* Menu Item Text / Текст элемента меню */
         .menu-item-text {
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 500;
           font-size: 16px;
           line-height: 24px;
-          color: rgba(26, 26, 26, 0.7);
+          color: var(--color-text-dark-secondary);
           white-space: nowrap;
         }
 
         .menu-item.active .menu-item-text {
-          color: #1a1a1a;
+          color: var(--color-text-dark-primary);
         }
 
         /* Menu Item Right / Правая часть элемента меню */
@@ -102,6 +103,7 @@ class FeProfileMenu extends HTMLElement {
         .menu-item-icon {
           width: 24px;
           height: 24px;
+          color: var(--color-text-dark-secondary);
         }
 
         /* Logout / Выход */
@@ -157,9 +159,9 @@ class FeProfileMenu extends HTMLElement {
             <span class="menu-item-text">Выход из аккаунта</span>
             <div class="menu-item-right">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="menu-item-icon">
-                <path d="M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H15" stroke="rgba(26, 26, 26, 0.7)" stroke-width="1.5" stroke-linecap="round"/>
-                <path d="M10 17L15 12L10 7" stroke="rgba(26, 26, 26, 0.7)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M15 12H3" stroke="rgba(26, 26, 26, 0.7)" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M15 3H19C20.1046 3 21 3.89543 21 5V19C21 20.1046 20.1046 21 19 21H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <path d="M10 17L15 12L10 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 12H3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
               </svg>
             </div>
           </a>

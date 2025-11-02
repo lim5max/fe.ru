@@ -26,6 +26,7 @@ class FePromoModal extends HTMLElement {
   render() {
     this.shadowRoot.innerHTML = `
       <style>
+        /* Используем CSS переменные из :root в input.css */
         :host {
           --modal-max-width: 480px;
         }
@@ -38,7 +39,7 @@ class FePromoModal extends HTMLElement {
           left: 0;
           width: 100%;
           height: 100%;
-          background-color: rgba(26, 26, 26, 0.18);
+          background-color: var(--color-alpha-dark-200);
           z-index: 1000;
           opacity: 0;
           transition: opacity 0.3s ease;
@@ -53,7 +54,7 @@ class FePromoModal extends HTMLElement {
 
         /* Modal Container / Контейнер модалки */
         .modal-container {
-          background: #ffffff;
+          background: var(--color-base-surface-1);
           border-radius: 24px;
           box-shadow: 0px 1.5px 0px 0.5px rgba(26, 26, 26, 0.08),
                       0px 8px 16px -8px rgba(26, 26, 26, 0.08);
@@ -79,8 +80,8 @@ class FePromoModal extends HTMLElement {
           right: 12px;
           width: 36px;
           height: 36px;
-          background: #fafaf9;
-          border: 1px solid #e7e5e4;
+          background: var(--color-base-surface-2);
+          border: 1px solid var(--color-base-border);
           border-radius: 14px;
           display: flex;
           align-items: center;
@@ -91,7 +92,7 @@ class FePromoModal extends HTMLElement {
         }
 
         .modal-close-btn:hover {
-          background: #f5f5f4;
+          background: var(--color-base-fill-1);
         }
 
         .modal-close-btn svg {
@@ -106,11 +107,11 @@ class FePromoModal extends HTMLElement {
         }
 
         .modal-title {
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 600;
           font-size: 24px;
           line-height: 38px;
-          color: #050505;
+          color: var(--color-text-dark-primary);
           margin: 0;
         }
 
@@ -132,48 +133,48 @@ class FePromoModal extends HTMLElement {
         }
 
         .input-label {
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 400;
           font-size: 18px;
           line-height: 28px;
-          color: rgba(26, 26, 26, 0.7);
+          color: var(--color-text-dark-secondary);
         }
 
         .input-field {
-          background: #ffffff;
-          border: 1px solid #e7e5e4;
+          background: var(--color-base-surface-1);
+          border: 1px solid var(--color-base-border);
           border-radius: 18px;
           height: 56px;
           padding: 0 20px;
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 500;
           font-size: 18px;
           line-height: 28px;
-          color: rgba(26, 26, 26, 0.7);
+          color: var(--color-text-dark-secondary);
           transition: border-color 0.2s ease;
         }
 
         .input-field:focus {
           outline: none;
-          border-color: #e4570c;
+          border-color: var(--color-state-brand-active);
         }
 
         .input-field::placeholder {
-          color: rgba(26, 26, 26, 0.4);
+          color: var(--color-text-dark-tertiary);
         }
 
         /* Activate Button / Кнопка активации */
         .activate-btn {
-          background: #e4570c;
-          border: 1px solid rgba(26, 26, 26, 0.12);
+          background: var(--color-state-brand-active);
+          border: 1px solid var(--color-alpha-dark-100);
           border-radius: 18px;
           height: 56px;
           padding: 0 24px;
-          font-family: 'Inter Variable', 'Inter', sans-serif;
+          font-family: var(--font-sans);
           font-weight: 600;
           font-size: 20px;
           line-height: 32px;
-          color: #ffffff;
+          color: var(--color-text-light-primary);
           cursor: pointer;
           transition: background-color 0.2s ease;
           display: flex;
@@ -182,11 +183,11 @@ class FePromoModal extends HTMLElement {
         }
 
         .activate-btn:hover {
-          background: #f67416;
+          background: var(--color-state-brand-hover);
         }
 
         .activate-btn:active {
-          background: #e4570c;
+          background: var(--color-state-brand-active);
         }
 
         /* Mobile responsiveness */
@@ -219,7 +220,7 @@ class FePromoModal extends HTMLElement {
           <!-- Close Button / Кнопка закрытия -->
           <button class="modal-close-btn" id="closeBtn" aria-label="Закрыть">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M15 5L5 15M5 5L15 15" stroke="#56524E" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </button>
 

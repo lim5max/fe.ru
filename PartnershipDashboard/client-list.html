@@ -73,9 +73,9 @@
                   </div>
                 </div>
 
-                <!-- Client Table / Таблица клиентов -->
+                <!-- Client Table Desktop / Таблица клиентов Desktop -->
                 <div
-                  class="border border-base-border rounded-6 w-full overflow-hidden"
+                  class="border border-base-border rounded-6 w-full overflow-hidden hidden md:block"
                 >
                   <!-- Table Header / Заголовок таблицы -->
                   <div class="flex items-center w-full">
@@ -98,6 +98,14 @@
                   <!-- Table Rows Container / Контейнер для строк таблицы -->
                   <div id="client-table-body"></div>
                 </div>
+
+                <!-- Client Table Mobile / Таблица клиентов Mobile -->
+                <div
+                  id="client-table-mobile"
+                  class="flex flex-col gap-3 w-full md:hidden"
+                >
+                  <!-- Mobile cards will be rendered here / Мобильные карточки будут отрендерены здесь -->
+                </div>
               </div>
             </div>
           </div>
@@ -117,7 +125,7 @@
         { id: "3252332", name: "Иван Романов" },
       ];
 
-      // Render Table / Рендеринг таблицы
+      // Render Desktop Table / Рендеринг десктопной таблицы
       function renderClientTable(clients) {
         const tableBody = document.getElementById("client-table-body");
         if (!tableBody) return;
@@ -144,6 +152,35 @@
           .join("");
       }
 
+      // Render Mobile Table / Рендеринг мобильной таблицы
+      function renderClientTableMobile(clients) {
+        const tableMobile = document.getElementById("client-table-mobile");
+        if (!tableMobile) return;
+
+        tableMobile.innerHTML = clients
+          .map(
+            (client) => `
+          <div class="bg-white border border-base-border rounded-6 p-4 flex flex-col gap-3 client-row-mobile" data-id="${
+            client.id
+          }" data-name="${client.name.toLowerCase()}">
+            <div class="flex items-center justify-between">
+              <span class="text-sm-medium text-text-dark-secondary">ID:</span>
+              <span class="text-sm-medium text-text-dark-primary">${
+                client.id
+              }</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-sm-medium text-text-dark-secondary">Клиент:</span>
+              <a href="#" class="text-sm-medium text-state-brand-active hover:underline">
+                ${client.name}
+              </a>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+      }
+
       // Search functionality / Функционал поиска
       function initSearch() {
         const searchInput = document.querySelector('input[type="text"]');
@@ -151,9 +188,23 @@
 
         searchInput.addEventListener("input", function (e) {
           const searchTerm = e.target.value.toLowerCase();
-          const tableRows = document.querySelectorAll(".client-row");
+          const desktopRows = document.querySelectorAll(".client-row");
+          const mobileRows = document.querySelectorAll(".client-row-mobile");
 
-          tableRows.forEach((row) => {
+          // Filter desktop rows
+          desktopRows.forEach((row) => {
+            const id = row.dataset.id.toLowerCase();
+            const name = row.dataset.name;
+
+            if (id.includes(searchTerm) || name.includes(searchTerm)) {
+              row.style.display = "flex";
+            } else {
+              row.style.display = "none";
+            }
+          });
+
+          // Filter mobile rows
+          mobileRows.forEach((row) => {
             const id = row.dataset.id.toLowerCase();
             const name = row.dataset.name;
 
@@ -185,8 +236,9 @@
           "../components/sidebar-partnership.html"
         );
 
-        // Render table with client data
+        // Render desktop and mobile tables with client data
         renderClientTable(clientsData);
+        renderClientTableMobile(clientsData);
 
         // Initialize search
         initSearch();

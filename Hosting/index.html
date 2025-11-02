@@ -534,6 +534,43 @@
         }
       }).render(document.getElementById('hosting-table'));
 
+      // Function to update table body without re-rendering header
+      function updateTableBody(data) {
+        const tbody = document.querySelector('#hosting-table .gridjs-tbody');
+        if (!tbody) return;
+
+        tbody.classList.add('transitioning');
+
+        setTimeout(() => {
+          let rowsHTML = '';
+          data.forEach((row, index) => {
+            const statusHTML = row.status === 'active'
+              ? `<div class="flex items-center gap-2">
+                  <span class="text-sm-medium text-[#10b77f]">Работает</span>
+                </div>`
+              : `<div class="flex items-center gap-2">
+                  <img src="../public/icons/alert-02.svg" alt="Заблокирован" class="w-6 h-6" style="filter: invert(27%) sepia(89%) saturate(3165%) hue-rotate(339deg) brightness(86%) contrast(94%);" />
+                  <span class="text-sm-medium text-[#dc2828]">Заблокирован</span>
+                </div>`;
+
+            rowsHTML += `
+              <tr class="gridjs-tr">
+                <td class="gridjs-td gridjs-td-figma"><div>${row.domain}</div></td>
+                <td class="gridjs-td gridjs-td-figma"><div>${row.name}</div></td>
+                <td class="gridjs-td gridjs-td-figma">${row.expiry}</td>
+                <td class="gridjs-td gridjs-td-figma">${statusHTML}</td>
+              </tr>
+            `;
+          });
+
+          tbody.innerHTML = rowsHTML;
+
+          setTimeout(() => {
+            tbody.classList.remove('transitioning');
+          }, 50);
+        }, 120);
+      }
+
       // Set total records and update pagination
       totalRecords = hostingData.length;
       updatePaginationDisplay(totalRecords, rowsPerPage);
@@ -557,12 +594,10 @@
           currentPage = 1;
 
           // Update table with first page of filtered data
-          const pageData = currentData.slice(0, rowsPerPage).map(row => [
-            row.domain, row.name, row.expiry, row.status
-          ]);
-          grid.updateConfig({ data: pageData }).forceRender();
+          const pageData = currentData.slice(0, rowsPerPage);
 
           updatePaginationDisplay(totalRecords, rowsPerPage);
+          updateTableBody(pageData);
         });
       }
 
@@ -574,12 +609,10 @@
             currentPage = parseInt(pageButton.dataset.page);
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
-            const pageData = currentData.slice(start, end).map(row => [
-              row.domain, row.name, row.expiry, row.status
-            ]);
-            grid.updateConfig({ data: pageData }).forceRender();
+            const pageData = currentData.slice(start, end);
 
             updatePaginationDisplay(totalRecords, rowsPerPage);
+            updateTableBody(pageData);
             console.log(`Navigate to page ${currentPage}`);
           }
 
@@ -588,12 +621,10 @@
               currentPage--;
               const start = (currentPage - 1) * rowsPerPage;
               const end = start + rowsPerPage;
-              const pageData = currentData.slice(start, end).map(row => [
-                row.domain, row.name, row.expiry, row.status
-              ]);
-              grid.updateConfig({ data: pageData }).forceRender();
+              const pageData = currentData.slice(start, end);
 
               updatePaginationDisplay(totalRecords, rowsPerPage);
+              updateTableBody(pageData);
             }
             console.log('Navigate to previous page');
           }
@@ -604,12 +635,10 @@
               currentPage++;
               const start = (currentPage - 1) * rowsPerPage;
               const end = start + rowsPerPage;
-              const pageData = currentData.slice(start, end).map(row => [
-                row.domain, row.name, row.expiry, row.status
-              ]);
-              grid.updateConfig({ data: pageData }).forceRender();
+              const pageData = currentData.slice(start, end);
 
               updatePaginationDisplay(totalRecords, rowsPerPage);
+              updateTableBody(pageData);
             }
             console.log('Navigate to next page');
           }
@@ -635,13 +664,11 @@
             currentPage = 1; // Reset to first page
 
             // Update table with new page size
-            const pageData = currentData.slice(0, rowsPerPage).map(row => [
-              row.domain, row.name, row.expiry, row.status
-            ]);
-            grid.updateConfig({ data: pageData }).forceRender();
+            const pageData = currentData.slice(0, rowsPerPage);
 
             // Update pagination display
             updatePaginationDisplay(totalRecords, rowsPerPage);
+            updateTableBody(pageData);
 
             console.log(`Changed rows per page to ${newLimit}`);
           }

@@ -45,11 +45,11 @@
                 </h1>
               </div>
 
-              <!-- Table Section / Секция таблицы -->
+              <!-- Table Section Desktop / Секция таблицы Desktop -->
               <div
-                class="w-full border border-base-border rounded-6 overflow-x-auto"
+                class="w-full border border-base-border rounded-6 overflow-x-auto hidden md:block"
               >
-                <table class="w-full promocodes-table min-w-[700px]">
+                <table class="w-full promocodes-table">
                   <!-- Table Header / Заголовок таблицы -->
                   <thead>
                     <tr class="bg-base-surface-2 border-b border-base-border">
@@ -75,6 +75,14 @@
                     <!-- Rows generated dynamically / Строки генерируются динамически -->
                   </tbody>
                 </table>
+              </div>
+
+              <!-- Table Section Mobile / Секция таблицы Mobile -->
+              <div
+                id="promocodes-table-mobile"
+                class="flex flex-col gap-4 w-full md:hidden"
+              >
+                <!-- Mobile cards will be rendered here / Мобильные карточки будут отрендерены здесь -->
               </div>
 
               <!-- Add Promocode Button / Кнопка добавления промокода -->
@@ -270,7 +278,7 @@
       let currentEditingPromocode = null;
       let isEditMode = false;
 
-      // Render Table / Рендер таблицы
+      // Render Desktop Table / Рендер десктопной таблицы
       function renderPromocodesTable() {
         const tbody = document.getElementById("promocodes-table-body");
         tbody.innerHTML = promocodesData
@@ -285,10 +293,10 @@
             </td>
             <td class="px-3 py-4">
               <div class="flex items-center gap-2.5 flex-wrap">
-                <button class="edit-btn bg-base-surface-2 border border-base-border rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-base-fill-1 transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
+                <button class="edit-btn bg-base-surface-2 border border-base-border rounded-6 px-7 h-12 hover:bg-base-fill-1 transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
                   <span class="text-sm-semibold text-text-dark-primary">Редактировать</span>
                 </button>
-                <button class="delete-btn bg-state-danger-active rounded-6 px-4 md:px-7 h-10 md:h-12 hover:bg-state-danger-hover transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
+                <button class="delete-btn bg-state-danger-active rounded-6 px-7 h-12 hover:bg-state-danger-hover transition-colors whitespace-nowrap" data-promo-id="${promo.id}">
                   <span class="text-sm-semibold text-text-light-primary">Удалить</span>
                 </button>
               </div>
@@ -300,6 +308,43 @@
 
         // Attach event listeners / Добавляем обработчики
         attachTableButtonListeners();
+      }
+
+      // Render Mobile Table / Рендер мобильной таблицы
+      function renderPromocodesTableMobile() {
+        const container = document.getElementById("promocodes-table-mobile");
+        container.innerHTML = promocodesData
+          .map(
+            (promo) => `
+          <div class="bg-white border border-base-border rounded-6 p-4 flex flex-col gap-3">
+            <!-- Promocode Info / Информация о промокоде -->
+            <div class="flex flex-col gap-2">
+              <div class="flex items-center justify-between">
+                <span class="text-sm-medium text-text-dark-secondary">Код:</span>
+                <span class="text-sm-medium text-text-dark-primary">${promo.code}</span>
+              </div>
+              <div class="flex flex-col gap-1">
+                <span class="text-sm-medium text-text-dark-secondary">Действие:</span>
+                <span class="text-sm-medium text-text-dark-primary">${promo.action}</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons / Кнопки действий -->
+            <div class="flex flex-col gap-2 w-full pt-2">
+              <button class="edit-btn-mobile bg-base-surface-2 border border-base-border rounded-6 px-4 h-12 hover:bg-base-fill-1 transition-colors w-full" data-promo-id="${promo.id}">
+                <span class="text-sm-semibold text-text-dark-primary">Редактировать</span>
+              </button>
+              <button class="delete-btn-mobile bg-state-danger-active rounded-6 px-4 h-12 hover:bg-state-danger-hover transition-colors w-full" data-promo-id="${promo.id}">
+                <span class="text-sm-semibold text-text-light-primary">Удалить</span>
+              </button>
+            </div>
+          </div>
+        `
+          )
+          .join("");
+
+        // Attach event listeners for mobile / Добавляем обработчики для мобильных
+        attachMobileButtonListeners();
       }
 
       // Open Modal for Creating / Открыть модалку для создания
@@ -397,6 +442,7 @@
         if (index !== -1) {
           promocodesData.splice(index, 1);
           renderPromocodesTable();
+          renderPromocodesTableMobile();
         }
       }
 
@@ -454,10 +500,11 @@
           });
         }
 
-        // Close modal and refresh table / Закрываем модалку и обновляем таблицу
+        // Close modal and refresh tables / Закрываем модалку и обновляем таблицы
         const modal = document.getElementById("promocodeModal");
         modal.close();
         renderPromocodesTable();
+        renderPromocodesTableMobile();
 
         // Reset state / Сбрасываем состояние
         currentEditingPromocode = null;
@@ -478,6 +525,29 @@
         // Delete buttons / Кнопки удаления
         const deleteButtons = document.querySelectorAll(".delete-btn");
         deleteButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const promoId = parseInt(this.dataset.promoId);
+            if (confirm("Вы уверены, что хотите удалить этот промокод?")) {
+              deletePromocode(promoId);
+            }
+          });
+        });
+      }
+
+      // Attach Mobile Button Listeners / Добавить обработчики на мобильные кнопки
+      function attachMobileButtonListeners() {
+        // Edit buttons mobile / Кнопки редактирования для мобильных
+        const editButtonsMobile = document.querySelectorAll(".edit-btn-mobile");
+        editButtonsMobile.forEach((button) => {
+          button.addEventListener("click", function () {
+            const promoId = parseInt(this.dataset.promoId);
+            openEditModal(promoId);
+          });
+        });
+
+        // Delete buttons mobile / Кнопки удаления для мобильных
+        const deleteButtonsMobile = document.querySelectorAll(".delete-btn-mobile");
+        deleteButtonsMobile.forEach((button) => {
           button.addEventListener("click", function () {
             const promoId = parseInt(this.dataset.promoId);
             if (confirm("Вы уверены, что хотите удалить этот промокод?")) {
@@ -537,6 +607,7 @@
           "../components/sidebar-partnership.html"
         );
         renderPromocodesTable();
+        renderPromocodesTableMobile();
         initTypeToggle();
 
         // Add button listener / Добавляем обработчик на кнопку добавления
