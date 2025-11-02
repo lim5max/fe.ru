@@ -63,8 +63,15 @@ class FeHeader extends HTMLElement {
         }
 
         .logo-desktop {
-          height: 16px;
-          width: auto;
+          display: none;
+        }
+
+        @media (min-width: 1024px) {
+          .logo-desktop {
+            display: block;
+            height: 16px;
+            width: auto;
+          }
         }
 
         .logo-mobile {

@@ -1232,6 +1232,10 @@ input[type="text"]:focus,
   bottom: 0px;
 }
 
+.bottom-full {
+  bottom: 100%;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -1599,10 +1603,6 @@ input[type="text"]:focus,
 
 .w-10 {
   width: 24px;
-}
-
-.w-11 {
-  width: 28px;
 }
 
 .w-12 {
